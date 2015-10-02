@@ -19,6 +19,7 @@ $english = array(
     'quizzes' => 'Quizzes',
     'quiz:name' => 'Quiz name',
     'quiz:create' => 'Create quiz',
+    'quiz:edit' => 'Edit Quiz',
     'quiz:removed' => 'Quiz removed',
     'quiz:cantremove' => 'Can not remove Quiz',
     'quiz:created' => 'Quiz created',

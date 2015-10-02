@@ -71,12 +71,13 @@ $count_answer = ClipitQuiz::questions_answered_by_user($quiz_id, $user_id);
             return false;
         }
         d = new Date(duration-interval);
-        if(duration.days()){
-            days = moment(d).format('DD') + "d ";
-        } else if(duration.hours()){
-            hours = moment.utc(d).format('HH') + "h ";
+        if(duration.days()) {
+            days = (duration.days() < 9 ? '0'+duration.days() : duration.days()) + "d ";
         }
-        $('.countdown').text(days + hours + moment.utc(d).format('mm') + "m " + moment.utc(d).format('ss') + "s");
+        if(duration.hours()){
+            hours = moment.utc(duration.asMilliseconds()).format('HH') + "h ";
+        }
+        $('.countdown').text(days + hours + moment.utc(duration.asMilliseconds()).format('mm') + "m " + moment.utc(duration.asMilliseconds()).format('ss') + "s");
     }, interval);
 
 <?php endif;?>
@@ -186,7 +187,6 @@ $(function(){
 <div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>">
 <?php
 $num = 1;
-
 foreach($questions as $question):
     $result = ClipitQuizResult::get_from_question_user($question->id, $user_id);
     $params = array(

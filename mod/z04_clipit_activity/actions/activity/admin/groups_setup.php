@@ -50,15 +50,17 @@ foreach($groups as $group){
             'name' => $group['name'],
         ));
     }
-    if($group['remove']){
-        ClipitGroup::delete_by_id(array($group_id));
-    } elseif($group_id) {
-        $groups_ids[] = $group_id;
-        $users = explode(",", $group['users']);
-        $users = array_filter($users);
-        ClipitGroup::set_users($group_id, $users);
-        ClipitGroup::set_properties($group_id, array('name' => $group['name']));
-        ClipitActivity::add_students($activity_id, $users);
+    if(ClipitSite::lookup($group_id)){
+        if($group['remove']){
+            ClipitGroup::delete_by_id(array($group_id));
+        } elseif($group_id) {
+            $groups_ids[] = $group_id;
+            $users = explode(",", $group['users']);
+            $users = array_filter($users);
+            ClipitGroup::set_users($group_id, $users);
+            ClipitGroup::set_properties($group_id, array('name' => $group['name']));
+            ClipitActivity::add_students($activity_id, $users);
+        }
     }
 
 }

@@ -16,7 +16,7 @@ function get_search_input($get_input){
     if($s->$get_input) {
         return $s->$get_input;
     } else {
-        return false;
+        return array();
     }
 }
 

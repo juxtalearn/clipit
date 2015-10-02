@@ -478,8 +478,10 @@ clipit.task.admin.quiz.printData = function (){
             ).collapse('show');
         } else {
             if(i == total ){
+             setTimeout(function(){
                 $('.bootbox').modal('hide');
                 window.print();
+             }, 1000);
             }
         }
     });
@@ -487,7 +489,8 @@ clipit.task.admin.quiz.printData = function (){
 
 clipit.task.admin.quiz.onShowTab = function(e){
     var id = $(this).attr('href'),
-        container = $(id).find('li');
+        //container = $(id).find('li');
+        container = $(id).find('li.list-item');
     if(container.find('.status').is(':hidden')) {
         elgg.get("ajax/view/quizzes/admin/results", {
             dataType: "json",

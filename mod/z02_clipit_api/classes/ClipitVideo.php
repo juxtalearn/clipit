@@ -179,7 +179,7 @@ class ClipitVideo extends ClipitResource{
                         'preview' => "http://i1.ytimg.com/vi/{$matches[0]}/mqdefault.jpg",
                         'favicon' => $favicon_url_base . $parse_url['host']
                     );
-                    // Vimeo
+                // Vimeo
                 } else if (strpos($url, 'vimeo.com') != false) {
                     preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
                     $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");

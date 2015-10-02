@@ -706,7 +706,7 @@ function sanitise_string_special($string, $extra_escapeable = '') {
 function sanitise_string($string) {
 	// @todo does this really need the trim?
 	// there are times when you might want trailing / preceeding white space.
-	return mysql_real_escape_string(trim($string));
+	return mysql_real_escape_string(trim((string)$string));
 }
 
 /**

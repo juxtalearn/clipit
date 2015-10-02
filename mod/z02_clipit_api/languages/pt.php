@@ -4,8 +4,8 @@
 
  */
 $portuguese = array(
-    "student_option" => "Fazer deste utilizador um estudante?",
-    "teacher_option" => "Fazer deste utilizador um professor?",
+    "student_option" => "Fazer deste utilizador um ESTUDANTE",
+    "teacher_option" => "Fazer deste utilizador um PROFESSOR",
     "metric:1" => "Test Metric",
 );
 add_translation('pt', $portuguese);
