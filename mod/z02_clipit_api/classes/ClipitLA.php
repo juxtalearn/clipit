@@ -35,9 +35,10 @@ class ClipitLA extends UBItem {
     protected function copy_from_elgg($elgg_object) {
         parent::copy_from_elgg($elgg_object);
         $this->status_code = (int)$elgg_object->get("status_code");
-        $this->metric_id = (int)$elgg_object->get("metric_id");
+        $this->metric_id = (string)$elgg_object->get("metric_id");
         $this->file_id = (int)$elgg_object->get("file_id");
         $this->metric_received = (bool)$elgg_object->get("metric_received");
+        $this->context = unserialize((string)$elgg_object->get("context"));
     }
 
     /**
@@ -48,9 +49,10 @@ class ClipitLA extends UBItem {
     protected function copy_to_elgg($elgg_object) {
         parent::copy_to_elgg($elgg_object);
         $elgg_object->set("status_code", (int)$this->status_code);
-        $elgg_object->set("metric_id", (int)$this->metric_id);
+        $elgg_object->set("metric_id", (string)$this->metric_id);
         $elgg_object->set("file_id", (int)$this->file_id);
         $elgg_object->set("metric_received", (bool)$this->metric_received);
+        $elgg_object->set("context", (string)serialize($this->context));
     }
 
     static function get_metric($metric_id, $context) {

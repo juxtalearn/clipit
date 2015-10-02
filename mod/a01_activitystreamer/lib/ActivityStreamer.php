@@ -4,7 +4,6 @@ class ActivityStreamer
 {
 
 
-
     static function get_metric($metric_id, $context)
     {
 
@@ -36,24 +35,30 @@ class ActivityStreamer
             //$return_url = "http://176.28.14.94/~workbench/jxlDefinitions/clipItDriver.php";
 
 
-            if (! ($json =  elgg_trigger_plugin_hook('activitystreamer',$metric_id, array('metric_id'=>$metric_id,'context' => $context), false))) {
-              //Default behaviour
+            if (!($json = elgg_trigger_plugin_hook('activitystreamer', $metric_id, array('metric_id' => $metric_id, 'context' => $context), false))) {
+                //Default behaviour
                 $json = self::assemble_data($context);
             }
             $hashed_data = md5($json);
-            $existing_id = check_for_existing_results($metric_id, $hashed_data);
+            $existing_result = check_for_existing_results($metric_id, $hashed_data);
             //TODO Check for missing return data
-            if ($existing_id > 0) {
+            if ($existing_result["id"] > 0) {
+                $return_id = $existing_result["id"];
                 //if we found an existing result, we will return its id
-                return $existing_id;
-            } else {
+                $la_item = ClipitLA::get_by_id(array($existing_result["id"]))[$existing_result["id"]];
+                if ($la_item->metric_received || (time() - $existing_result["timestamp"]) < 60) {
+                    return $return_id;
+                } else {
+                    update_existing_results($return_id);
+                }
+            }
+            else {
                 //else we will create a new object, store this request in our database and return the id of the new object
-                $return_id = ClipitLA::create(array());
-//                $prop_value_array["return_id"] = (int)$return_id;
-                $prop_value_array["metric_id"] = $metric_id;
-                $prop_value_array["context"] = $context;
-                $prop_value_array["metric_received"] = false;
-                ClipitLA::set_properties($return_id, $prop_value_array);
+                $return_id = ClipitLA::create(array(
+                    "metric_id"=>$metric_id,
+                    "context" => $context,
+                    "metric_received" => false
+                ));
                 $timestamp = time();
                 store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp);
             }
@@ -271,7 +276,7 @@ function store_analysis_request($return_id, $metric_id, $hashed_data, $timestamp
 function check_for_existing_results($metric_id, $hashed_data)
 {
     global $con;
-    $get_analysis_statement = $con->prepare("SELECT return_id FROM `" . $_SESSION['analysis_table'] . "` " .
+    $get_analysis_statement = $con->prepare("SELECT return_id, timestamp FROM `" . $_SESSION['analysis_table'] . "` " .
         "WHERE metric_id = ? AND hashed_data = ?;");
     $existing_id = 0;
     //Check whether there is an existing result matching the request
@@ -279,7 +284,7 @@ function check_for_existing_results($metric_id, $hashed_data)
         $get_analysis_statement->bind_param('ss', $metric_id, $hashed_data);
         $get_analysis_statement->execute();
         $get_analysis_statement->store_result();
-        $get_analysis_statement->bind_result($id_entry);
+        $get_analysis_statement->bind_result($id_entry, $timestamp);
 
         //if there is, we simply need the id, otherwise we will return 0
         if ($get_analysis_statement->fetch()) {
@@ -288,5 +293,19 @@ function check_for_existing_results($metric_id, $hashed_data)
     } else {
         error_log(mysqli_error($con));
     }
-    return $existing_id;
+    return array("id" => $existing_id, "timestamp" => $timestamp);
+}
+
+function update_existing_results($return_id)
+{
+    global $con;
+    $timestamp = time();
+    $get_analysis_statement = $con->prepare("UPDATE `".$_SESSION['analysis_table']."` SET timestamp=? WHERE return_id=?");
+    //Check whether there is an existing result matching the request
+    if ($get_analysis_statement instanceof mysqli_stmt) {
+        $get_analysis_statement->bind_param('si', $timestamp, $return_id);
+        $get_analysis_statement->execute();
+    } else {
+        error_log(mysqli_error($con));
+    }
 }
