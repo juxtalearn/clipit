@@ -40,6 +40,10 @@ class ClipitTrickyTopic extends UBItem {
     // Linked Student Problem Examples
     public $example_array = array();
 
+    // Linked Ontology Reference
+    public $ontologylink = "";
+
+
     /**
      * Loads object parameters stored in Elgg
      *
@@ -54,6 +58,8 @@ class ClipitTrickyTopic extends UBItem {
         $this->storyboard_array = (array)static::get_storyboards((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
         $this->example_array = (array)static::get_examples((int)$this->id);
+
+        $this->ontologylink = (string)$elgg_entity->get("ontologylink");
     }
 
     /**
@@ -65,6 +71,13 @@ class ClipitTrickyTopic extends UBItem {
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("subject", (string)$this->subject);
         $elgg_entity->set("education_level", (string)$this->education_level);
+
+
+        if (!empty($this->ontologylink)) {
+            $elgg_entity->set("ontologylink", (string)$this->ontologylink);
+        } else {
+            $elgg_entity->set("ontologylink", "");
+        }
     }
 
     /**
@@ -72,7 +85,7 @@ class ClipitTrickyTopic extends UBItem {
      * @param  bool $double_save if $double_save is true, this object is saved twice to ensure that all properties are updated properly. E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save($double_save=false) {
+    public function save($double_save=false) {
         parent::save($double_save);
         static::set_tags((int)$this->id, (array)$this->tag_array);
         static::set_files((int)$this->id, (array)$this->file_array);
