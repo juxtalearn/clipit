@@ -28,5 +28,15 @@ $english = array(
     "la_dashboard:widget:availableactivities" => "Available Activities",
     "la_dashboard:widget:availableusers" => "Available Users",
     "la_dashboard:widget:scope" => "Frame",
+    "la_dashboard:widget:activities" => "Activities",
+    "la_dashboard:widget:quiz" => "Quiz",
+    "la_dashboard:widget:user" => "User",
+    "la_dashboard:widget:groups" => "Groups",
+    "la_dashboard:useractivities:title" => "Useractivities",
+    "la_dashboard:useractivities:description" => "This widget shows the activities of a selected user.",
+    "la_dashboard:groupactivities:title" => "Groupactivities",
+    "la_dashboard:groupactivities:description" => "This widget shows the groupactivities of an activitiy.",
+    "la_dashboard:artefactsperuser:title" => "Userartefacts",
+    "la_dashboard:artefactsperuser:description" => "This widget shows the userartefacts of an activity."
 );
 add_translation('en', $english);

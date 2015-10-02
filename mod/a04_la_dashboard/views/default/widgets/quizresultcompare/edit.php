@@ -3,7 +3,7 @@
 $widget = elgg_extract('entity', $vars);
 $widget_id = $widget->guid;
 
-if (elgg_get_logged_in_user_entity()->role == ClipitUser::ROLE_ADMIN){
+if (elgg_get_logged_in_user_entity()->role == ClipitUser::ROLE_ADMIN) {
     $activities = ClipitActivity::get_all();
 } else {
     $activities = ClipitActivity::get_from_user(elgg_get_logged_in_user_guid());
@@ -31,7 +31,7 @@ $params = array(
     'name' => 'params[task_id1]',
     'value' => $vars['entity']->task_id1,
     'options_values' => $task_options,
-    'disabled' => !(count($task_options)>1),
+    'disabled' => !(count($task_options) > 1),
     'id' => "task_dropdown1-$widget_id",
     'required' => true,
 );
@@ -44,7 +44,7 @@ $params = array(
     'name' => 'params[task_id2]',
     'value' => $vars['entity']->task_id2,
     'options_values' => $task_options,
-    'disabled' => !(count($task_options)>1),
+    'disabled' => !(count($task_options) > 1),
     'id' => "task_dropdown2-$widget_id",
     'required' => true,
 );
@@ -91,27 +91,27 @@ $target_dropdown = elgg_view('input/dropdown', $params);
 
 ?>
 <p>
-    <?php echo elgg_echo('activity'); ?>:
+    <?php echo elgg_echo('la_dashboard:widget:activities'); ?>:
     <?php echo $activity_dropdown ?>
 </p>
 
 <p>
-    <?php echo elgg_echo('quiz'); ?>:
+    <?php echo elgg_echo('la_dashboard:widget:quiz'); ?>:
     <?php echo $task_dropdown1 ?>
 </p>
 
 <p>
-    <?php echo elgg_echo('quiz'); ?>:
+    <?php echo elgg_echo('la_dashboard:widget:quiz'); ?>:
     <?php echo $task_dropdown2 ?>
 </p>
 
 <p>
-    <?php echo elgg_echo('scope'); ?>:
+    <?php echo elgg_echo('la_dashboard:widget:scope'); ?>:
     <?php echo $scale_dropdown ?>
 </p>
 
 <p>
-    <?php echo elgg_echo('group'); ?>:
+    <?php echo elgg_echo('la_dashboard:widget:user'); ?>:
     <?php echo $target_dropdown ?>
 </p>
 
@@ -130,7 +130,7 @@ $target_dropdown = elgg_view('input/dropdown', $params);
 
 
     $('<?php echo "#activity_dropdown-$widget_id" ?>').change(function () {
-        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled=false
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false
         var activityId = document.getElementById('<?php echo "activity_dropdown-$widget_id" ?>').selectedOptions[0].value
         document.getElementById('<?php echo "task_dropdown1-$widget_id" ?>').disabled = true;
         $('<?php echo "#task_dropdown1-$widget_id" ?> option').remove();
@@ -170,17 +170,29 @@ $target_dropdown = elgg_view('input/dropdown', $params);
 
 
     $('#<?php echo "scale_dropdown-$widget_id" ?>').change(function () {
-        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled=false;
+        $('#' + this.id).parent().parent().find('.elgg-button-submit')[0].disabled = false;
         if (document.getElementById('<?php echo "scale_dropdown-$widget_id" ?>').selectedOptions[0].value != "<?php echo ClipitActivity::SUBTYPE?>") {
             var activityId = document.getElementById('<?php echo "activity_dropdown-$widget_id" ?>').selectedOptions[0].value;
             var typeId = document.getElementById('<?php echo "scale_dropdown-$widget_id" ?>').selectedOptions[0].value;
+            var firstTextNode = $('#<?php echo "target_dropdown-$widget_id" ?>').parent()
+                .contents()
+                .filter(function () {
+                    return this.nodeType === 3;
+                })
+                .first();
+            if (typeId == "<?php echo ClipitUser::SUBTYPE?>") {
+                firstTextNode.replaceWith(document.createTextNode("<?php echo elgg_echo('la_dashboard:widget:user')?>:"));
+            } else if (typeId == "<?php echo ClipitGroup::SUBTYPE?>") {
+                firstTextNode.replaceWith(document.createTextNode("<?php echo elgg_echo('la_dashboard:widget:groups')?>:"));
+            }
+
             document.getElementById('<?php echo "target_dropdown-$widget_id" ?>').disabled = true;
             $('<?php echo "#target_dropdown-$widget_id" ?> option').remove()
             elgg.get('ajax/view/metrics/get_targets', {
                 data: {
                     id: activityId,
                     type: typeId,
-                    addAll:0
+                    addAll: 0
                 },
                 success: function (data) {
                     var quiz_array = JSON.parse(data);
@@ -188,7 +200,7 @@ $target_dropdown = elgg_view('input/dropdown', $params);
 
                     for (i = 0; i < quiz_array.length; i++) {
                         if (quiz_array[i].id == 0) {
-                            var  newOption = new Option(quiz_array[i].name, quiz_array[i].id, true, true);
+                            var newOption = new Option(quiz_array[i].name, quiz_array[i].id, true, true);
                         } else {
                             var newOption = new Option(quiz_array[i].name, quiz_array[i].id, false, false);
                         }
@@ -204,8 +216,6 @@ $target_dropdown = elgg_view('input/dropdown', $params);
             document.getElementById('<?php echo "target_dropdown-$widget_id" ?>').style.visibility = 'visible';
         }
     })
-
-
 
 
 </script>

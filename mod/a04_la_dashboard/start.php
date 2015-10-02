@@ -38,6 +38,9 @@ function learning_analytics_dashboard_init()
     elgg_register_widget_type('activityprogress', elgg_echo('activity:status'), elgg_echo('la_dashboard:widget:activityprogress:description'), 'la_metrics', true);
     elgg_register_widget_type('progresscomparison', elgg_echo('la_dashboard:progresscomparison'), elgg_echo('la_dashboard:progressc'), 'la_metrics', true);
     elgg_register_widget_type('stumblingblockcoverage', elgg_echo('la_dashboard:stumblingblockcoverage'), elgg_echo('la_dashboard:stumblingblockcoverage'), 'la_metrics', true);
+    elgg_register_widget_type('useractivities_metric', elgg_echo('la_dashboard:useractivities:title'), elgg_echo('la_dashboard:useractivities:description'), 'la_metrics', true);
+    elgg_register_widget_type('groupactivities_metric', elgg_echo('la_dashboard:groupactivities:title'), elgg_echo('la_dashboard:groupactivities:description'), 'la_metrics', true);
+    elgg_register_widget_type('artefactsperuser_metric', elgg_echo('la_dashboard:artefactsperuser:title'), elgg_echo('la_dashboard:artefactsperuser:description'), 'la_metrics', true);
 
     elgg_unregister_action('widgets/add');
     elgg_register_action('widgets/add',dirname(__FILE__).'/actions/widgets/add.php');
@@ -92,7 +95,8 @@ function widgetmenu_hook($hook, $type, $return, $params)
         'text' => "",
         'title' => elgg_echo('la_dashboard:widget:resize'),
         'href' => "#widget-resize-$widget->guid",
-        'class' => "elgg-widget-resize-button elgg-lightbox",
+        'class' => "elgg-widget-resize-button",
+//        'class' => "elgg-widget-resize-button elgg-lightbox",
         'rel' => 'toggle',
         'priority' => 700,
     );

@@ -16,5 +16,12 @@ if($metric->metric_received){
     echo elgg_view('output/iframe', array(
         'value'  => elgg_normalize_url(elgg_format_url("metric/{$metric->file_id}")),
     ));
+} else {
+
+    if(!$la_metrics_class = (string)elgg_get_config("la_metrics_class")){
+        error_log("No metrics class!");
+        return null;
+    }
+    $la_metrics_class::get_metric($metric->metric_id, $metric->context);
 }
 ?>

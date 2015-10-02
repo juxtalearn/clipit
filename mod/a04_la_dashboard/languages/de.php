@@ -26,5 +26,15 @@ $german = array(
     "la_dashboard:widget:availableactivities" => "Verfügbare Aktivitäten",
     "la_dashboard:widget:availableusers" => "Verfügbare Benutzer",
     "la_dashboard:widget:scope" => "Rahmen",
+    "la_dashboard:widget:activities" => "Aktivitäten",
+    "la_dashboard:widget:quiz" => "Quiz",
+    "la_dashboard:widget:user" => "Benutzer",
+    "la_dashboard:widget:groups" => "Gruppen",
+    "la_dashboard:useractivities:title" => "Benutzeraktivitäten",
+    "la_dashboard:useractivities:description" => "Dieses Widget zeigt die Aktivitäten eines ausgewählten Benutzers an.",
+    "la_dashboard:groupactivities:title" => "Gruppenaktivitäten",
+    "la_dashboard:groupactivities:description" => "Dieses Widget zeigt die Gruppenaktivitäten in der ausgewählten Aktivität an.",
+    "la_dashboard:artefactsperuser:title" => "Benutzerartefakte",
+    "la_dashboard:artefactsperuser:description" => "Dieses Widget zeigt die Benutzerartefakte in der ausgewählten Aktivität an."
 );
 add_translation('de', $german);
