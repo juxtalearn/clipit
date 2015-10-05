@@ -21,7 +21,7 @@ class ClipitLA extends UBItem {
      */
     const SUBTYPE = "ClipitLA";
     public $status_code = 0;
-    public $metric_id = 0;
+    public $metric_id = "";
     public $context = array();
     public $file_id = 0;
     public $metric_received = false;
