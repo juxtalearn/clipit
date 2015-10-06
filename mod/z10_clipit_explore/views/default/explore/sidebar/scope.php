@@ -17,7 +17,7 @@ $icon = '
     </div>';
 elgg_register_menu_item('explore:scope', array(
     'name' => 'explore_site',
-    'text' => $icon.elgg_echo('explore:public'),
+    'text' => $icon.elgg_echo('explore:public:videos'),
     'href' => "explore{$href}site=true",
     'selected' => $vars['site']
 ));

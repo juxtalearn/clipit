@@ -258,7 +258,7 @@ function explore_page_handler($page) {
     $my_activities_ids = ClipitUser::get_activities($user_id);
     $my_activities = ClipitActivity::get_by_id($my_activities_ids);
     $menu_scope = elgg_view("explore/sidebar/scope", array('site' => $site, 'href' => $href_filter));
-    $sidebar = elgg_view_module('aside', elgg_echo('explore:scope'), $menu_scope);
+    $sidebar = elgg_view_module('aside', '', $menu_scope);
     // Explore by activity
     $menu_filter = elgg_view("explore/sidebar/activities",
         array(
@@ -267,11 +267,14 @@ function explore_page_handler($page) {
             'files' => $searched_files,
             'href' => $href_filter
         ));
-    $sidebar .= elgg_view_module('aside', elgg_echo('explore:by_activity'), $menu_filter);
+    if($my_activities) {
+        $sidebar .= elgg_view_module('aside', elgg_echo('explore:by_activity'), $menu_filter);
+    }
     // Explore by tricky topics
-    $tricky_topics = ClipitTrickyTopic::get_all();
-    $menu_tt = elgg_view("explore/sidebar/tricky_topics", array('entities' => $tricky_topics, 'href' => $href_filter));
-    $sidebar .= elgg_view_module('aside', elgg_echo('explore:by_tricky_topic'), $menu_tt);
+    if($tricky_topics = ClipitTrickyTopic::get_all()) {
+        $menu_tt = elgg_view("explore/sidebar/tricky_topics", array('entities' => $tricky_topics, 'href' => $href_filter));
+        $sidebar .= elgg_view_module('aside', elgg_echo('explore:by_tricky_topic'), $menu_tt);
+    }
     /**
      * Filter
      */

@@ -21,6 +21,7 @@ $english = array(
     'explore:tags' => 'Explore by Stumbling Block',
     'explore:public' => 'Public',
     'explore:tags:related_tricky_topic' => 'Related tags for tricky topic',
+    'explore:public:videos' => 'Public videos',
 );
 
 add_translation('en', $english);
