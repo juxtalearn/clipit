@@ -37,6 +37,17 @@ $user = array_pop(ClipitUser::get_by_id(array($user_id)));
     ?>
     <!-- Profile menu -->
     <ul id="menu_settings" class="dropdown-menu caret-menu" role="menu" aria-labelledby="settings">
+        <?php if ($user->role == ClipitUser::ROLE_ADMIN):?>
+        <li role="presentation">
+            <?php echo elgg_view('output/url', array(
+                'href'  => "admin",
+                'title' => elgg_echo('admin:page'),
+                'text'  => '<i class="fa fa-edit"></i> '.elgg_echo('admin:page'),
+            ));
+            ?>
+        </li>
+        <li role="presentation" class="divider"></li>
+        <?php endif;?>
         <li role="presentation">
             <?php echo elgg_view('output/url', array(
                 'href'  => "settings/user",
