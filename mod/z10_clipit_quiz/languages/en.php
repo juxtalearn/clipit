@@ -49,6 +49,12 @@ $english = array(
     'quiz:result:send' => 'Your answers have been saved. While there is time left to do the quiz, you can review and change your answers if you want to.',
     'quiz:result:finish' => 'If you click on Finish, you will no longer be able to change your answers, and you will see you\'re results.',
     'quiz:result:compare' => 'Compare results',
+    'quiz:result:remove' => 'Remove results',
+    'quiz:result:removed' => 'Results removed',
+    'quiz:result:reset_time' => 'Reset time',
+    'quiz:result:reseted_time' => 'Time restored',
+    'quiz:set_quiz_finish' => 'Mark quiz as finished',
+    'quiz:set_quiz_finished' => 'Quiz finished',
     'quiz:out_of:answered' => '%s out of %s answered',
 );
 

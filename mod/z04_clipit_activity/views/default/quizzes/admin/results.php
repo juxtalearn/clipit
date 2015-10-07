@@ -18,6 +18,30 @@ $users = get_input('users');
 
 $default = "";
 switch($type = get_input('type')){
+    case 'action':
+        $action_type = get_input('action_type');
+        $user_id = get_input('entity_id');
+
+        switch($action_type){
+            case 'reset-time':
+                UBCollection::remove_items($quiz_id, array($user_id), ClipitQuiz::REL_QUIZ_USER);
+                echo elgg_echo('quiz:result:reseted_time');
+                break;
+            case 'remove-results':
+                $questions = ClipitQuiz::get_quiz_questions($quiz_id);
+                foreach($questions as $question_id){
+                    $result = ClipitQuizResult::get_from_question_user($question_id, $user_id);
+                    $results[] = $result->id;
+                }
+                ClipitQuizResult::delete_by_id($results);
+                echo elgg_echo('quiz:result:removed');
+                break;
+            case 'finish-quiz':
+                ClipitQuiz::set_quiz_as_finished($quiz_id, $user_id);
+                echo elgg_echo('quiz:set_quiz_finished');
+                break;
+        }
+        break;
     case 'compare_results':
 
         function get_random_colors($count){
@@ -34,7 +58,6 @@ switch($type = get_input('type')){
         $task_id = ClipitQuiz::get_task($quiz_id);
         $stumbling_blocks = array();
         $tricky_topic_id = ClipitQuiz::get_tricky_topic($quiz_id);
-        $tricky_topic_id = 2856;
         $stumbling_blocks = ClipitTrickyTopic::get_tags($tricky_topic_id);
         $stumbling_blocks = ClipitTag::get_by_id(array_values($stumbling_blocks));
         switch(get_input('entity_type')){

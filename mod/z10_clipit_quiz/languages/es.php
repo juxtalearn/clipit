@@ -50,6 +50,12 @@ $spanish = array(
     'quiz:result:send' => 'Las respuestas del test quedarán guardadas. Mientras que estés dentro del tiempo para hacer el examen puedes modificar tus respuestas.',
     'quiz:result:finish' => 'Al pulsar Terminar ya no podrías cambiar tus respuestas, y podrás ver tus resultados.',
     'quiz:result:compare' => 'Comparar resultados',
+    'quiz:result:remove' => 'Eliminar resultados',
+    'quiz:result:removed' => 'Resultados eliminados',
+    'quiz:result:reset_time' => 'Reestablecer el tiempo',
+    'quiz:result:reseted_time' => 'Tiempo reestablecido',
+    'quiz:set_quiz_finish' => 'Marcar test como terminado',
+    'quiz:set_quiz_finished' => 'Test terminado',
     'quiz:out_of:answered' => '%s de %s contestadas',
 );
 
