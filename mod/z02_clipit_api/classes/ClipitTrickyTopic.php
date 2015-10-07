@@ -23,6 +23,7 @@ class ClipitTrickyTopic extends UBItem {
     const REL_TRICKYTOPIC_TAG = "ClipitTrickyTopic-ClipitTag";
     const REL_TRICKYTOPIC_FILE = "ClipitTrickyTopic-ClipitFile";
     const REL_TRICKYTOPIC_VIDEO = "ClipitTrickyTopic-ClipitVideo";
+    const REL_TRICKYTOPIC_TEXT = "ClipitTrickyTopic-ClipitText";
     const REL_TRICKYTOPIC_EXAMPLE = "ClipitTrickyTopic-ClipitExample";
     const EDUCATION_LEVEL_PRIMARY = "primary";
     const EDUCATION_LEVEL_GCSE = "gcse";
@@ -37,6 +38,7 @@ class ClipitTrickyTopic extends UBItem {
     // Linked Teacher Material
     public $video_array = array();
     public $file_array = array();
+    public $text_array = array();
     // Linked Student Problem Examples
     public $example_array = array();
 
@@ -52,6 +54,7 @@ class ClipitTrickyTopic extends UBItem {
         $this->tag_array = (array)static::get_tags((int)$this->id);
         $this->file_array = (array)static::get_files((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
+        $this->text_array = (array)static::get_texts((int)$this->id);
         $this->example_array = (array)static::get_examples((int)$this->id);
     }
 
@@ -76,6 +79,7 @@ class ClipitTrickyTopic extends UBItem {
         static::set_tags((int)$this->id, (array)$this->tag_array);
         static::set_files((int)$this->id, (array)$this->file_array);
         static::set_videos((int)$this->id, (array)$this->video_array);
+        static::set_texts((int)$this->id, (array)$this->text_array);
         static::set_examples((int)$this->id, (array)$this->example_array);
         return (int)$this->id;
     }
@@ -188,6 +192,23 @@ class ClipitTrickyTopic extends UBItem {
 
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TRICKYTOPIC_FILE);
+    }
+
+    // TEACHER RESOURCES: TEXTS
+    static function add_texts($id, $text_array) {
+        return UBCollection::add_items($id, $text_array, static::REL_TRICKYTOPIC_TEXT);
+    }
+
+    static function set_texts($id, $text_array) {
+        return UBCollection::set_items($id, $text_array, static::REL_TRICKYTOPIC_TEXT);
+    }
+
+    static function remove_texts($id, $text_array) {
+        return UBCollection::remove_items($id, $text_array, static::REL_TRICKYTOPIC_TEXT);
+    }
+
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_TRICKYTOPIC_TEXT);
     }
 
     // Student Problem Examples

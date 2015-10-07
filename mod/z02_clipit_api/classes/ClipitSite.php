@@ -31,29 +31,35 @@ class ClipitSite extends UBSite {
     const REL_SITE_TRICKY_TOPIC = "ClipitSite-ClipitTrickyTopic";
     const REL_SITE_VIDEO = "ClipitSite-ClipitVideo";
     const REL_SITE_FILE = "ClipitSite-ClipitFile";
+    const REL_SITE_TEXT = "ClipitSite-ClipitText";
     public $tricky_topic_array = array();
     public $video_array = array();
     public $file_array = array();
+    public $text_array = array();
 
     // PUBLIC SCOPE (Public for everyone on the Global ClipIt Site)
     const REL_SITE_PUB_TRICKYTOPIC = "ClipitSite-PUB-ClipitTrickyTopic";
     const REL_SITE_PUB_VIDEO = "ClipitSite-PUB-ClipitVideo";
     const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
+    const REL_SITE_PUB_TEXT = "ClipitSite-PUB-ClipitText";
     const REL_SITE_PUB_ACTIVITY = "ClipitSite-PUB-ClipitActivity";
     public $pub_tricky_topic_array = array();
     public $pub_activity_array = array();
     public $pub_video_array = array();
     public $pub_file_array = array();
+    public $pub_text_array = array();
 
     protected function copy_from_elgg($elgg_entity) {
         parent::copy_from_elgg($elgg_entity);
         $this->tricky_topic_array = (array)static::get_tricky_topics();
         $this->video_array = (array)static::get_videos();
         $this->file_array = (array)static::get_files();
+        $this->text_array = (array)static::get_texts();
         $this->pub_tricky_topic_array = (array)static::get_pub_tricky_topics();
         $this->pub_activity_array = (array)static::get_pub_activities();
         $this->pub_video_array = (array)static::get_pub_videos();
         $this->pub_file_array = (array)static::get_pub_files();
+        $this->pub_text_array = (array)static::get_pub_texts();
     }
 
     /**
@@ -66,10 +72,12 @@ class ClipitSite extends UBSite {
         static::set_tricky_topics($this->tricky_topic_array);
         static::set_videos($this->video_array);
         static::set_files($this->file_array);
+        static::set_texts($this->text_array);
         static::set_pub_tricky_topics($this->pub_tricky_topic_array);
         static::set_pub_activities($this->pub_activity_array);
         static::set_pub_videos($this->pub_video_array);
         static::set_pub_files($this->pub_file_array);
+        static::set_pub_texts($this->pub_text_array);
         return $site_id;
     }
 
@@ -136,6 +144,27 @@ class ClipitSite extends UBSite {
     static function get_files() {
         $id = static::get_site_id();
         return UBCollection::get_items($id, static::REL_SITE_FILE);
+    }
+
+    // SITE TEXTS
+    static function add_texts($text_array) {
+        $id = static::get_site_id();
+        return UBCollection::add_items($id, $text_array, static::REL_SITE_TEXT);
+    }
+
+    static function set_texts($text_array) {
+        $id = static::get_site_id();
+        return UBCollection::set_items($id, $text_array, static::REL_SITE_TEXT);
+    }
+
+    static function remove_texts($text_array) {
+        $id = static::get_site_id();
+        return UBCollection::remove_items($id, $text_array, static::REL_SITE_TEXT);
+    }
+
+    static function get_texts() {
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_SITE_TEXT);
     }
 
     // PUBLIC SCOPE //
@@ -210,6 +239,30 @@ class ClipitSite extends UBSite {
     static function get_pub_files() {
         $id = static::get_site_id();
         return UBCollection::get_items($id, static::REL_SITE_PUB_FILE);
+    }
+
+    // PUBLIC TEXTS
+    static function add_pub_texts($text_array) {
+        $id = static::get_site_id();
+        UBCollection::add_items($id, $text_array, static::REL_SITE_PUB_TEXT);
+        return static::update_global_resources();
+    }
+
+    static function set_pub_texts($text_array) {
+        $id = static::get_site_id();
+        UBCollection::set_items($id, $text_array, static::REL_SITE_PUB_TEXT);
+        return static::update_global_resources();
+    }
+
+    static function remove_pub_texts($text_array) {
+        $id = static::get_site_id();
+        UBCollection::remove_items($id, $text_array, static::REL_SITE_PUB_TEXT);
+        return static::update_global_resources();
+    }
+
+    static function get_pub_texts() {
+        $id = static::get_site_id();
+        return UBCollection::get_items($id, static::REL_SITE_PUB_TEXT);
     }
 
     // PUBLIC ACTIVITIES
@@ -299,6 +352,9 @@ class ClipitSite extends UBSite {
         // REMOTE FILES
         $data["method"] = "clipit.remote_file.get_from_site";
         $remote_files = static::global_site_call($data, "GET");
+        // REMOTE TEXTS
+        $data["method"] = "clipit.remote_text.get_from_site";
+        $remote_texts = static::global_site_call($data, "GET");
         // LOCAL public resources
         $pub_tricky_topics = static::get_pub_tricky_topics();
         // public activities are only sent to global if the site allows registration
@@ -310,6 +366,7 @@ class ClipitSite extends UBSite {
         }
         $pub_videos = static::get_pub_videos();
         $pub_files = static::get_pub_files();
+        $pub_texts = static::get_pub_texts();
 
         // ADD new content to Global
         // NEW TRICKY TOPICS
@@ -386,6 +443,25 @@ class ClipitSite extends UBSite {
                 static::global_site_call($data, "POST");
             }
         }
+        // NEW TEXTS
+        foreach($pub_texts as $pub_text_id){
+            if(!in_array($pub_text_id, $remote_texts)){
+                $text = array_pop(ClipitText::get_by_id(array($pub_text_id)));
+                $tag_name_array = array();
+                $tag_array = ClipitTag::get_by_id($text->tag_array);
+                foreach($tag_array as $tag){
+                    $tag_name_array[] = $tag->name;
+                }
+                $data = array("method" => "clipit.remote_text.create");
+                $data += array("prop_value_array[remote_site]" => base64_encode(elgg_get_site_url()));
+                $data += array("prop_value_array[remote_id]" => $text->id);
+                $data += array("prop_value_array[name]" => base64_encode($text->name));
+                $data += array("prop_value_array[description]" => base64_encode($text->description));
+                $data += array("prop_value_array[url]" => base64_encode($text->url));
+                $data += array("prop_value_array[tag_array]" => base64_encode(json_encode($tag_name_array)));
+                static::global_site_call($data, "POST");
+            }
+        }
 
         // REMOVE content no longer public on local site
         // OLD TRICKY TOPICS
@@ -441,7 +517,22 @@ class ClipitSite extends UBSite {
             }
         }
         if(!empty($remove_array)) {
-            $data = array("method" => "clipit.remote_video.delete_by_remote_id");
+            $data = array("method" => "clipit.remote_file.delete_by_remote_id");
+            $data += array("remote_site" => base64_encode(elgg_get_site_url()));
+            foreach ($remove_array as $remove_id) {
+                $data += array("remote_id_array[]" => $remove_id);
+            }
+            static::global_site_call($data, "POST");
+        }
+        // OLD TEXTS
+        $remove_array = array();
+        foreach($remote_texts as $remote_text_id){
+            if(!in_array($remote_text_id, $pub_texts)){
+                $remove_array[] = $remote_text_id;
+            }
+        }
+        if(!empty($remove_array)) {
+            $data = array("method" => "clipit.remote_text.delete_by_remote_id");
             $data += array("remote_site" => base64_encode(elgg_get_site_url()));
             foreach ($remove_array as $remove_id) {
                 $data += array("remote_id_array[]" => $remove_id);

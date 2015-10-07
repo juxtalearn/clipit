@@ -22,11 +22,13 @@ class ClipitGroup extends UBItem {
     const SUBTYPE = "ClipitGroup";
     const REL_GROUP_USER = "ClipitGroup-ClipitUser";
     const REL_GROUP_FILE = "ClipitGroup-ClipitFile";
-    const REL_GROUP_VIDEO = "ClipitGroup-ClipitVideo";
+    const REL_GROUP_VIDEO = "ClipitGroup-ClipitText";
+    const REL_GROUP_TEXT = "ClipitGroup-Clipit";
     const REL_GROUP_TAG = "ClipitGroup-ClipitTag";
     public $user_array = array();
     public $file_array = array();
     public $video_array = array();
+    public $text_array = array();
     public $tag_array = array();
     public $activity = 0;
 
@@ -40,6 +42,7 @@ class ClipitGroup extends UBItem {
         $this->user_array = static::get_users($this->id);
         $this->file_array = static::get_files($this->id);
         $this->video_array = static::get_videos($this->id);
+        $this->text_array = static::get_texts($this->id);
         $this->tag_array = static::get_tags($this->id);
         $this->activity = static::get_activity($this->id);
     }
@@ -54,6 +57,7 @@ class ClipitGroup extends UBItem {
         static::set_users($this->id, $this->user_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
+        static::set_texts($this->id, $this->text_array);
         static::set_tags($this->id, $this->tag_array);
         if($this->activity != 0) {
             ClipitActivity::add_groups($this->activity, array($this->id));
@@ -99,14 +103,7 @@ class ClipitGroup extends UBItem {
         return array_pop($rel_array)->guid_one;
     }
 
-    /**
-     * Add Users to a Group.
-     *
-     * @param int   $id         Id of the Group to add Users to.
-     * @param array $user_array Array of User Ids to add to the Group.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
+    // USERS
     static function add_users($id, $user_array) {
         return UBCollection::add_items($id, $user_array, static::REL_GROUP_USER);
     }
@@ -115,37 +112,15 @@ class ClipitGroup extends UBItem {
         return UBCollection::set_items($id, $user_array, static::REL_GROUP_USER);
     }
 
-    /**
-     * Remove Users from a Group.
-     *
-     * @param int   $id         Id of the Group to remove Users from.
-     * @param array $user_array Array of User Ids to remove from the Group.
-     *
-     * @return bool Returns true if removed correctly, or false if error.
-     */
     static function remove_users($id, $user_array) {
         return UBCollection::remove_items($id, $user_array, static::REL_GROUP_USER);
     }
 
-    /**
-     * Get User Ids from a Group.
-     *
-     * @param int $id Id of the Group to get Users from.
-     *
-     * @return bool Returns array of User Ids, or false if error.
-     */
     static function get_users($id) {
         return UBCollection::get_items($id, static::REL_GROUP_USER);
     }
 
-    /**
-     * Add Files to a Group.
-     *
-     * @param int   $id         Id of the Group to add Files to.
-     * @param array $file_array Array of File Ids to add to the Group.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
+    // FILES
     static function add_files($id, $file_array) {
         return UBCollection::add_items($id, $file_array, static::REL_GROUP_FILE);
     }
@@ -154,37 +129,15 @@ class ClipitGroup extends UBItem {
         return UBCollection::set_items($id, $file_array, static::REL_GROUP_FILE);
     }
 
-    /**
-     * Remove Files from a Group.
-     *
-     * @param int   $id         Id of the Group to remove Files from.
-     * @param array $file_array Array of File Ids to remove from the Group.
-     *
-     * @return bool Returns true if removed correctly, or false if error.
-     */
     static function remove_files($id, $file_array) {
         return UBCollection::remove_items($id, $file_array, static::REL_GROUP_FILE);
     }
 
-    /**
-     * Get File Ids from a Group.
-     *
-     * @param int $id Id of the Group to get Files from.
-     *
-     * @return bool Returns array of User Ids, or false if error.
-     */
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_GROUP_FILE);
     }
 
-    /**
-     * Add Videos to a Group.
-     *
-     * @param int   $id          Id of the Group to add Videos to.
-     * @param array $video_array Array of Video Ids to add to the Group.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
+    // VIDEOS
     static function add_videos($id, $video_array) {
         return UBCollection::add_items($id, $video_array, static::REL_GROUP_VIDEO);
     }
@@ -193,37 +146,32 @@ class ClipitGroup extends UBItem {
         return UBCollection::set_items($id, $video_array, static::REL_GROUP_VIDEO);
     }
 
-    /**
-     * Remove Videos from a Group.
-     *
-     * @param int   $id          Id of the Group to remove Videos from.
-     * @param array $video_array Array of Video Ids to remove from the Group.
-     *
-     * @return bool Returns true if removed correctly, or false if error.
-     */
     static function remove_videos($id, $video_array) {
         return UBCollection::remove_items($id, $video_array, static::REL_GROUP_VIDEO);
     }
 
-    /**
-     * Get Video Ids from a Group.
-     *
-     * @param int $id Id of the Group to get Videos from.
-     *
-     * @return bool Returns array of Video Ids, or false if error.
-     */
     static function get_videos($id) {
         return UBCollection::get_items($id, static::REL_GROUP_VIDEO);
     }
 
-    /**
-     * Add Tags for a Group to work on.
-     *
-     * @param int   $id          Id of the Group to add Tags to.
-     * @param array $tag_array  Array of Tag Ids to add to the Group.
-     *
-     * @return bool Returns true if added correctly, or false if error.
-     */
+    // TEXTS
+    static function add_texts($id, $text_array) {
+        return UBCollection::add_items($id, $text_array, static::REL_GROUP_TEXT);
+    }
+
+    static function set_texts($id, $text_array) {
+        return UBCollection::set_items($id, $text_array, static::REL_GROUP_TEXT);
+    }
+
+    static function remove_texts($id, $text_array) {
+        return UBCollection::remove_items($id, $text_array, static::REL_GROUP_TEXT);
+    }
+
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_GROUP_TEXT);
+    }
+
+    //TAGS
     static function add_tags($id, $tag_array) {
         return UBCollection::add_items($id, $tag_array, static::REL_GROUP_TAG);
     }

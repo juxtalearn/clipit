@@ -24,6 +24,7 @@ class ClipitExample extends UBItem {
     const REL_EXAMPLE_EXAMPLETYPE = "ClipitExample-ClipitExampleType";
     const REL_EXAMPLE_VIDEO = "ClipitExample-ClipitVideo";
     const REL_EXAMPLE_FILE = "ClipitExample-ClipitFile";
+    const REL_EXAMPLE_TEXT = "ClipitExample-ClipitText";
     public $tricky_topic = 0;
     public $tag_array = array();
     public $example_type_array = array();
@@ -32,6 +33,7 @@ class ClipitExample extends UBItem {
     // Example Resources
     public $video_array = array();
     public $file_array = array();
+    public $text_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -47,6 +49,7 @@ class ClipitExample extends UBItem {
         $this->location = (string)$elgg_entity->get("location");
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->text_array = static::get_texts($this->id);
     }
 
     /**
@@ -67,6 +70,7 @@ class ClipitExample extends UBItem {
         static::set_example_types($this->id, (array)$this->example_type_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
+        static::set_texts($this->id, $this->text_array);
         return $this->id;
     }
 
@@ -229,5 +233,22 @@ class ClipitExample extends UBItem {
     
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_EXAMPLE_FILE);
+    }
+
+    // Texts methods
+    static function add_texts($id, $text_array) {
+        return UBCollection::add_items($id, $text_array, static::REL_EXAMPLE_TEXT);
+    }
+
+    static function set_texts($id, $text_array) {
+        return UBCollection::set_items($id, $text_array, static::REL_EXAMPLE_TEXT);
+    }
+
+    static function remove_texts($id, $text_array) {
+        return UBCollection::remove_items($id, $text_array, static::REL_EXAMPLE_TEXT);
+    }
+
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_EXAMPLE_TEXT);
     }
 }
