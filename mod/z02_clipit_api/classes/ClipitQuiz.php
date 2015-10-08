@@ -196,6 +196,10 @@ class ClipitQuiz extends UBItem {
         return UBCollection::add_items($id, array($user_id), static::REL_QUIZ_USER);
     }
 
+    static function remove_quiz_start($id, $user_array){
+        return UBCollection::remove_items($id, $user_array, static::REL_QUIZ_USER);
+    }
+
     /**
      * @param $id
      * @param $user_id
