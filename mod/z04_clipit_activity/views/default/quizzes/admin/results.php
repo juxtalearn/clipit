@@ -24,7 +24,7 @@ switch($type = get_input('type')){
 
         switch($action_type){
             case 'reset-time':
-                UBCollection::remove_items($quiz_id, array($user_id), ClipitQuiz::REL_QUIZ_USER);
+                ClipitQuiz::remove_quiz_start($quiz_id, array($user_id));
                 echo elgg_echo('quiz:result:reseted_time');
                 break;
             case 'remove-results':
