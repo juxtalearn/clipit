@@ -448,6 +448,14 @@ class ClipitQuiz extends UBItem {
         return $quiz_results;
     }
 
+    static function evaluate_results($id){
+        $quiz_questions = static::get_quiz_questions($id);
+        foreach($quiz_questions as $quiz_question) {
+            ClipitQuizQuestion::evaluate_results($quiz_question);
+        }
+        return true;
+    }
+
     /**
      * Adds Quiz Questions to a Quiz.
      *
