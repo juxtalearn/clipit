@@ -20,6 +20,11 @@ function expose_quiz_question_functions() {
     $class_suffix = "ClipitQuizQuestion::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "evaluate_results", $class_suffix . "evaluate_results",
+        array("id" => array("type" => "int", "required" => true)),
+        "Evaluate all results from a Quiz Question", "POST", false, true
+    );
+    expose_function(
         $api_suffix . "get_from_quiz", $class_suffix . "get_from_quiz",
         array(
             "quiz_id" => array("type" => "int", "required" => true)),
