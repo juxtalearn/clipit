@@ -370,6 +370,7 @@ class ClipitQuiz extends UBItem {
         foreach($result_array as $tag_id=>$correct_answers){
             $result_array[$tag_id] = (float)$correct_answers/$tag_count_array[$tag_id];
         }
+        ksort($result_array);
         return $result_array;
     }
 
@@ -406,6 +407,7 @@ class ClipitQuiz extends UBItem {
         foreach($group_results as $tag_id=>$result){
             $group_results[$tag_id] = (float)$result/$user_count;
         }
+        ksort($group_results);
         return $group_results;
     }
 
@@ -442,6 +444,7 @@ class ClipitQuiz extends UBItem {
         foreach($quiz_results as $tag_id=>$result){
             $quiz_results[$tag_id] = (float)$result/$user_count;
         }
+        ksort($quiz_results);
         return $quiz_results;
     }
 
