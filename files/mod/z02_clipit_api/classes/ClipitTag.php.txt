@@ -22,6 +22,8 @@ class ClipitTag extends UBItem {
      */
     const SUBTYPE = "ClipitTag";
 
+    public $ontologylink = "";
+
     /**
      * Create a new instance of this class, and assign values to its properties.
      *
@@ -44,5 +46,23 @@ class ClipitTag extends UBItem {
         return UBCollection::get_items($id, ClipitTrickyTopic::REL_TRICKYTOPIC_TAG, true);
     }
 
+    protected function copy_from_elgg($elgg_entity)
+    {
+        parent::copy_from_elgg($elgg_entity);
+        $this->ontologylink = (string)$elgg_entity->get("ontologylink");
+    }
+
+    protected function copy_to_elgg($elgg_entity)
+    {
+        parent::copy_to_elgg($elgg_entity);
+        if (!empty($this->ontologylink)) {
+            $elgg_entity->set("ontologylink", (string)$this->ontologylink);
+        } else {
+            $elgg_entity->set("ontologylink", "");
+        }
+    }
+    public function save(){
+        parent::save();
+    }
 
 }
