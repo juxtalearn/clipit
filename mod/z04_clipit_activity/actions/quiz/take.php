@@ -27,9 +27,9 @@ foreach($questions as $question_id => $value){
             break;
         case ClipitQuizQuestion::TYPE_SELECT_MULTI:
             $p = array_fill(0, count($question->validation_array), 0);
-            for($x = 0; $x < count($value); $x++){
+            for($x = 0; $x <= count($value); $x++){
                 if($value[$x]  ){
-                    $s = $value[$x] -1;
+                    $s = $value[$x]-1;
                     $p[$s] = 1;
                 }
             }
