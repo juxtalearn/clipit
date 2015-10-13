@@ -154,15 +154,6 @@ switch($type = get_input('type')){
                             ));
                         endif;
                         ?>
-                        <?php if($total_answered):?>
-                            <small>
-                                <?php echo elgg_echo('quiz:out_of:answered', array(
-                                        count(array_filter($total_results)),
-                                        count($users)*count($questions)
-                                    ));
-                                ?>
-                            </small>
-                        <?php endif;?>
                         <i class="btn fa fa-angle-down blue btn-icon"
                            data-target="#question-result-<?php echo $question->id;?>-<?php echo $entity_id;?>"
                            data-toggle="collapse"></i>
