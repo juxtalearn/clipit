@@ -27,7 +27,7 @@ if($random) {
 
 foreach($options as $key => $option):
     $checked = '';
-    if ($result->answer[$key - 1]) {
+    if ($result->answer[$key]) {
         $checked = 'checked';
     }
     $total_results_text = '';
@@ -53,7 +53,7 @@ foreach($options as $key => $option):
         <?php endif;?>
         <?php echo $total_results_text;?>
     <?php else:?>
-        <input type="checkbox" value="<?php echo $key;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
+        <input type="checkbox" value="<?php echo $key+1;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
         <?php echo $option;?>
     <?php endif;?>
 </label>
