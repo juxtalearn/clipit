@@ -75,6 +75,13 @@ function expose_quiz_functions() {
         "Set Quiz Start Time", 'POST', false, true
     );
     expose_function(
+        $api_suffix . "remove_quiz_start", $class_suffix . "remove_quiz_start",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_array" => array("type" => "array", "required" => true)),
+        "Remove Quiz Start Time", 'POST', false, true
+    );
+    expose_function(
         $api_suffix . "get_quiz_start", $class_suffix . "get_quiz_start",
         array(
             "id" => array("type" => "int", "required" => true),
