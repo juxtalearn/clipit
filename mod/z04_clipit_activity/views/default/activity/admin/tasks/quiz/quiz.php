@@ -32,6 +32,10 @@ if($entity = elgg_extract('entity', $vars)){
         'name' => $input_prefix.'[id]',
         'value' => $entity->id
     ));
+    echo elgg_view("input/hidden", array(
+        'name' => $input_prefix.'[tricky_topic]',
+        'value' => $tricky_topic
+    ));
 }
 
 $tags = ClipitTrickyTopic::get_tags($tricky_topic);
