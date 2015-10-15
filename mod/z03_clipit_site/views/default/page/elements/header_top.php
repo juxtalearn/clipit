@@ -14,7 +14,7 @@ $site = elgg_get_site_entity();
     ));
     ?>
     <div class="container">
-        <h2 class="white pull-left site-title hidden-xs hidden-sm"><?php echo $site->name;?></h2>
+        <h2 class="white pull-left site-title hidden-xs hidden-sm" style="font-size: 13px;font-family: FuturaBoldRegular,Impact,'Impact Bold',Helvetica,Arial,sans,sans-serif;margin: 0;padding: 10px 0;letter-spacing: .5px;"><?php echo $site->name;?></h2>
         <?php
         if (elgg_is_logged_in()): ?>
         <div class="col-md-3 pull-right">
