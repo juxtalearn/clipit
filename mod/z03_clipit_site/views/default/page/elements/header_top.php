@@ -21,7 +21,7 @@ $site = elgg_get_site_entity();
             <?php echo elgg_view('search/search_box', array('class' => 'navbar-form navbar-right search-form')); ?>
         </div>
         <?php elseif(!$vars['walled_garden']): ?>
-        <p class="navbar-text navbar-left">
+        <p class="navbar-text navbar-left  hide">
             <?php echo elgg_view('output/url', array(
                 'href'  => "/",
                 'title' => elgg_echo('back'),
