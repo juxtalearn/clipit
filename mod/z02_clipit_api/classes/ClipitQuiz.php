@@ -196,6 +196,10 @@ class ClipitQuiz extends UBItem {
         return UBCollection::add_items($id, array($user_id), static::REL_QUIZ_USER);
     }
 
+    static function remove_quiz_start($id, $user_array){
+        return UBCollection::remove_items($id, $user_array, static::REL_QUIZ_USER);
+    }
+
     /**
      * @param $id
      * @param $user_id
@@ -366,6 +370,7 @@ class ClipitQuiz extends UBItem {
         foreach($result_array as $tag_id=>$correct_answers){
             $result_array[$tag_id] = (float)$correct_answers/$tag_count_array[$tag_id];
         }
+        ksort($result_array);
         return $result_array;
     }
 
@@ -402,6 +407,7 @@ class ClipitQuiz extends UBItem {
         foreach($group_results as $tag_id=>$result){
             $group_results[$tag_id] = (float)$result/$user_count;
         }
+        ksort($group_results);
         return $group_results;
     }
 
@@ -438,7 +444,16 @@ class ClipitQuiz extends UBItem {
         foreach($quiz_results as $tag_id=>$result){
             $quiz_results[$tag_id] = (float)$result/$user_count;
         }
+        ksort($quiz_results);
         return $quiz_results;
+    }
+
+    static function evaluate_results($id){
+        $quiz_questions = static::get_quiz_questions($id);
+        foreach($quiz_questions as $quiz_question) {
+            ClipitQuizQuestion::evaluate_results($quiz_question);
+        }
+        return true;
     }
 
     /**
@@ -489,6 +504,11 @@ class ClipitQuiz extends UBItem {
     }
 
     static function export_to_excel($id){
+        $ROW_HEIGHT = -1;
+        $ROW_WIDTH = 30;
+        $H_ALIGN = PHPExcel_Style_Alignment::HORIZONTAL_RIGHT;
+        $WRAP_TEXT = true;
+
         $quiz = static::get_by_id(array($id));
         if(empty($quiz)){
             return null;
@@ -503,26 +523,26 @@ class ClipitQuiz extends UBItem {
         $php_excel = new PHPExcel();
 
         // Set document properties
-        $php_excel->getProperties()->setCreator("ClipIt")
-            ->setTitle("ClipIt export of Quiz " . $quiz->name)
-            ->setKeywords("clipit export quiz");
+        $php_excel->getProperties()->setCreator(elgg_echo("clipit:quiz:export:creator"))
+            ->setTitle(elgg_echo("clipit:quiz:export:title") . " - " . $quiz->name)
+            ->setKeywords(elgg_echo("clipit:quiz:export:keywords"));
 
         // Set Scores sheet properties
         $sheet_0 = $php_excel->getSheet(0);
-        $sheet_0->setTitle("Scores");
-        $sheet_0->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-        $sheet_0->getDefaultStyle()->getAlignment()->setWrapText(true);
-        $sheet_0->getDefaultRowDimension()->setRowHeight(-1);
-        $sheet_0->getDefaultColumnDimension()->setWidth(30);
+        $sheet_0->setTitle(elgg_echo("clipit:quiz:export:scores"));
+        $sheet_0->getStyle('A1:Z1000')->getAlignment()->setHorizontal($H_ALIGN);
+        $sheet_0->getDefaultStyle()->getAlignment()->setWrapText($WRAP_TEXT);
+        $sheet_0->getDefaultRowDimension()->setRowHeight($ROW_HEIGHT);
+        $sheet_0->getDefaultColumnDimension()->setWidth($ROW_WIDTH);
 
 
 
         // Quiz info title row
         $col_0 = 0; $row_0 = 1;
-        $sheet_0->getStyle($row_0)->getFont()->setBold(true);
-        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "QUIZ NAME");
-        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "TRICKY TOPIC");
-        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "MAX TIME (mins)");
+        $sheet_0->getStyle("A".$row_0.":Z".$row_0)->getFont()->setBold(true);
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, elgg_echo("clipit:quiz:export:quiz_name"));
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, elgg_echo("clipit:quiz:export:tricky_topic"));
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, elgg_echo("clipit:quiz:export:max_time"));
 
         // Quiz info
         $col_0=0; $row_0++;
@@ -538,10 +558,10 @@ class ClipitQuiz extends UBItem {
 
         // Student Scores title row
         $col_0 = 0; $row_0 += 2;
-        $sheet_0->getStyle($row_0)->getFont()->setBold(true);
-        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "STUDENT NAME");
-        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "CORRECT ANSWERS");
-        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, "SCORE");
+        $sheet_0->getStyle("A".$row_0.":Z".$row_0)->getFont()->setBold(true);
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, elgg_echo("clipit:quiz:export:student_name"));
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, elgg_echo("clipit:quiz:export:num_correct"));
+        $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, elgg_echo("clipit:quiz:export:score"));
 
         // Student Scores
         $col_0 = 0; $row_0++;
@@ -554,7 +574,7 @@ class ClipitQuiz extends UBItem {
             foreach($results_by_question as $question_id => $result){
                 $total_correct += (int)$result;
             }
-            $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $total_correct." out of ".count($quiz->quiz_question_array));
+            $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $total_correct.elgg_echo("clipit:quiz:export:out_of").count($quiz->quiz_question_array));
             $percentage = (float)($total_correct / count($quiz->quiz_question_array) * 100.0);
             $percentage = round($percentage, 2);
             $sheet_0->setCellValueByColumnAndRow($col_0++, $row_0, $percentage."%");
@@ -563,23 +583,22 @@ class ClipitQuiz extends UBItem {
 
         // Set Answers sheet properties
         $sheet_1 = $php_excel->createSheet(1);
-        $sheet_1->setTitle("Answers");
-        $sheet_1->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_RIGHT);
-        $sheet_1->getDefaultStyle()->getAlignment()->setWrapText(true);
-        $sheet_1->getDefaultRowDimension()->setRowHeight(-1);
-        $sheet_1->getDefaultColumnDimension()->setWidth(30);
+        $sheet_1->setTitle(elgg_echo("clipit:quiz:export:answers"));
+        $sheet_1->getStyle('A1:Z1000')->getAlignment()->setHorizontal($H_ALIGN);
+        $sheet_1->getDefaultStyle()->getAlignment()->setWrapText($WRAP_TEXT);
+        $sheet_1->getDefaultRowDimension()->setRowHeight($ROW_HEIGHT);
+        $sheet_1->getDefaultColumnDimension()->setWidth($ROW_WIDTH);
 
         // Quiz Questions header
         $col_1 = 0; $row_1 = 1;
-        $sheet_1->getColumnDimension('A')->setWidth(30);
         $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
-        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "QUESTION NUMBER");
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, elgg_echo("clipit:quiz:export:question_number"));
         $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
-        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "QUESTION TITLE");
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, elgg_echo("clipit:quiz:export:question_title"));
         $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
-        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "CORRECT ANSWER(S)");
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, elgg_echo("clipit:quiz:export:correct_answer"));
         $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
-        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, "STUDENT NAME");
+        $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, elgg_echo("clipit:quiz:export:student_name"));
 
         /// Quiz Questions
         $col_1 = 1; $row_1 = 1;
@@ -607,9 +626,11 @@ class ClipitQuiz extends UBItem {
                     break;
                 case ClipitQuizQuestion::TYPE_TRUE_FALSE:
                     if($quiz_question->validation_array[0]){
-                        $correct_answer = "TRUE";
+                        $correct_answer = elgg_echo("clipit:quiz:export:true");
                     } elseif($quiz_question->validation_array[1]){
-                        $correct_answer = "FALSE";
+                        $correct_answer = elgg_echo("clipit:quiz:export:false");
+                    } else{
+                        $correct_answer = elgg_echo("clipit:quiz:export:undefined");
                     }
                     break;
                 case ClipitQuizQuestion::TYPE_NUMBER:
@@ -622,7 +643,7 @@ class ClipitQuiz extends UBItem {
             $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID);
             $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFill()->setStartColor($fill_color);
             $sheet_1->setCellValueByColumnAndRow($col_1, $row_1++, (string)$correct_answer);
-            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, "STUDENT ANSWER");
+            $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, elgg_echo("clipit:quiz:export:student_answer"));
             $sheet_1->getStyleByColumnAndRow($col_1, $row_1)->getFont()->setBold(true);
             $col_1++; $row_1 = 1;
         }
@@ -639,7 +660,7 @@ class ClipitQuiz extends UBItem {
             foreach($quiz_question_array as $quiz_question){
                 $quiz_result = ClipitQuizResult::get_from_question_user($quiz_question->id, $user_id);
                 if(empty($quiz_result)){
-                    $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, "<not answered>");
+                    $sheet_1->setCellValueByColumnAndRow($col_1, $row_1, elgg_echo("clipit:quiz:export:not_answered"));
                     $col_1++;
                     continue;
                 }
@@ -664,9 +685,11 @@ class ClipitQuiz extends UBItem {
                         break;
                     case ClipitQuizQuestion::TYPE_TRUE_FALSE:
                         if($quiz_result->answer[0]){
-                            $answer = "TRUE";
+                            $answer = elgg_echo("clipit:quiz:export:true");
                         } elseif($quiz_result->answer[1]){
-                            $answer = "FALSE";
+                            $answer = elgg_echo("clipit:quiz:export:false");
+                        } else{
+                            $answer = elgg_echo("clipit:quiz:export:undefined");
                         }
                         break;
                     case ClipitQuizQuestion::TYPE_NUMBER:

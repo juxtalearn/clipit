@@ -108,8 +108,31 @@ elgg_load_js('jquery:chartjs');
                             </div>
                         </div>
                         <span class="pull-right">
+                            <div class="inline-block dropdown entity-options">
+                                <a class="show-data btn-primary btn btn-xs btn-border-blue btn-options" data-type="student" data-toggle="dropdown" style="font-size: 14px;">
+                                    <i class="fa-cog fa"></i>
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="entity-action" data-action="reset-time" href="javascript:;">
+                                            <i class="fa fa-clock-o"></i> <?php echo elgg_echo('quiz:result:reset_time');?>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="entity-action" data-action="finish-quiz" href="javascript:;">
+                                            <i class="fa fa-check"></i> <?php echo elgg_echo('quiz:set_quiz_finish');?>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="entity-action remove" data-action="remove-results" href="javascript:;">
+                                            <i class="fa fa-times"></i> <?php echo elgg_echo('quiz:result:remove');?>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                             <a href="#questions-<?php echo $student->id;?>"
-                               class="show-data btn-primary btn btn-xs btn-icon fa-list fa btn-border-blue"
+                               class="show-data margin-left-10 btn-primary btn btn-xs btn-icon fa-list fa btn-border-blue"
                                data-type="student"
                                data-entity-type="questions"
                                data-toggle="collapse"

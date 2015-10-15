@@ -20,6 +20,11 @@ function expose_quiz_functions() {
     $class_suffix = "ClipitQuiz::";
     expose_common_functions($api_suffix, $class_suffix);
     expose_function(
+        $api_suffix . "evaluate_results", $class_suffix . "evaluate_results",
+        array("id" => array("type" => "int", "required" => true)),
+        "Evaluate all results from a Quiz", "POST", false, true
+    );
+    expose_function(
         $api_suffix . "get_task", $class_suffix . "get_task", array(
             "id" => array("type" => "int", "required" => true)
         ), "Get Task in which Quiz is inside of", 'GET', false, true
@@ -68,6 +73,13 @@ function expose_quiz_functions() {
             "id" => array("type" => "int", "required" => true),
             "user_id" => array("type" => "int", "required" => true)),
         "Set Quiz Start Time", 'POST', false, true
+    );
+    expose_function(
+        $api_suffix . "remove_quiz_start", $class_suffix . "remove_quiz_start",
+        array(
+            "id" => array("type" => "int", "required" => true),
+            "user_array" => array("type" => "array", "required" => true)),
+        "Remove Quiz Start Time", 'POST', false, true
     );
     expose_function(
         $api_suffix . "get_quiz_start", $class_suffix . "get_quiz_start",

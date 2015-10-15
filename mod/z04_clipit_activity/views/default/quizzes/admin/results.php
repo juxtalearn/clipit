@@ -18,6 +18,30 @@ $users = get_input('users');
 
 $default = "";
 switch($type = get_input('type')){
+    case 'action':
+        $action_type = get_input('action_type');
+        $user_id = get_input('entity_id');
+
+        switch($action_type){
+            case 'reset-time':
+                ClipitQuiz::remove_quiz_start($quiz_id, array($user_id));
+                echo elgg_echo('quiz:result:reseted_time');
+                break;
+            case 'remove-results':
+                $questions = ClipitQuiz::get_quiz_questions($quiz_id);
+                foreach($questions as $question_id){
+                    $result = ClipitQuizResult::get_from_question_user($question_id, $user_id);
+                    $results[] = $result->id;
+                }
+                ClipitQuizResult::delete_by_id($results);
+                echo elgg_echo('quiz:result:removed');
+                break;
+            case 'finish-quiz':
+                ClipitQuiz::set_quiz_as_finished($quiz_id, $user_id);
+                echo elgg_echo('quiz:set_quiz_finished');
+                break;
+        }
+        break;
     case 'compare_results':
 
         function get_random_colors($count){
@@ -34,7 +58,6 @@ switch($type = get_input('type')){
         $task_id = ClipitQuiz::get_task($quiz_id);
         $stumbling_blocks = array();
         $tricky_topic_id = ClipitQuiz::get_tricky_topic($quiz_id);
-        $tricky_topic_id = 2856;
         $stumbling_blocks = ClipitTrickyTopic::get_tags($tricky_topic_id);
         $stumbling_blocks = ClipitTag::get_by_id(array_values($stumbling_blocks));
         switch(get_input('entity_type')){
@@ -250,15 +273,6 @@ switch($type = get_input('type')){
                             ));
                         endif;
                         ?>
-                        <?php if($total_answered):?>
-                            <small>
-                                <?php echo elgg_echo('quiz:out_of:answered', array(
-                                        count(array_filter($total_results)),
-                                        count($users)*count($questions)
-                                    ));
-                                ?>
-                            </small>
-                        <?php endif;?>
                         <i class="btn fa fa-angle-down blue btn-icon"
                            data-target="#question-result-<?php echo $question->id;?>-<?php echo $entity_id;?>"
                            data-toggle="collapse"></i>

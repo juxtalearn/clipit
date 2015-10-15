@@ -19,6 +19,7 @@ clipit.quiz.init = function() {
     $('.chart, .questions').on('show.bs.collapse', clipit.task.admin.quiz.showData);
     $('.print-data').click(clipit.task.admin.quiz.printData);
     $('.compare-results').on('show.bs.collapse', clipit.task.admin.quiz.compareResults);
+    $('.entity-action').click(clipit.task.admin.quiz.setAction);
 };
 elgg.register_hook_handler('init', 'system', clipit.quiz.init);
 clipit.quiz.translated = function(){
@@ -476,6 +477,25 @@ clipit.task.admin.quiz.init = function() {
 };
 elgg.register_hook_handler('init', 'system', clipit.task.admin.quiz.init);
 
+clipit.task.admin.quiz.setAction = function (){
+    var action = $(this).data('action'),
+        $entity = $(this).closest('[data-entity]'),
+        id = $entity.data('entity'),
+        $quiz = $(this).closest('[data-quiz]');
+    elgg.get("ajax/view/quizzes/admin/results", {
+        data: {
+            quiz: $quiz.data('quiz'),
+            type: 'action',
+            action_type: action,
+            entity_id: id
+        },
+        success: function (data) {
+            $entity.find('.counts').html('');
+            $entity.find('.msg-not-finished').text(data);
+        }
+    });
+};
+
 clipit.task.admin.quiz.showChart = function(e){
     var that = $(this),
         user_id = that.closest('li').data('entity'),
@@ -587,7 +607,7 @@ clipit.task.admin.quiz.compareResults = function (){
 };
 clipit.task.admin.quiz.onShowTab = function(e){
     var id = $(this).attr('href'),
-        container = $(id).find('li');
+        container = $(id).find('li[data-entity]');
     if(container.find('.status').is(':hidden')) {
         elgg.get("ajax/view/quizzes/admin/results", {
             dataType: "json",

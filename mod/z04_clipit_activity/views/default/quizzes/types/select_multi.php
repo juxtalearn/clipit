@@ -27,14 +27,14 @@ if($random) {
 
 foreach($options as $key => $option):
     $checked = '';
-    if ($result->answer[$key - 1]) {
+    if ($result->answer[$key]) {
         $checked = 'checked';
     }
     $total_results_text = '';
     $total_results_count = 0;
     if($total_results){
         foreach($total_results as $total_result){
-            if($total_result->answer[$key-1]) {
+            if($total_result->answer[$key]) {
                 $total_results_count++;
             }
         }
@@ -46,14 +46,14 @@ foreach($options as $key => $option):
 <label style="font-weight: normal">
     <?php if($finished):?>
         <input type="checkbox" disabled <?php echo $checked;?>/>
-        <?php if($question->validation_array[$key-1] && $finished_task):?>
+        <?php if($question->validation_array[$key] && $finished_task):?>
             <strong><?php echo $option;?></strong>
         <?php else:?>
             <?php echo $option;?>
         <?php endif;?>
         <?php echo $total_results_text;?>
     <?php else:?>
-        <input type="checkbox" value="<?php echo $key;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
+        <input type="checkbox" value="<?php echo $key+1;?>" <?php echo $checked;?> name="question[<?php echo $question->id;?>][]" />
         <?php echo $option;?>
     <?php endif;?>
 </label>

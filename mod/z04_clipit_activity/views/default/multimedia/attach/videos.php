@@ -30,11 +30,7 @@ $(function() {
     $container.find('.add-video-btn').click(function(){
         var form = $(this).closest('[data-list="videos"]'),
             $items = $('#<?php echo $id;?> .items-list'),
-            add_video_options = $(this).closest('.add-video'),
-            url = 'ajax/view/multimedia/file/attach_action?' +
-                'prefix=<?php echo json_encode($input_prefix);?>&'  +
-                'type=video&' +
-                form.find('input[type=text]').serialize();
+            add_video_options = $(this).closest('.add-video');
         // Collapse add-video container
         add_video_options.find('.in').collapse('hide');
 
@@ -42,6 +38,7 @@ $(function() {
             dataType: "json",
             data: $(this).closest('form').serialize(),
             success: function(json){
+                $container.find('.empty').remove();
                 $items.prepend(tmpl("template-modal-download", json));
                 // Set empty values
                 $container.find('.add-video :input').val('');
@@ -94,7 +91,7 @@ $(function() {
             ?>
             <div id="<?php echo $id;?>_collapse" class="panel-group">
                 <div class="margin-top-15 panel" style="  box-shadow: none;">
-                    <div class="upload-files inline-block">
+                    <div style="margin-left: 1px;" class="upload-files inline-block">
                         <a class="btn btn-xs btn-border-blue margin-right-10" style="position: relative;overflow: hidden;" href="javascript:;">
                             <strong>
                                 <i class="fa fa-upload"></i> <?php echo elgg_echo('video:add:to_youtube');?>

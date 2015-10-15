@@ -248,7 +248,8 @@ function tt_page_handler($page){
                     $content = elgg_view_form('example/save',
                         array(
                             'enctype' => 'multipart/form-data',
-                            'data-validate' => 'true'
+                            'data-validate' => 'true',
+                            'class' => 'clearfix'
                         ),
                         array(
                             'submit_value' => elgg_echo('create'),
@@ -276,6 +277,7 @@ function tt_page_handler($page){
                         array(
                             'data-validate' => 'true',
                             'enctype' => 'multipart/form-data',
+                            'class' => 'clearfix'
                         ),
                         array(
                             'entity' => $example,

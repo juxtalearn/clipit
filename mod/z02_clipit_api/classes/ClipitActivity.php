@@ -35,6 +35,7 @@ class ClipitActivity extends UBItem {
     const REL_ACTIVITY_TASK = "ClipitActivity-ClipitTask";
     const REL_ACTIVITY_VIDEO = "ClipitActivity-ClipitVideo";
     const REL_ACTIVITY_FILE = "ClipitActivity-ClipitFile";
+    const REL_ACTIVITY_TEXT = "ClipitActivity-ClipitText";
     // Status values
     const STATUS_ENROLL = "enroll";
     const STATUS_ACTIVE = "active";
@@ -61,6 +62,7 @@ class ClipitActivity extends UBItem {
     // Activity Teacher Resources
     public $video_array = array();
     public $file_array = array();
+    public $text_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -84,6 +86,7 @@ class ClipitActivity extends UBItem {
         $this->task_array = static::get_tasks($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->text_array = static::get_texts($this->id);
     }
 
     /**
@@ -140,6 +143,7 @@ class ClipitActivity extends UBItem {
         static::set_tasks($this->id, $this->task_array);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
+        static::set_texts($this->id, $this->text_array);
         return $this->id;
     }
 
@@ -341,6 +345,23 @@ class ClipitActivity extends UBItem {
         return UBCollection::get_items($id, static::REL_ACTIVITY_FILE);
     }
 
+    // TEACHER RESOURCE TEXTS
+    static function add_texts($id, $text_array) {
+        return UBCollection::add_items($id, $text_array, static::REL_ACTIVITY_TEXT);
+    }
+
+    static function set_texts($id, $text_array) {
+        return UBCollection::set_items($id, $text_array, static::REL_ACTIVITY_TEXT);
+    }
+
+    static function remove_texts($id, $text_array) {
+        return UBCollection::remove_items($id, $text_array, static::REL_ACTIVITY_TEXT);
+    }
+
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_ACTIVITY_TEXT);
+    }
+
     /**
      * Gets all published files from the Tasks contained inside an Activity
      *
@@ -377,5 +398,24 @@ class ClipitActivity extends UBItem {
             }
         }
         return $video_array;
+    }
+
+    /**
+     * Gets all published Texts from the Tasks contained inside an Activity
+     *
+     * @param int $id Activity ID
+     *
+     * @return ClipitText[] Array of Texts
+     */
+    static function get_published_texts($id) {
+        $task_ids = static::get_tasks($id);
+        $tasks = ClipitTask::get_by_id($task_ids);
+        $text_array = array();
+        foreach($tasks as $task) {
+            if($task->task_type == ClipitTask::TYPE_TEXT_UPLOAD) {
+                $text_array = array_merge($text_array, $task->text_array);
+            }
+        }
+        return $text_array;
     }
 }
