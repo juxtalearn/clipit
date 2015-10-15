@@ -1,3 +1,6 @@
+<?php
+$site = elgg_get_site_entity();
+?>
 <nav class="navbar navbar-default navbar-static-top navbar-blue" role="navigation">
     <?php echo elgg_view('output/url', array(
         'href' => "/",
@@ -11,6 +14,7 @@
     ));
     ?>
     <div class="container">
+        <h2 class="white pull-left site-title hidden-xs hidden-sm"><?php echo $site->name;?></h2>
         <?php
         if (elgg_is_logged_in()): ?>
         <div class="col-md-3 pull-right">
