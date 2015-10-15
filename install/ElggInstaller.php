@@ -421,7 +421,7 @@ class ElggInstaller {
             ),
             "clipit_global_password" => array(
                 "type" => "text",
-                "value" => "admin1!",
+                "value" => "*****",
                 "required" => FALSE,
             ),
 //            'jxl_secret' => array(
