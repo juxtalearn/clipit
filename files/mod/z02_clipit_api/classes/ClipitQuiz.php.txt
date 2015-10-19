@@ -196,6 +196,10 @@ class ClipitQuiz extends UBItem {
         return UBCollection::add_items($id, array($user_id), static::REL_QUIZ_USER);
     }
 
+    static function remove_quiz_start($id, $user_array){
+        return UBCollection::remove_items($id, $user_array, static::REL_QUIZ_USER);
+    }
+
     /**
      * @param $id
      * @param $user_id
@@ -362,6 +366,7 @@ class ClipitQuiz extends UBItem {
         foreach($result_array as $tag_id=>$correct_answers){
             $result_array[$tag_id] = (float)$correct_answers/$tag_count_array[$tag_id];
         }
+        ksort($result_array);
         return $result_array;
     }
 
@@ -398,6 +403,7 @@ class ClipitQuiz extends UBItem {
         foreach($group_results as $tag_id=>$result){
             $group_results[$tag_id] = (float)$result/$user_count;
         }
+        ksort($group_results);
         return $group_results;
     }
 
@@ -434,7 +440,16 @@ class ClipitQuiz extends UBItem {
         foreach($quiz_results as $tag_id=>$result){
             $quiz_results[$tag_id] = (float)$result/$user_count;
         }
+        ksort($quiz_results);
         return $quiz_results;
+    }
+
+    static function evaluate_results($id){
+        $quiz_questions = static::get_quiz_questions($id);
+        foreach($quiz_questions as $quiz_question) {
+            ClipitQuizQuestion::evaluate_results($quiz_question);
+        }
+        return true;
     }
 
     /**

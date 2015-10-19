@@ -180,6 +180,14 @@ class ClipitQuizQuestion extends UBItem {
         return $return_quiz_question_array;
     }
 
+    static function evaluate_results($id){
+        $quiz_results = static::get_quiz_results($id);
+        foreach($quiz_results as $quiz_result){
+            ClipitQuizResult::evaluate_result($quiz_result);
+        }
+        return true;
+    }
+
     /**
      * @param int   $id
      * @param array $result_array
@@ -291,5 +299,5 @@ class ClipitQuizQuestion extends UBItem {
         $prop_value_array["option_type"] = static::TYPE_NUMBER;
         return static::set_properties($id, $prop_value_array);
     }
-
 }
+
