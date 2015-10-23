@@ -41,6 +41,7 @@ function learning_analytics_dashboard_init()
     elgg_register_widget_type('useractivities_metric', elgg_echo('la_dashboard:useractivities:title'), elgg_echo('la_dashboard:useractivities:description'), 'la_metrics', true);
     elgg_register_widget_type('groupactivities_metric', elgg_echo('la_dashboard:groupactivities:title'), elgg_echo('la_dashboard:groupactivities:description'), 'la_metrics', true);
     elgg_register_widget_type('artefactsperuser_metric', elgg_echo('la_dashboard:artefactsperuser:title'), elgg_echo('la_dashboard:artefactsperuser:description'), 'la_metrics', true);
+    elgg_register_widget_type('circular_metric', elgg_echo('la_dashboard:circular:title'), elgg_echo('la_dashboard:circular:description'), 'la_metrics', true);
 
     elgg_unregister_action('widgets/add');
     elgg_register_action('widgets/add',dirname(__FILE__).'/actions/widgets/add.php');

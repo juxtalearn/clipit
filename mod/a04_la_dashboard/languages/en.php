@@ -37,6 +37,8 @@ $english = array(
     "la_dashboard:groupactivities:title" => "Groupactivities",
     "la_dashboard:groupactivities:description" => "This widget shows the groupactivities of an activitiy.",
     "la_dashboard:artefactsperuser:title" => "Userartefacts",
-    "la_dashboard:artefactsperuser:description" => "This widget shows the userartefacts of an activity."
+    "la_dashboard:artefactsperuser:description" => "This widget shows the userartefacts of an activity.",
+    "la_dashboard:circular:description" => "This widget shows all data of the selected activity in circular layout.",
+    "la_dashboard:circular:title" => "Circular Layout"
 );
 add_translation('en', $english);

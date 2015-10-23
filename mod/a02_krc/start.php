@@ -19,8 +19,9 @@ function krc_shutdown()
 function update_quiz_listener($event, $object_type, $object)
 {
     if ($object instanceof ElggEntity && $object->getSubtype() == ClipitQuiz::SUBTYPE) {
-        if ($object->has_finished_quiz(elgg_get_logged_in_user_guid())) {
-            update_quiz($object);
+        $user_id = elgg_get_logged_in_user_guid();
+        if ($object->has_finished_quiz($user_id)) {
+            update_quiz($object, $user_id);
         }
     }
 }
@@ -52,9 +53,10 @@ function krc_pagesetup()
 }
 
 
-function update_quiz($quiz)
+function update_quiz($quiz,$user_id)
 {
-
+    $user_profile=new UserProfile($user_id);
+    $user_profile->update_from_quiz($quiz);
 }
 
 elgg_register_event_handler('update', ClipitQuiz::SUBTYPE, 'update_quiz_listener');

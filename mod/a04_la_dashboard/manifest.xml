@@ -31,5 +31,9 @@
         <type>plugin</type>
         <name>z04_clipit_activity</name>
     </requires>
+    <requires>
+        <type>plugin</type>
+        <name>z04_clipit_activity</name>
+    </requires>
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>
