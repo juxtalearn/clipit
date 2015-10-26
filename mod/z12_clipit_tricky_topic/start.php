@@ -49,6 +49,7 @@ function publish_site_tricky_topics($hook, $entity_type, $returnvalue, $params){
     $entity_id = get_input('entity-id');
     $object = ClipitSite::lookup($entity_id);
     if($object['subtype'] == 'ClipitTrickyTopic') {
+        ClipitSite::add_tricky_topics(array($entity_id));
         if(get_input('remote')){
             ClipitSite::add_pub_tricky_topics(array($entity_id));
         }
