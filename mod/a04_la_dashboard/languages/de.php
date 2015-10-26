@@ -35,7 +35,7 @@ $german = array(
     "la_dashboard:groupactivities:title" => "Gruppenaktivitäten",
     "la_dashboard:groupactivities:description" => "Dieses Widget zeigt die Gruppenaktivitäten in der ausgewählten Aktivität an.",
     "la_dashboard:artefactsperuser:title" => "Benutzerartefakte",
-    "la_dashboard:artefactsperuser:description" => "Dieses Widget zeigt die Benutzerartefakte in der ausgewählten Aktivität an."
+    "la_dashboard:artefactsperuser:description" => "Dieses Widget zeigt die Benutzerartefakte in der ausgewählten Aktivität an.",
     "la_dashboard:circular:description" => "Dieses Widget zeigt alle Daten der ausgewählten Aktivität im Circular Layout an.",
     "la_dashboard:circular:title" => "Circular Layout"
 );
