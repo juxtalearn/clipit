@@ -18,8 +18,8 @@ $english = array(
     'clipit:slogan:share' => 'Share',
     'clipit:slogan:share_rest' => 'your videos with the rest of colleagues from your educational center.',
     'clipit:slogan:description' => 'ClipIt offers a collaborative environment for learn by teaching, where students
-        progress by creating their own videos, and evaluating other\'s. The best videos are selected as part of the
-        public educational resources.',
+        progress by creating their own videos, and evaluating other\'s. The best videos are selected as part
+        of the public pool of educational resources.',
     'clipit:carrousel:define' => 'Define',
     'clipit:carrousel:define_rest' => 'Teachers define the tricky topic and Stumbling Blocks to work on.
         They can also share help material with students for refference and guidance.',
