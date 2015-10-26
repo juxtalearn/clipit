@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $entities = elgg_extract('entities', $vars);
+$total_count = elgg_extract('total_count', $vars);
 ?>
 <style>
     .container .content{
@@ -18,6 +19,9 @@ $entities = elgg_extract('entities', $vars);
     }
     .tags{
         display: block;
+    }
+    #footer{
+        margin-top: 30px;
     }
 </style>
 <ul>
@@ -77,3 +81,4 @@ foreach($entities as $entity):
     </li>
 <?php endforeach;?>
 </ul>
+<?php echo clipit_get_pagination(array('count' => $total_count)); ?>
