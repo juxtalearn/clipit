@@ -31,5 +31,11 @@
         <type>plugin</type>
         <name>z12_clipit_tricky_topic</name>
     </requires>
-    <activate_on_install>true</activate_on_install>
+    <requires>
+        <type>priority</type>
+	<plugin>z12_clipit_tricky_topic</plugin
+	>
+	<priority>after</priority>
+</requires>
+<activate_on_install>true</activate_on_install>
 </plugin_manifest>

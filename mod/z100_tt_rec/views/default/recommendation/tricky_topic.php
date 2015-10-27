@@ -148,17 +148,17 @@ function recommend($userId, $language, $stumblingBlockArray)
             }
         }
 
-        error_log("onto" . print_r($ListForOntology, true));
-        error_log("levensh" . print_r($ListForLevenshtein, true));
+//        error_log("onto" . print_r($ListForOntology, true));
+//        error_log("levensh" . print_r($ListForLevenshtein, true));
         $ResultListOntology = array();
 
 
         if(count($ListForOntology)> 1) {
             $parent = RecommendationHelper::getParentClass($ListForOntology);
             if($parent != "" && $parent != null){
-                error_log("parent" .  print_r($parent, true));
+//                error_log("parent" .  print_r($parent, true));
                 $siblings = RecommendationHelper::getSiblingsByParent($parent, $language);
-                error_log("siblings", print_r($siblings, true));
+//                error_log("siblings", print_r($siblings, true));
 //                $RecommendationList = RecommendationParameters::addParentsChildParameter($siblings, $ResultListOntology);
             }else{
 //                foreach ($ListForOntology as $item) {
@@ -326,7 +326,7 @@ function recommend($userId, $language, $stumblingBlockArray)
             }
 
 
-    error_log("recommendationlist" . print_r($RecommendationList, true));
+//    error_log("recommendationlist" . print_r($RecommendationList, true));
 //    if (empty($recommendationList) == TRUE){
 //
 //        //TODO put in language files
