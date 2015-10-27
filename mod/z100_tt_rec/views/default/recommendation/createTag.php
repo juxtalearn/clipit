@@ -30,14 +30,16 @@ function createTag()
                WHERE { ?concept rdfs:label ?label.
                FILTER(langMatches(lang(?label),"de")) }';
 
-    $store = new phpSesame("http://192.168.1.21:8080/openrdf-sesame", "jxlstore_clean_Stem");
+
+    $store = RecommendationHelper::getNewSesameInstance();
     $response = $store->query($query, phpSesame::SPARQL_XML, 'sparql', 'true');
     $output = $response->getRows();
 
     global $SESSION;
 
     if (isset($SESSION)) {
-        $SESSION['user'] = array_pop(elgg_get_entities(array('guid'=>24)));
+        $clipit_user = array_pop(ClipitUser::get_by_role(array(ClipitUser::ROLE_ADMIN)));
+        $SESSION['user'] = array_pop(elgg_get_entities(array('guid'=>$clipit_user->id)));
     }
     foreach ($output as $concept) {
 
