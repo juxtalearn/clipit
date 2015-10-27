@@ -1,0 +1,19 @@
+#recommendations .new a.highlight-recommendation {
+    border-width: 2px;
+    border-color: #D8BA05 ;
+    color: #D8BA05;
+}
+
+#recommendations a.recommended_item {
+    cursor: pointer;
+}
+
+#recommendations.loading li a {
+    cursor: default;
+    opacity: 0.3;
+}
+
+#loading-spinner{
+    z-index: 999;
+    background: none;
+}
