@@ -53,6 +53,7 @@ clipit.init = function() {
     clipit.shorten('[data-shorten=true]');
     // Form validation
     $("body").on("click", "form[data-validate=true]", clipit.formValidation);
+//    $("body").on("click", "form[data-validate=clipit.formValidation]", clipit.formValidation);
     // Remove object confirmation
     $(".remove-object").click(clipit.removeObject);
     // Tags from list
