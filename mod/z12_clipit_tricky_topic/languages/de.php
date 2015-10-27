@@ -16,6 +16,10 @@ $german = array(
     'education_level:alevel' => 'Sekundarstufe II',
     'education_level:vocational' => 'Berufsschule',
     'education_level:university' => 'Hochschule',
+    'education_level' => 'Bildungsstufe',
+    'tricky_topic:subject' => 'Fach',
+    'tricky_topic:tag[]' => 'Stolpersteine',
+    'tricky_topic:author' => 'Autor'
 );
 
 add_translation('de', $german);
