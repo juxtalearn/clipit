@@ -277,7 +277,7 @@ $spanish = array(
     'publish'   => 'Publicar',
     'published'   => 'Publicado',
     'publish:to_activity'   => 'Publicar %s en %s',
-    'publish:video'   => 'Publicar video',
+    'publish:video'   => 'Publicar videos',
     // Labels
     'label' => 'Etiqueta',
     'labels' => 'Etiquetas',
@@ -333,7 +333,7 @@ $spanish = array(
     'task:my_file' => 'Archivo de mi grupo',
     'task:other_files' => 'Archivos de otros grupos',
     'task:not_actual' => 'No hay tareas pendientes',
-    'task:video_upload' => 'Publicar video',
+    'task:video_upload' => 'Publicar videos',
     'task:file_upload' => 'Publicar archivos',
     'task:file_uploaded' => 'Archivo subido',
     'task:text_upload' => 'Publicar textos',
