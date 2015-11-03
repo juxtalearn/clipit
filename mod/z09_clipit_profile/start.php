@@ -29,6 +29,9 @@ function clipit_profile_init() {
     elgg_register_action("settings/avatar/remove", elgg_get_plugins_path() . "z09_clipit_profile/actions/settings/avatar/remove.php");
 
     elgg_extend_view("navigation/menu/top", "navigation/menu/profile", 400);
+    if(isset($_COOKIE['ccr'])) {
+        elgg_extend_view("page/elements/head", 'css/ccr');
+    }
 }
 
 /**
@@ -100,8 +103,9 @@ function usersettings_clipit_page_handler($page){
             elgg_extend_view('forms/settings/account', 'settings/account/password', 100);
             elgg_extend_view('forms/settings/account', 'settings/account/email', 100);
             elgg_extend_view('forms/settings/account', 'settings/account/language', 100);
+            elgg_extend_view('forms/settings/account', 'settings/account/ccr', 100);
 
-            $content = elgg_view_form('settings/account', array('class' => 'form-horizontal'), array('entity' => $user));
+            $content = elgg_view_form('settings/account', array('class' => 'form-horizontal clearfix'), array('entity' => $user));
             break;
         case 'avatar':
             $title = elgg_echo("profile:settings:edit_avatar");

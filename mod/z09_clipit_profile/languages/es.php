@@ -31,6 +31,8 @@ $spanish = array(
     'profile:settings:edit_profile' => 'Editar perfil',
     'profile:settings:edit_avatar' => 'Editar imagen de perfil',
     'profile:settings:edit' => 'Configuración de la cuenta',
+    'user:ccr:label' => 'Configuración de contraste',
+    'ccr:set' => 'Aplicar contraste de color',
 );
 
 add_translation('es', $spanish);
