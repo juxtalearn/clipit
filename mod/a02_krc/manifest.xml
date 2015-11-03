@@ -11,9 +11,20 @@
 		<type>plugin</type>
 	        <name>a01_activitystreamer</name>
 	</requires>
+
     <requires>
         <type>plugin</type>
-        <name>a99_tested_and_working</name>
+        <name>a99_needs_clean_upr</name>
     </requires>
+
+	<requires>
+		<type>plugin</type>
+		<name>z02_clipit_api</name>
+	</requires>
+	<requires>
+		<type>priority</type>
+		<plugin>z02_clipit_api</plugin>
+		<priority>after</priority>
+	</requires>
 	<activate_on_install>false</activate_on_install>
 </plugin_manifest>

@@ -48,6 +48,20 @@ class UserProfile
     }
 
 
+    public function update_from_quizresult(ClipitQuizResult $quizresult) {
+        $results = ClipitQuizQuestion::get_tags($quizresult->quiz_question);
+        if ( !empty ($results) ) {
+            foreach( $results as $tag_id) {
+                if ( $quizresult->correct === true) {
+                    $this->update_type_rating($tag_id, QUIZ_RATING, 1.0);
+                } else {
+                    $this->update_type_rating($tag_id, QUIZ_RATING, 0.0);
+                }
+            }
+        }
+    }
+
+
     protected function retrieve_rating($stumbling_block_id, $type = "all")
     {
         $rating = 0;
@@ -78,8 +92,11 @@ class UserProfile
                 $rating += $tmprating;
                 $amount++;
             }
-
-            $rating = Math.round($rating/$amount);
+            if  ($amount !==0) {
+                $rating = round($rating/$amount,5);
+            } else {
+                $rating = 0.0;
+            }
 
         } else {
             $rating = $this->user->getMetaData("$stumbling_block_id$type");
@@ -89,10 +106,11 @@ class UserProfile
 
     protected function update_type_rating($stumbling_block_id, $type, $new_value)
     {
-        $current_rating = retrieve_rating($stumbling_block_id, $type);
+        $current_rating = $this->retrieve_rating($stumbling_block_id, $type);
         switch ($type) {
             case QUIZ_RATING:
                 //(Value found in user profile * 0.5 + new result) / 1.5
+
                 if (!($current_rating === false)) {
                     $new_rating = ($current_rating * 0.5 + $new_value) / 1.5;
                 } else {
