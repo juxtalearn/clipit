@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'input:required:information' => '(*) Campos obligatorios',
     'locale' => 'es_ES',
 
     'link:view:less' => 'Ver menos',
