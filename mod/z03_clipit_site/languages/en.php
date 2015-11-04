@@ -5,6 +5,7 @@
  */
 
 $english = array(
+    'input:required:information' => 'All required fields are marked with an asterisk (*)',
     'locale' => 'en_GB',
 
     'link:view:less' => 'View less',
