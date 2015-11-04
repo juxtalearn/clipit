@@ -149,8 +149,8 @@ $english = array(
     // Group tools
     'group:menu' => 'Group menu',
     'group:tools' => 'Group tools',
-    'group:discussion' => 'Discussion',
-    'group:files' => 'Repository',
+    'group:discussion' => 'Discussion group',
+    'group:files' => 'Repository group',
     'group:home' => 'Group home',
     'group:activity_log' => 'Activity log',
     'group:progress' => 'Group progress',

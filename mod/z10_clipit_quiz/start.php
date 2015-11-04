@@ -77,6 +77,7 @@ function task_quiz_save($hook, $entity_type, $returnvalue, $params){
             'quiz_random_order' => $task['quiz_random_order'],
         ));
         ClipitTask::set_properties($task_id, $task_properties);
+        ClipitQuiz::evaluate_results($quiz['id']);
     }
 }
 function file_quiz_download($hook, $entity_type, $returnvalue, $params){

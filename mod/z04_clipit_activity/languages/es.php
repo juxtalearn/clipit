@@ -150,8 +150,8 @@ $spanish = array(
     // Group tools
     'group:menu' => 'Menú del grupo',
     'group:tools' => 'Herramientas de grupo',
-    'group:discussion' => 'Discusiones',
-    'group:files' => 'Materiales',
+    'group:discussion' => 'Discusiones del grupo',
+    'group:files' => 'Materiales del grupo',
     'group:home' => 'Inicio',
     'group:activity_log' => 'Registro de la actividad',
     'group:progress' => 'Progreso del grupo',

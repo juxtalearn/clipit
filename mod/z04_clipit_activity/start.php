@@ -121,6 +121,13 @@ function clipit_activity_init() {
     elgg_register_ajax_view('multimedia/file/viewer');
     elgg_register_ajax_view('multimedia/file/upload');
     elgg_register_ajax_view('multimedia/file/attach_action');
+    /* Texts */
+    elgg_register_action("multimedia/texts/remove", "{$plugin_dir}/actions/multimedia/texts/remove.php");
+    elgg_register_action("multimedia/texts/save", "{$plugin_dir}/actions/multimedia/texts/save.php");
+    elgg_register_action("multimedia/texts/publish", "{$plugin_dir}/actions/multimedia/texts/publish.php");
+    elgg_register_action("multimedia/texts/extract", "{$plugin_dir}/actions/multimedia/texts/extract.php");
+    elgg_register_ajax_view('modal/multimedia/texts/edit');
+    elgg_register_ajax_view('modal/multimedia/texts/publish');
     /* Multimedia */
     elgg_register_action("multimedia/resources/add", "{$plugin_dir}/actions/multimedia/resources/add.php");
     elgg_register_action("multimedia/resources/remove", "{$plugin_dir}/actions/multimedia/resources/remove.php");
@@ -211,6 +218,8 @@ function clipit_activity_init() {
     elgg_extend_view('tasks/menu', 'tasks/menu/text', 150);
 
     elgg_extend_view('tasks/container', 'tasks/container/resource_download');
+
+    elgg_extend_view('tasks/options', 'tasks/options/text_upload');
 }
 
 function task_resources_save($hook, $entity_type, $returnvalue, $params){
@@ -257,18 +266,19 @@ function task_resources_save($hook, $entity_type, $returnvalue, $params){
 function task_upload_save($hook, $entity_type, $returnvalue, $params){
     $activity_id = $params['activity_id'];
     $task = $params['task'];
-
-    if($task['type'] == ClipitTask::TYPE_VIDEO_UPLOAD ||
-        $task['type'] == ClipitTask::TYPE_FILE_UPLOAD
-    ) {
+    $upload_tasks = array(
+        ClipitTask::TYPE_VIDEO_UPLOAD,
+        ClipitTask::TYPE_FILE_UPLOAD,
+        ClipitTask::TYPE_TEXT_UPLOAD,
+    );
+    if(in_array($task['type'], $upload_tasks)) {
         $task_properties = array_merge(get_task_properties_action($task), array(
             'task_type' => $task['type'],
         ));
         $task_id = ClipitTask::create($task_properties);
         // Add task to activity
         ClipitActivity::add_tasks($activity_id, array($task_id));
-    } elseif(get_input('task-id') &&
-        ($task['entity_type'] == ClipitTask::TYPE_VIDEO_UPLOAD ||  $task['entity_type'] == ClipitTask::TYPE_FILE_UPLOAD) ){
+    } elseif(get_input('task-id') && in_array($task['entity_type'], $upload_tasks) ){
         $task_id = get_input('task-id');
         // Save task
         ClipitTask::set_properties($task_id, get_task_properties_action($task));
@@ -541,7 +551,6 @@ function activity_page_handler($page) {
     if(!$params){
         return false;
     }
-    $group_menu_sidebar = "";
     $pending_tasks_sidebar = "";
     $activity_menu_sidebar = "";
 
@@ -555,7 +564,6 @@ function activity_page_handler($page) {
         $pending_tasks_sidebar = elgg_view_module('aside', elgg_echo('activity:pending_tasks'), $pending_tasks, array('class' => 'aside-block'));
         if($hasGroup) {
             elgg_extend_view("page/elements/owner_block", "page/elements/group_block");
-            $group_menu_sidebar = elgg_view('group/sidebar/group_menu', array('entity' => $activity));
         }
     }
     if($activity_status == ClipitActivity::STATUS_ENROLL && $hasGroup){
@@ -590,7 +598,7 @@ function activity_page_handler($page) {
             array('teachers' => $teachers, 'access' => $access, 'activity_id' => $activity->id)
         );
     }
-    $params['sidebar'] = $pending_tasks_sidebar . $activity_menu_sidebar . $group_menu_sidebar . $teacher_sidebar;
+    $params['sidebar'] = $pending_tasks_sidebar . $activity_menu_sidebar . $teacher_sidebar;
     if(!$params['class']){
         $params['class'] = "activity-section activity-layout";
     }

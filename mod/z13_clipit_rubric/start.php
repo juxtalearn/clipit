@@ -61,8 +61,9 @@ function task_rubric_save($hook, $entity_type, $returnvalue, $params){
     }
 
     if(
-        ( $task['entity_type'] == ClipitTask::TYPE_VIDEO_FEEDBACK ||
-        $task['entity_type'] == ClipitTask::TYPE_FILE_FEEDBACK )
+        $task['entity_type'] == ClipitTask::TYPE_VIDEO_FEEDBACK ||
+        $task['entity_type'] == ClipitTask::TYPE_FILE_FEEDBACK ||
+        $task['entity_type'] == ClipitTask::TYPE_TEXT_FEEDBACK
     ){
         $properties = get_task_properties_action($task);
         // Edit task
