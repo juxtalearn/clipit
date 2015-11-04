@@ -66,3 +66,7 @@ require(elgg_get_plugins_path().'z03_clipit_site' . '/bootstrap/less/clipit/clip
 if(get_config('clipit_site_type') == ClipitSite::TYPE_GLOBAL){
     require(elgg_get_plugins_path().'z03_clipit_site' . '/bootstrap/less/clipit/landing.min.css');
 }
+?>
+.label-asterisk:after{
+    content: ' *';
+}
