@@ -4,6 +4,14 @@ elgg.provide('clipit');
 jQuery.migrateMute = true;
 
 clipit.init = function() {
+    
+    $('form[data-validate]').each(function(){
+        if($(this).find('input, select').filter('[required]')) {
+            $(this).find('input[required], select[required]').prev('label').addClass('label-asterisk');
+            var btn = $(this).find('input[type="submit"]');
+            btn.parent('div').prepend('<small class="pull-left" style="line-height: 30px;margin-right: 20px;">'+elgg.echo('input:required:information')+'</small>');
+        }
+    });
     /**
      * jQuery validator int messages
      */
