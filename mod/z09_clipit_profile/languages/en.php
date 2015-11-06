@@ -30,6 +30,8 @@ $english = array(
     'profile:settings:edit_profile' => 'Edit profile',
     'profile:settings:edit_avatar' => 'Edit avatar',
     'profile:settings:edit' => 'Settings',
+    'user:ccr:label' => 'Contrast Color settings',
+    'ccr:set' => 'Set contrast',
 
 );
 

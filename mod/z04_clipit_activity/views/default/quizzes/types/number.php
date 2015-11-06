@@ -53,7 +53,9 @@ if($finished):?>
             <hr>
         <?php else: ?>
             <span>
-                <?php echo elgg_echo('quiz:question:answered');?>:
+                <?php if($finished_task && $result):?>
+                    <?php echo elgg_echo('quiz:question:answered');?>:
+                <?php endif;?>
                 <?php if($result->correct && $finished_task):?>
                     <strong><?php echo $result->answer;?></strong>
                 <?php else:?>

@@ -27,11 +27,14 @@ class ClipitTask extends UBItem {
     const TYPE_FILE_FEEDBACK = "file_feedback";
     const TYPE_VIDEO_UPLOAD = "video_upload";
     const TYPE_VIDEO_FEEDBACK = "video_feedback";
+    const TYPE_TEXT_UPLOAD = "text_upload";
+    const TYPE_TEXT_FEEDBACK = "text_feedback";
     const TYPE_OTHER = "other";
     // Relationship names
     const REL_TASK_VIDEO = "ClipitTask-ClipitVideo";
     const REL_TASK_FILE = "ClipitTask-ClipitFile";
     const REL_TASK_QUIZ = "ClipitTask-ClipitQuiz";
+    const REL_TASK_TEXT = "ClipitTask-ClipitText";
     const REL_TASK_RUBRIC = "ClipitTask-ClipitRubricItem";
     const REL_PARENTTASK_CHILDTASK = "ClipitTask-ClipitTask";
     // Status values
@@ -55,6 +58,7 @@ class ClipitTask extends UBItem {
     // Linked materials
     public $video_array = array();
     public $file_array = array();
+    public $text_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -81,6 +85,7 @@ class ClipitTask extends UBItem {
         $this->quiz = (int)static::get_quiz($this->id);
         $this->video_array = static::get_videos($this->id);
         $this->file_array = static::get_files($this->id);
+        $this->text_array = static::get_texts($this->id);
         $this->rubric = (int)static::get_rubric($this->id);
         $this->results_after_finished = (bool)$elgg_entity->get("results_after_finished");
         $this->quiz_random_order = (bool)$elgg_entity->get("quiz_random_order");
@@ -117,6 +122,7 @@ class ClipitTask extends UBItem {
         static::set_activity($this->id, $this->activity);
         static::set_videos($this->id, $this->video_array);
         static::set_files($this->id, $this->file_array);
+        static::set_texts($this->id, $this->text_array);
         static::set_rubric($this->id, (int)$this->rubric);
         return $this->id;
     }
@@ -380,6 +386,23 @@ class ClipitTask extends UBItem {
     }
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_TASK_FILE);
+    }
+
+    // TEXTS
+    static function add_texts($id, $text_array)
+    {
+        return UBCollection::add_items($id, $text_array, static::REL_TASK_TEXT);
+    }
+    static function remove_texts($id, $text_array)
+    {
+        return UBCollection::remove_items($id, $text_array, static::REL_TASK_TEXT);
+    }
+    static function set_texts($id, $text_array)
+    {
+        return UBCollection::set_items($id, $text_array, static::REL_TASK_TEXT);
+    }
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_TASK_TEXT);
     }
 
     // RUBRIC

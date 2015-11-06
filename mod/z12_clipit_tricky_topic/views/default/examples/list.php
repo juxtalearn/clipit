@@ -45,7 +45,7 @@ $count = elgg_extract('count', $vars);
             </th>
         <?php endforeach;?>
         <th role="presentation" class="col-md-2"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th role="presentation" class="col-md-2 hidden-xs"></th>
+        <th  role="presentation" class="col-md-2 hidden-xs"><?php echo elgg_echo("options");?></th>
     </tr>
     </thead>
     <tbody role="presentation">

@@ -33,7 +33,7 @@ $individual_tasks = array(
         if( time() < $task->start && $user->role == ClipitUser::ROLE_STUDENT ) {
             $access = false;
         } elseif(isset($activity)) {
-            if ($activity->public && !in_array($user_id, $activity->student_array)) {
+            if ($activity->public && !in_array($user_id, $activity->student_array) && $user->role == ClipitUser::ROLE_STUDENT) {
                 $access = false;
             }
         }

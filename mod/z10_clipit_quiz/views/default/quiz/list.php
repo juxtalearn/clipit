@@ -92,7 +92,7 @@ $(function(){
             <th role="presentation"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
             <th  role="presentation" class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
             <?php if($options):?>
-                <th role="presentation" style="width: 100px;"></th>
+                <th role="presentation" style="width: 100px;"><?php echo elgg_echo("options");?></th>
             <?php endif;?>
         </tr>
         </thead>

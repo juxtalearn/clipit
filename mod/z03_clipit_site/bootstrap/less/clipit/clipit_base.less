@@ -203,6 +203,9 @@ a[href] .fa:hover,
 a[href].fa:hover{
   opacity: .7;
   text-decoration: none;
+  &.red{
+    color: @red_clipit;
+  }
 }
 // toggle menu
 .toggle-menu{
@@ -382,6 +385,48 @@ h4.empty{
     transform: rotate(360deg);
   }
 }
+@-moz-keyframes rotate{
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes rotate{
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate{
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
 .fa.fa-spinner.fa-spin{
   width: 15px;
   height: 15px;
@@ -394,6 +439,8 @@ h4.empty{
   background-color: transparent;
   border-radius: 100%;
   -webkit-animation: rotate 0.75s linear infinite !important;
+  -moz-animation: rotate 0.75s linear infinite !important;
+  -o-animation: rotate 0.75s linear infinite !important;
   animation: rotate 0.75s linear infinite !important;
   &:before{
     content: '';

@@ -14,12 +14,14 @@ class ClipitRemoteSite extends UBItem{
     const REL_REMOTESITE_REMOTETRICKYTOPIC = "ClipitRemoteSite-ClipitRemoteTrickyTopic";
     const REL_REMOTESITE_REMOTEFILE = "ClipitRemoteSite-ClipitRemoteFile";
     const REL_REMOTESITE_REMOTEVIDEO = "ClipitRemoteSite-ClipitRemoteVideo";
+    const REL_REMOTESITE_REMOTETEXT = "ClipitRemoteSite-ClipitRemoteText";
     const REL_REMOTESITE_REMOTEACTIVITY = "ClipitRemoteSite-ClipitRemoteActivity";
     public $timezone = "";
     public $tricky_topic_array = array();
     public $activity_array = array();
     public $file_array = array();
     public $video_array = array();
+    public $text_array = array();
 
     /**
      * @param array $prop_value_array
@@ -40,6 +42,7 @@ class ClipitRemoteSite extends UBItem{
         $this->activity_array = (array)static::get_activities($this->id);
         $this->file_array = (array)static::get_files($this->id);
         $this->video_array = (array)static::get_videos($this->id);
+        $this->text_array = (array)static::get_texts($this->id);
     }
 
     /**
@@ -64,6 +67,7 @@ class ClipitRemoteSite extends UBItem{
         static::set_activities($this->id, $this->activity_array);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
+        static::set_texts($this->id, $this->text_array);
         return $this->id;
     }
 
@@ -170,5 +174,19 @@ class ClipitRemoteSite extends UBItem{
     }
     static function get_videos($id) {
         return UBCollection::get_items($id, static::REL_REMOTESITE_REMOTEVIDEO);
+    }
+
+    // REMOTE TEXTS
+    static function add_texts($id, $text_array) {
+        return UBCollection::add_items($id, $text_array, static::REL_REMOTESITE_REMOTETEXT);
+    }
+    static function set_texts($id, $text_array) {
+        return UBCollection::set_items($id, $text_array, static::REL_REMOTESITE_REMOTETEXT);
+    }
+    static function remove_texts($id, $text_array) {
+        return UBCollection::remove_items($id, $text_array, static::REL_REMOTESITE_REMOTETEXT);
+    }
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_REMOTESITE_REMOTETEXT);
     }
 } 

@@ -4,8 +4,9 @@
  *
  */
 
-$english = [
+$english = array(
     'locale' => 'en_GB',
+    'profile:avatar:from' => '%s\'s avatar',
     //ACCESSIBILITY TEXTS
     'progress:activity' => 'Activity´s progress',
     'user:profile:avatar'=> 'User´s avatar',
@@ -164,6 +165,6 @@ $english = [
 
     'responsive:desktop' => 'Desktop version',
     'responsive:mobile' => 'Mobile version',
-];
+);
 
 add_translation('en', $english);

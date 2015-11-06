@@ -143,10 +143,10 @@ if($owner_options){
     }
     if($href['publish']) {
         $options_list[] = array(
-            'attr' => array('href' => $href['publish'] ),
+            'attr' => array('data-toggle' => 'modal', 'data-target' => '#publish-'.$entity->id),
             'text' => elgg_echo('send:to_site'),
             'icon' => 'globe',
-            'item_class' => $item_class
+            'item_class' => "cursor-pointer ".$item_class
         );
     }
     if($remove) {

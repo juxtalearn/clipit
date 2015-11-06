@@ -14,6 +14,13 @@ $rubric = elgg_extract('entity', $vars);
 $rubric_items = ClipitRubricItem::get_by_id($rubric->rubric_item_array, 0, 0, 'time_created', false);
 $user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
 ?>
+<style>
+@media print {
+    #rubric-items {
+        max-height: 100% !important;
+    }
+}
+</style>
 <div class="pull-right">
     <div class="inline-block">
         <?php echo elgg_view('page/components/admin_options', array(
@@ -38,6 +45,6 @@ $user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
 </div>
 <div class="clearfix"></div>
 <hr>
-<div style="overflow-y: auto;overflow-x: hidden;max-height: 450px;">
+<div id="rubric-items" style="overflow-y: auto;overflow-x: hidden;max-height: 450px;">
     <?php echo elgg_view('rubric/items', array('entities' => $rubric_items));?>
 </div>

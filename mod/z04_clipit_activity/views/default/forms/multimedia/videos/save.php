@@ -215,6 +215,7 @@ echo elgg_view("input/hidden", array(
         </div>
     </div>
 <?php if($vars['publish']):?>
+    <hr>
     <div class="margin-bottom-10 margin-top-5">
         <label><?php echo elgg_echo('send:to_global');?></label>
         <label style="font-weight: normal;" class="inline-block margin-right-10">

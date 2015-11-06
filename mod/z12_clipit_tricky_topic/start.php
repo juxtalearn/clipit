@@ -46,10 +46,13 @@ function clipit_tricky_topic_init() {
 }
 
 function publish_site_tricky_topics($hook, $entity_type, $returnvalue, $params){
-    $entity_id = get_input('id');
+    $entity_id = get_input('entity-id');
     $object = ClipitSite::lookup($entity_id);
     if($object['subtype'] == 'ClipitTrickyTopic') {
-        ClipitSite::add_pub_tricky_topics(array($entity_id));
+        ClipitSite::add_tricky_topics(array($entity_id));
+        if(get_input('remote')){
+            ClipitSite::add_pub_tricky_topics(array($entity_id));
+        }
         forward(REFERER);
     }
 }
@@ -248,7 +251,8 @@ function tt_page_handler($page){
                     $content = elgg_view_form('example/save',
                         array(
                             'enctype' => 'multipart/form-data',
-                            'data-validate' => 'true'
+                            'data-validate' => 'true',
+                            'class' => 'clearfix'
                         ),
                         array(
                             'submit_value' => elgg_echo('create'),
@@ -276,6 +280,7 @@ function tt_page_handler($page){
                         array(
                             'data-validate' => 'true',
                             'enctype' => 'multipart/form-data',
+                            'class' => 'clearfix'
                         ),
                         array(
                             'entity' => $example,

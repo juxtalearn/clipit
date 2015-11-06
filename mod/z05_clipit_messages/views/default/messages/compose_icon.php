@@ -18,6 +18,7 @@ if($user->id != elgg_get_logged_in_user_guid()){
     // Remote modal, form content
     echo elgg_view("page/components/modal_remote", array('id'=> "send-message-{$user->id}" ));
     $params_message = array(
+        'aria-hidden' => 'true',
         'text'  => '<i class="fa fa-envelope" style="border-right: 1px solid #C9C9C9;padding-right: 5px;"></i>'. $vars['text'],
         'data-target' => '#send-message-'.$user->id,
         'data-toggle' => 'modal',

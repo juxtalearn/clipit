@@ -15,9 +15,15 @@ $total_results = elgg_extract('total_results', $vars);
 $finished = elgg_extract('finished', $vars);
 $finished_task = elgg_extract('finished_task', $vars);
 $question = elgg_extract('question', $vars);
-$i = 1;
 $options = $question->option_array;
-//uksort($options, function() { return rand() > rand(); });
+
+$random = elgg_extract('random', $vars);
+// Random answers
+if($random) {
+    uksort($options, function () {
+        return rand() > rand();
+    });
+}
 foreach($options as $key => $option):
     $key++;
     $checked = '';
@@ -52,5 +58,4 @@ foreach($options as $key => $option):
     <?php endif;?>
 </label>
 <?php
-$i++;
 endforeach;

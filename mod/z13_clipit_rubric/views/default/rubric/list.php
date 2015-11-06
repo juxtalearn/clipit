@@ -51,34 +51,6 @@ if($select = get_input('select')){
         ?>
     <?php endif;?>
 </div>
-<script>
-$(function(){
-    $(document).on("click", ".show-items", function(){
-        var tr = $(this).closest("tr")
-            id = $(this).attr("id"),
-            tr_rubric = $("[data-rubric="+id+"]");
-        if(tr_rubric.length > 0){
-            tr_rubric.toggle();
-            return false;
-        }
-        var container =
-            $("<tr/>").attr("data-rubric", id).html(
-                $('<td/>').attr("colspan", 4)
-                    .html('<i class="fa fa-spinner fa-spin fa-2x blue"/>')
-                    .css({"padding": "10px", "overflowY": "auto", "overflowX": "hidden", "maxHeight": "450px"})
-            );
-        tr.after(container);
-        elgg.get('ajax/view/rubric/items',{
-            data: {
-                'entity_id': id
-            },
-            success: function(content){
-                container.find('td').html(content);
-            }
-        });
-    });
-});
-</script>
 <div class="table-responsive">
 <table class="table table-striped" style="table-layout: fixed" role="presentation">
     <thead role="presentation">

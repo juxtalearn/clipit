@@ -35,6 +35,17 @@ ClipitUser::set_properties($user_id, array(
     'name' => $name,
     'email' => $email
 ));
+// Set CCR style
+if($ccr = get_input('ccr')){
+    switch($ccr){
+        case '1':
+            setcookie('ccr', 1, time()+60*60*24*30, '/');
+            break;
+        case '-1':
+            setcookie('ccr', 1, time()-60*60*24*30, '/');
+            break;
+    }
+}
 
 // Set password
 $current_password = get_input('current_password', null, false);

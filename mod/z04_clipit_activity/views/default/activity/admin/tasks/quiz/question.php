@@ -36,11 +36,13 @@ if($question){
         echo elgg_view("input/hidden", array(
             'name' => $input_prefix.'[question]['.$id.'][id_parent]',
             'value' => $question->id,
+            'class' => 'input-id-parent',
         ));
     } else {
         echo elgg_view("input/hidden", array(
             'name' => $input_prefix.'[question]['.$id.'][id]',
             'value' => $question->id,
+            'class' => 'input-id'
         ));
     }
 }
@@ -69,10 +71,17 @@ if($question){
         'value' => $num,
         'class' => 'input-order'
     )); ?>
+    <?php echo elgg_view("input/hidden", array(
+        'value' => $id,
+        'class' => 'input-uniqid'
+    )); ?>
     <div class="<?php echo $num !== false ? "col-xs-11":"" ?>">
         <div style="padding: 10px; background: #fafafa;">
         <?php if($num !== false):?>
-            <i class="fa fa-arrows-v text-muted pull-right reorder-question"></i>
+            <div class="pull-right">
+                <i title="<?php echo elgg_echo('duplicate');?>"  class="fa fa-files-o text-muted margin-left-20 cursor-pointer clone-question"></i>
+                <i class="fa fa-arrows-v text-muted margin-left-10 reorder-question"></i>
+            </div>
         <?php endif; ?>
         <?php
         $types = array(
@@ -101,6 +110,7 @@ if($question){
                     <label><?php echo elgg_echo('quiz:question:additional_info');?></label>
                     <?php echo elgg_view("input/plaintext", array(
                         'name' => $input_prefix.'[question]['.$id.'][description]',
+                        'id' => $input_prefix.'[question]['.$id.'][description]',
                         'value' => $question->description,
                         'class' => 'form-control '.($question ? 'mceEditor':''),
                         'onfocus'   => '$(this).addClass(\'mceEditor\');
@@ -276,6 +286,7 @@ if($question){
                         <?php endif;?>
                     </div>
                     <strong>
+                        <i class="fa fa-spinner fa-spin loading pull-right" style="display: none;"></i>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'class' => 'add-result',
@@ -324,6 +335,7 @@ if($question){
                         <?php endif;?>
                     </div>
                     <strong>
+                        <i class="fa fa-spinner fa-spin loading pull-right" style="display: none;"></i>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "javascript:;",
                             'class' => 'add-result',

@@ -37,8 +37,15 @@ $entities = elgg_extract('entities', $vars);
             <div class="margin-top-5">
                 <?php echo elgg_view('output/url', array(
                     'href' => "videos/".elgg_get_friendly_title($edu->name)."/".$edu->id,
+                    'title' => elgg_echo('videos:view_all'),
                     'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('videos:view_all'),
-                    'title' => elgg_echo('videos:view_all')
+                    'class' => 'margin-right-10',
+                ));
+                ?>
+                <?php echo elgg_view('output/url', array(
+                    'href' => "trickytopics?site=".$edu->id,
+                    'title' => elgg_echo('tricky_topics:view_all'),
+                    'text'  => '<i class="fa fa-list-alt"></i> '.elgg_echo('tricky_topics:view_all'),
                 ));
                 ?>
             </div>

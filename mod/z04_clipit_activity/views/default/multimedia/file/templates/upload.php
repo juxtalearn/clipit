@@ -71,7 +71,12 @@ $(function(){
     <div class="col-md-10">
         <div class="form-group">
             <label for="file-name"><?php echo elgg_echo("name");?></label>
-            <input type="text" name="file-name" class="form-control" placeholder="{%=file.name%}" required="true" value="{%=file.name%}" onfocus="if(this.value == '{%=file.name%}') { this.value = ''; }">
+            <input type="text" name="file-name"
+            class="form-control"
+            required="true"
+            value="{%=file.name%}"
+            onblur="if(this.value == '') { this.value = '{%=file.name%}'; }"
+            onfocus="if(this.value == '{%=file.name%}') { this.value = ''; }">
         </div>
         <div class="form-group">
             <label for="file-text"><?php echo elgg_echo("multimedia:file:description");?></label>

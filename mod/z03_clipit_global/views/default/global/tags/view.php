@@ -37,7 +37,7 @@ if($width){
     <?php if(count($tags) > $limit ): ?>
         <a href="javascript:;" style="vertical-align: bottom;" data-toggle="popover" class="more-tags fa fa-ellipsis-h" rel="popover" data-placement="bottom"></a>
         <div id="popover_content_wrapper" class="popover-content popover_content_wrapper tags" style="display: none">
-            <?php echo elgg_view('tricky_topic/tags/view', array('tags' => array_slice($tags, $limit, count($tags)), 'limit' => count($tags)));?>
+            <?php echo elgg_view('global/tags/view', array('tags' => array_slice($tags, $limit, count($tags)), 'limit' => count($tags)));?>
         </div>
     <?php endif; ?>
 </div>

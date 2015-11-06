@@ -314,11 +314,15 @@ function tricky_topics_global_section($page_elements, $handler){
         $remote_site = array_pop(ClipitRemoteSite::get_by_id(array($site_id)));
         $tricky_topics = ClipitRemoteTrickyTopic::get_from_site(base64_encode($remote_site->url));
     } else {
-        $tricky_topics = ClipitRemoteTrickyTopic::get_all();
+        $total_tricky_topics = count(ClipitRemoteTrickyTopic::get_all(0, 0, '', true, true));
+        $tricky_topics = ClipitRemoteTrickyTopic::get_all(
+            clipit_get_limit(),
+            clipit_get_offset()
+        );
     }
     $content = elgg_view('output/empty', array('value' => elgg_echo('tricky_topics:none'))); // Hardcoded
     if($tricky_topics){
-        $content = elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics));
+        $content = elgg_view('global/tricky_topics/list', array('entities' => $tricky_topics, 'total_count' => $total_tricky_topics));
     }
     $params = array(
         'title' => $title,

@@ -127,6 +127,7 @@ function formatFileSize( $bytes, $precision = 0) {
  */
 function get_text_from_quote($id, $message_destination){
     $post = array_pop(ClipitPost::get_by_destination(array($message_destination)));
+    $post = array_values($post);
     return $post[$id-1];
 }
 
@@ -662,6 +663,7 @@ function get_education_levels($level = ''){
         ClipitTrickyTopic::EDUCATION_LEVEL_ALEVEL,
         ClipitTrickyTopic::EDUCATION_LEVEL_VOCATIONAL,
         ClipitTrickyTopic::EDUCATION_LEVEL_UNIVERSITY,
+        ClipitTrickyTopic::EDUCATION_LEVEL_SPECIAL,
     );
     $ed_levels = array('' => '');
     foreach($default_ed_levels as $ed_level){

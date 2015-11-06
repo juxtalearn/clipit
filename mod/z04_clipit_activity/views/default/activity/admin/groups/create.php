@@ -21,7 +21,8 @@ $(function(){
         url: "<?php echo elgg_add_action_tokens_to_url("action/activity/create/add_users_upload", true);?>",
         acceptFileTypes: /(\.|\/)(xlsx|xls)$/i,
         autoUpload: true,
-        previewCrop: false
+        previewCrop: false,
+        pasteZone: null
     }).on('fileuploadadd', function (e, data) {
         var alertOptions = {
             title: elgg.echo(elgg.echo('loading')+"..."),

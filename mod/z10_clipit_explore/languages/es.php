@@ -21,6 +21,7 @@ $spanish = array(
     'explore:tags' => 'Explorar por Concepto',
     'explore:public' => 'Público',
     'explore:tags:related_tricky_topic' => 'Conceptos asociados al tema clave',
+    'explore:public:videos' => 'Videos públicos',
 );
 
 add_translation('es', $spanish);

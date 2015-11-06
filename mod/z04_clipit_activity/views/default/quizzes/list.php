@@ -191,6 +191,7 @@ foreach($questions as $question):
         'finished' => $finished,
         'question' => $question,
         'result' => $result,
+        'random' => $task->quiz_random_order
     );
 ?>
 <div class="question form-group border-bottom-blue-lighter" data-question="<?php echo $num;?>">
@@ -310,7 +311,7 @@ endforeach;
     ));
 ?>
     <?php if($quiz->view_mode == ClipitQuiz::VIEW_MODE_PAGED && count($questions)>1):?>
-        <div class="margin-top-20">
+        <div class="margin-top-20 clearfix">
             <div class="text-center">
                 <?php if(!$finished && !$finished_task):?>
                     <?php echo elgg_view('modal/quiz/confirmation');?>
@@ -340,7 +341,7 @@ endforeach;
         </div>
     <?php endif;?>
     <?php if((!$finished && !$finished_task) && $quiz->view_mode == ClipitQuiz::VIEW_MODE_LIST):?>
-    <div class="margin-top-20">
+    <div class="margin-top-20 clearfix">
         <?php echo elgg_view('modal/quiz/confirmation');?>
         <?php echo elgg_view('input/button',
             array(

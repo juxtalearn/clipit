@@ -23,6 +23,7 @@ clipit.rubric.init = function() {
     $(document).on('click', '.rubric-unselect', clipit.rubric.unselect_item);
     // Click item for rating
     $(document).on('click', '.rubrics-rating .rubric-item', clipit.rubric.set_rating);
+    $(document).on("click", ".show-items", clipit.rubric.show_items);
 };
 elgg.register_hook_handler('init', 'system', clipit.rubric.init);
 
@@ -130,6 +131,30 @@ clipit.rubric.get_by_owner = function(){
     } else {
         $(container).html('');
     }
+};
+clipit.rubric.show_items = function(){
+    var tr = $(this).closest("tr")
+    id = $(this).attr("id"),
+        tr_rubric = $(this).closest('table').find("[data-rubric="+id+"]");
+    if(tr_rubric.length > 0){
+        tr_rubric.toggle();
+        return false;
+    }
+    var container =
+        $("<tr/>").attr("data-rubric", id).html(
+            $('<td/>').attr("colspan", 4)
+                .html('<i class="fa fa-spinner fa-spin fa-2x blue"/>')
+                .css({"padding": "10px", "overflowY": "auto", "overflowX": "hidden", "maxHeight": "450px"})
+        );
+    tr.after(container);
+    elgg.get('ajax/view/rubric/items',{
+        data: {
+            'entity_id': id
+        },
+        success: function(content){
+            container.find('td').html(content);
+        }
+    });
 };
 clipit.rubric.select_item = function(){
     var selected_list = $(this).closest('.rubric-select-list').find('.rubrics-selected'),

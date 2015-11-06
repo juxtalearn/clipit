@@ -26,6 +26,7 @@ echo elgg_view("input/hidden", array(
     <label class="text-muted" for="search[name]"><?php echo elgg_echo('tricky_topic');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[name]',
+        'id' => 'search[name]',
         'class' => 'form-control',
         'value' => get_search_input('name')
     ));
@@ -39,6 +40,7 @@ echo elgg_view("input/hidden", array(
     <label class="text-muted" for="search[education_level]"><?php echo elgg_echo('education_level');?></label>
     <?php echo elgg_view("input/dropdown", array(
         'name' => 'search[education_level]',
+        'id' => 'search[education_level]',
         'aria-label' => 'search[education_level]',
         'style' => 'padding: 0;height: 25px;',
         'value' => get_search_input('education_level'),
@@ -51,6 +53,7 @@ echo elgg_view("input/hidden", array(
     <label class="text-muted" for="search[subject]"><?php echo elgg_echo('tricky_topic:subject');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[subject]',
+        'id' => 'search[subject]',
         'class' => 'form-control',
         'value' => get_search_input('subject')
     ));

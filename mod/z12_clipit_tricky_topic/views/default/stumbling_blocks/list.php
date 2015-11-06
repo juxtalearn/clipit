@@ -48,7 +48,7 @@ $count = elgg_extract('count', $vars);
         <th role="presentation"><i class="fa fa-sitemap"></i> <?php echo elgg_echo('tricky_topics');?></th>
         <th role="presentation"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
         <th role="presentation" style="width: 50px;"><?php echo elgg_echo('examples');?></th>
-        <th role="presentation" style="width: 100px;"></th>
+        <th role="presentation" style="width: 100px;"><?php echo elgg_echo("options");?></th>
     </tr>
     </thead>
     <?php foreach($tags as $tag):

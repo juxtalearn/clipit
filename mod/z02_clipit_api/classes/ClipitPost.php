@@ -27,10 +27,12 @@ class ClipitPost extends UBMessage {
     const REL_MESSAGE_USER = "ClipitPost-ClipitUser";
     const REL_POST_VIDEO = "ClipitPost-ClipitVideo";
     const REL_POST_FILE = "ClipitPost-ClipitFile";
+    const REL_POST_TEXT = "ClipitPost-ClipitText";
 
     public $topic_id = 0;
     public $video_array = array();
     public $file_array = array();
+    public $text_array = array();
 
     /**
      * Loads object parameters stored in Elgg
@@ -42,6 +44,7 @@ class ClipitPost extends UBMessage {
         $this->topic_id = (int)$elgg_entity->get("topic_id");
         $this->file_array = (array)static::get_files((int)$this->id);
         $this->video_array = (array)static::get_videos((int)$this->id);
+        $this->text_array = (array)static::get_texts((int)$this->id);
     }
 
     /**
@@ -63,6 +66,7 @@ class ClipitPost extends UBMessage {
         parent::save($double_save);
         static::set_files($this->id, $this->file_array);
         static::set_videos($this->id, $this->video_array);
+        static::set_texts($this->id, $this->text_array);
         return $this->id;
     }
 
@@ -98,5 +102,22 @@ class ClipitPost extends UBMessage {
 
     static function get_files($id) {
         return UBCollection::get_items($id, static::REL_POST_FILE);
+    }
+
+    // TEXTS
+    static function add_texts($id, $text_array) {
+        return UBCollection::add_items($id, $text_array, static::REL_POST_TEXT);
+    }
+
+    static function set_texts($id, $text_array) {
+        return UBCollection::set_items($id, $text_array, static::REL_POST_TEXT);
+    }
+
+    static function remove_texts($id, $text_array) {
+        return UBCollection::remove_items($id, $text_array, static::REL_POST_TEXT);
+    }
+
+    static function get_texts($id) {
+        return UBCollection::get_items($id, static::REL_POST_TEXT);
     }
 }

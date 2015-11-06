@@ -46,8 +46,8 @@ $page = 'tricky_topics';
                 </a>
             </th>
         <?php endforeach;?>
-        <th class="col-md-2 hidden-xs" role="presentation"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?> </th>
-        <th class="col-md-2 hidden-xs" role="presentation"></th>
+        <th role="presentation" class="col-md-2 hidden-xs"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+        <th role="presentation" class="col-md-2 hidden-xs"><?php echo elgg_echo("options");?></th>
     </tr>
     </thead>
     <tbody role="presentation">
@@ -60,6 +60,26 @@ $page = 'tricky_topics';
         if(!empty($activities) || !empty($quizzes) ){
             $is_linked = true;
         }
+        $modal = elgg_view("page/components/modal",
+            array(
+                "dialog_class"     => "modal-md",
+                "target"    => "publish-".$tricky_topic->id,
+                "title"     => elgg_echo('send:to_site'),
+                "form"      => true,
+                "body"      => elgg_view('forms/tricky_topic/publish', array('entity'  => $tricky_topic)),
+                "cancel_button" => true,
+                "ok_button" => elgg_view('input/submit',
+                    array(
+                        'value' => elgg_echo('send:to_site'),
+                        'class' => "btn btn-primary"
+                    ))
+            ));
+        echo elgg_view_form('', array(
+                'action' => 'action/publications/publish',
+                'data-validate'=> "true",
+                'body' => $modal,
+            )
+        );
         ?>
         <tr role="presentation">
             <td data-title="<?php echo elgg_echo('name');?>" role="presentation">
