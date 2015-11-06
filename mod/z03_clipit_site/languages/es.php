@@ -5,6 +5,7 @@
  */
 
 $spanish = array(
+    'input:required:information' => '(*) Campos obligatorios',
     'locale' => 'es_ES',
     'profile:avatar:from' => 'Imagen de perfil de %s',
     'link:view:less' => 'Ver menos',
