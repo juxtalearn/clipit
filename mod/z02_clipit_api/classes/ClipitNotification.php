@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Pablo Llin·s
+ * User: Pablo Llin√°s
  * Date: 09/07/2015
  * Time: 15:48
  */

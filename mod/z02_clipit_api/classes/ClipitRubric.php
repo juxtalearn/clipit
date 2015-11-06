@@ -4,7 +4,7 @@
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llin�s Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
  * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
