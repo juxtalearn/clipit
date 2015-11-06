@@ -1,19 +1,19 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit - Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_api
  */
 
 /**
- * Contains all elements required to carry out the JuxtaLearn learning method in which Student work in Groups around a
+ * Contains all elements required to carry out the Clipit learning method in which Student work in Groups around a
  * selected Tricky Topic.
  *
  * It contains a list of enrolled/called Students, Groups (that actually participate in the activity), Tasks (set by the

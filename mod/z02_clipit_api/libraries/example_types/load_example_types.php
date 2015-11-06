@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit - Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_api
  */
 
@@ -52,7 +52,7 @@ function input_example_types_file($file){
 }
 
 /**
- * Parse a single role from an Excel file, containing one example type item, and add it to ClipIt
+ * Parse a single role from an Excel file, containing one example type item, and add it to Clipit
  *
  * @param PHPExcel_Worksheet_Row $row_iterator
  *
@@ -97,6 +97,6 @@ function parse_example_types_row($row_iterator) {
     $value = $cell_iterator->current()->getValue();
     $prop_value_array["category_description"] = (string)$value;
 
-    // Add Example Type Item to ClipIt
+    // Add Example Type Item to Clipit
     ClipitExampleType::create($prop_value_array);
 }
