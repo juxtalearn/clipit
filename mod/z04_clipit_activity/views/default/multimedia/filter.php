@@ -10,10 +10,10 @@
  * @license         GNU Affero General Public License v3
  * @package         ClipIt
  */
-$entity = elgg_extract('entity', $vars);
 $href = elgg_extract('href', $vars);
-$files_count = count($entity->file_array) > 0 ? "(".count($entity->file_array).")" : "(0)";
-$videos_count = count($entity->video_array) > 0 ? "(".count($entity->video_array).")" : "(0)";
+$files_count = elgg_extract('files_count', $vars);
+$videos_count = elgg_extract('videos_count', $vars);
+$texts_count = elgg_extract('texts_count', $vars);
 
 $tabs = array(
     'files' => array(
@@ -25,6 +25,11 @@ $tabs = array(
         'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:videos'), 'badge' => $videos_count, 'icon' => 'fa-video-camera')),
         'href' => "{$href}?filter=videos",
         'priority' => 300,
+    ),
+    'texts' => array(
+        'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:texts'), 'badge' => $texts_count, 'icon' => 'fa-file-text-o')),
+        'href' => "{$href}?filter=texts",
+        'priority' => 400,
     ),
 );
 foreach ($tabs as $name => $tab) {

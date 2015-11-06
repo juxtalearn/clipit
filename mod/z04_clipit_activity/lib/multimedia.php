@@ -61,3 +61,21 @@ function videos_get_page_content_list($params = array()){
     }
     return $content;
 }
+
+function texts_get_page_content_list($params = array()){
+    $texts = $params['entities'];
+    // Search items
+    if($search_term = stripslashes(get_input("search"))){
+        $items_search = array_keys(ClipitText::get_from_search($search_term));
+        $texts = array_uintersect($items_search, $texts, "strcasecmp");
+    }
+    elgg_extend_view("texts/search", "search/search");
+    $params['entities'] = $texts;
+
+    $content = elgg_view('multimedia/text/list', $params);
+    if (!$texts) {
+        $content .= elgg_view('output/empty', array('value' => elgg_echo('texts:none')));
+    }
+    return $content;
+}
+

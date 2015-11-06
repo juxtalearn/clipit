@@ -26,7 +26,7 @@ $activity = array_pop(ClipitActivity::get_by_id(array($activity_id)));
             ?>
         </div>
         <div class="row margin-top-10">
-            <div class="col-md-6">
+            <div class="col-md-<?php echo $group->tag_array ? '6':'12'?>">
                 <small class="show" style="margin: 5px 0"><?php echo elgg_echo('activity:pending_tasks');?></small>
                 <?php echo elgg_view("page/components/pending_tasks", array('entity' => $activity)); ?>
             </div>

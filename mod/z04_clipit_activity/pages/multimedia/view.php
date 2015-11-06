@@ -43,18 +43,17 @@ switch($object['subtype']){
         ));
         break;
     // Clipit Resource
-    case 'ClipitResource':
-        elgg_push_breadcrumb(elgg_echo("resources"), $href."?filter=resources");
-        $title = elgg_echo("resource");
-        $entity = array_pop(ClipitResource::get_by_id(array($entity_id)));
+    case 'ClipitText':
+        elgg_push_breadcrumb(elgg_echo("texts"), $href."?filter=texts");
+        $title = elgg_echo("text");
+        $entity = array_pop(ClipitText::get_by_id(array($entity_id)));
         $content = elgg_view('multimedia/view', array(
             'entity' => $entity,
-            'type' => 'resource',
+            'type' => 'text',
             'preview' => false,
-            'body' => elgg_view("multimedia/body", array('entity'  => $entity)),
+            'body' => elgg_view("multimedia/text/body", array('entity'  => $entity)),
             'description' => false,
         ));
-        $content = elgg_view("multimedia/resource", array('entity_id' => $entity_id));
         break;
     default:
         return false;

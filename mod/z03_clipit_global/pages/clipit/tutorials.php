@@ -52,7 +52,7 @@ if(!elgg_is_logged_in()){
             )).'
             <hr/>
             <div class="frame-container">
-                <iframe src="https://docs.google.com/document/d/'.$student_id.'/pub?embedded=true" frameborder="0"></iframe>
+                <iframe src="https://docs.google.com/document/d/'.$student_id.'/pub?embedded=false" frameborder="0"></iframe>
             </div>
         </div>
         <div role="tabpanel" class="tab-pane" id="teacher">
@@ -65,7 +65,7 @@ if(!elgg_is_logged_in()){
             )).'
             <hr/>
             <div class="frame-container">
-                <iframe src="https://docs.google.com/document/d/'.$teacher_id.'/pub?embedded=true" frameborder="0"></iframe>
+                <iframe src="https://docs.google.com/document/d/'.$teacher_id.'/pub?embedded=false" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@ if(!elgg_is_logged_in()){
     $content .= '
     <hr/>
     <div class="frame-container">
-        <iframe src="https://docs.google.com/document/d/'.$id.'/pub?embedded=true" frameborder="0"></iframe>
+        <iframe src="https://docs.google.com/document/d/'.$id.'/pub?embedded=false" frameborder="0"></iframe>
     </div>
     ';
 }
@@ -90,6 +90,6 @@ $params = array(
     'filter' => '',
     'title' => $title,
 );
-$body = elgg_view_layout('content', $params);
+$body = elgg_view_layout('one_column', $params);
 
 echo elgg_view_page($title, $body);

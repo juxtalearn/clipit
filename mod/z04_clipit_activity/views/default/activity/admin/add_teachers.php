@@ -74,7 +74,7 @@ $activity = elgg_extract('entity', $vars);
         'placeholder' => elgg_echo('filter')."...",
     ));
     ?>
-    <select multiple class="form-control" name="select_users[]"></select>
+    <select multiple class="form-control" name="select_users[]" style="height: auto !important;"></select>
     <p class="margin-top-10 text-right">
         <?php
         echo elgg_view('input/button', array(
