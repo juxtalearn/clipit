@@ -15,6 +15,7 @@ if ($user) {
     $input = elgg_view('input/dropdown', array(
         'class' => 'form-control',
         'name'  => $input_name,
+        'label'  => $input_name,
         'id'    => $input_name,
         'value' => $user->language,
         'options_values' => get_installed_translations()

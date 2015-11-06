@@ -20,6 +20,7 @@ if($filter = get_input("filter")){
     <small class="show margin-bottom-5"><?php echo elgg_echo('task:select');?></small>
     <?php echo elgg_view('input/dropdown', array(
         'name' => 'task_id',
+        'aria-label' => 'task_id',
         'id' => 'task_id',
         'class' => 'form-control margin-bottom-20 pull-left',
         'style' => 'height: auto;width: auto;padding: 0;font-weight: bold;',

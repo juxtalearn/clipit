@@ -21,7 +21,8 @@ echo elgg_view("input/hidden", array(
         'name' => 'search[name]',
         'id' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_search_input('name')
+        'value' => get_search_input('name'),
+        'aria-label' => elgg_echo('filter:quizname'),
     ));
     ?>
 </div>
@@ -31,7 +32,8 @@ echo elgg_view("input/hidden", array(
         'name' => 'search[tricky_topic]',
         'id' => 'search[tricky_topic]',
         'class' => 'form-control',
-        'value' => get_search_input('tricky_topic')
+        'value' => get_search_input('tricky_topic'),
+        'aria-label' => elgg_echo('filter:tricky'),
     ));
     ?>
 </div>

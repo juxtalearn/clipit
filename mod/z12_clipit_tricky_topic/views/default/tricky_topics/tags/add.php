@@ -19,6 +19,7 @@
         'class' => 'fa fa-times red pull-right',
         'style' => 'margin-right: 10px;margin-top: 10px;',
         'onclick' => '$(this).parent(\'.form-group\').remove()',
+        'aria-label' => elgg_echo('delete'),
     ));
     ?>
     <?php echo elgg_view("input/text", array(
@@ -27,7 +28,8 @@
         'style' => 'width: 90%;',
         'class' => 'form-control input-tag',
         'required' => isset($vars['required']) ? $vars['required'] : true,
-        'placeholder' => elgg_echo('tag')
+        'placeholder' => elgg_echo('tag'),
+        'aria-label' => elgg_echo('tag'),
     ));
     ?>
 </div>

@@ -57,7 +57,8 @@ elseif($entity_id):
         <li class="list-item">
             <?php echo elgg_view('output/img', array(
                 'src' => get_avatar($user, 'small'),
-                'class' => 'image-block avatar-tiny'
+                'class' => 'image-block avatar-tiny',
+                'alt' => 'avatar-tiny',
             ));
             ?>
             <div class="content-block">

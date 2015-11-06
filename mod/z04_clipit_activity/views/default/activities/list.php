@@ -27,19 +27,19 @@ $table_orders = elgg_extract('table_orders', $vars);
     ?>
 </div>
 <div class="table-responsive">
-<table class="table table-striped table-order">
-    <thead>
-    <tr class="title_order">
+<table class="table table-striped table-order" role="presentation" caption="<?php echo elgg_echo('table:activities')?>">
+    <thead role="presentation">
+    <tr class="title_order" role="presentation">
         <?php foreach($table_orders as $data):?>
-            <th>
+            <th role="presentation">
                 <a href="<?php echo $data['href'];?>">
                     <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
                     <span class="margin-left-5"><?php echo $data['value'];?></span>
                 </a>
             </th>
         <?php endforeach;?>
-        <th><?php echo elgg_echo('activity:teachers');?></th>
-        <th></th>
+        <th role="presentation"><?php echo elgg_echo('activity:teachers');?></th>
+        <th role="presentation"></th>
     </tr>
     </thead>
     <?php
@@ -47,8 +47,8 @@ $table_orders = elgg_extract('table_orders', $vars);
         $user = array_pop(ClipitUser::get_by_id(array($activity->owner_id)));
         $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($activity->tricky_topic)));
     ?>
-        <tr>
-            <td>
+        <tr role="presentation">
+            <td role="presentation">
 <!--                <i class="activity-point pull-left margin-top-5 margin-right-10" style="background: #--><?php //echo $activity->color;?><!--"></i>-->
                 <div class="content-block">
                 <strong>
@@ -69,7 +69,7 @@ $table_orders = elgg_extract('table_orders', $vars);
                 </div>
                 </div>
             </td>
-            <td>
+            <td role="presentation">
                 <?php echo elgg_view('output/url', array(
                     'href'  => "tricky_topics/view/{$tricky_topic->id}",
                     'title' => $tricky_topic->name,
@@ -77,13 +77,13 @@ $table_orders = elgg_extract('table_orders', $vars);
                 ));
                 ?>
             </td>
-            <td>
+            <td role="presentation">
                 <small class="activity-status status-<?php echo $activity->status;?>">
                     <strong><?php echo elgg_echo("status:".$activity->status);?></strong>
                 </small>
             </td>
 
-            <td>
+            <td role="presentation">
                 <ul style="max-height: 100px; overflow: auto;">
                     <?php
                     foreach($activity->teacher_array as $teacher_id):
@@ -101,7 +101,7 @@ $table_orders = elgg_extract('table_orders', $vars);
                     <?php endforeach; ?>
                 </ul>
             </td>
-            <td>
+            <td role="presentation">
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $activity,
                     'user' => $user,

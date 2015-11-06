@@ -38,7 +38,9 @@ $activities = ClipitActivity::get_by_id($activities);
         <?php echo elgg_view('output/img', array(
             'src' => get_avatar($entity, 'large'),
             'style' => 'width: auto',
-            'class' => 'avatar-large'
+            'class' => 'avatar-large',
+            'alt' => 'Avatar',
+            'aria-label' => 'Avatar'
         ));
         ?>
         <ul class="margin-top-20" style="display: none">

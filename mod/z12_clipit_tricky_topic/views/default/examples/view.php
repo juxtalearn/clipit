@@ -95,7 +95,7 @@ endif;
 <a name="resources"></a>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('activity:stas')));?>
-    <div role="tabpanel">
+    <div role="presentation">
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -118,7 +118,7 @@ endif;
         </style>
         <!-- Tab panes -->
         <div class="tab-content">
-            <div role="tabpanel" class="tab-pane active" id="files">
+            <div role="presentation" class="tab-pane active" id="files">
                 <div class="margin-top-20">
                     <?php
                     $params = array(
@@ -135,7 +135,7 @@ endif;
                     ?>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane" id="videos">
+            <div role="presentation" class="tab-pane" id="videos">
                 <div class="margin-top-20">
                     <?php
                     $params = array(

@@ -113,7 +113,8 @@ if (is_array($items) && count($items) > 0):
                                         <?php echo elgg_view('output/url', array(
                                             'href'  => "clipit_activity/{$item->id}/group/{$group->id}",
                                             'title' => $group->name,
-                                            'text'  => $group->name));
+                                            'text'  => $group->name,
+                                            'alt' => $group->name));
                                         ?>
                                     </strong>
                                 </div>
@@ -124,13 +125,15 @@ if (is_array($items) && count($items) > 0):
                                         $user_avatar = elgg_view('output/img', array(
                                             'src' => get_avatar($user, 'small'),
                                             'style' => 'margin: 1px;',
-                                            'class' => 'avatar-tiny'
+                                            'class' => 'avatar-tiny',
+                                            'alt' => 'Avatar',
                                         ));
                                     ?>
                                         <?php echo elgg_view('output/url', array(
                                             'href'  => "profile/".$user->login,
                                             'title' => $user->name,
-                                            'text' => $user_avatar
+                                            'text' => $user_avatar,
+                                            'name'  => $user->name,
                                          ));
                                         ?>
                                     <?php endforeach; ?>

@@ -25,7 +25,7 @@ if($id = $vars['id']){
 if($aria_label = $vars['name']){
     $aria_label = 'aria-label="'.$aria_label.'"';
 }
-echo "<ul class=\"$class\" $id role=\"menu\" $aria_label>";
+echo "<ul class=\"$class\" $id role=\"presentation\" $aria_label>";
 foreach ($vars['items'] as $menu_item) {
 	echo elgg_view('navigation/menu/elements/item', array(
 		'item' => $menu_item,

@@ -118,7 +118,7 @@ if(!empty($activities) || !empty($quizzes) ){
 <a name="resources"></a>
 <div>
     <?php echo elgg_view('page/components/title_block', array('title' => elgg_echo('tricky_topic:resources')));?>
-    <div role="tabpanel">
+    <div role="presentation">
 
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
@@ -141,7 +141,7 @@ if(!empty($activities) || !empty($quizzes) ){
 </style>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active form-group" id="files">
+        <div role="presentation" class="tab-pane active form-group" id="files">
             <div class="margin-top-20">
                 <?php
                 echo elgg_view_form('tricky_topic/resources', array(
@@ -168,7 +168,7 @@ if(!empty($activities) || !empty($quizzes) ){
                 ?>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane form-group" id="videos">
+        <div role="presentation" class="tab-pane form-group" id="videos">
             <div class="margin-top-20">
                 <?php
                 echo elgg_view_form('tricky_topic/resources', array(

@@ -10,8 +10,8 @@ $spanish = array(
     "metric:1" => "Métrica de Prueba",
 
     // ClipitQuiz::export_to_excel
-    "clipit:quiz:export:creator"            => "ClipIt",
-    "clipit:quiz:export:title"              => "Exportación de ClipIt Test",
+    "clipit:quiz:export:creator"            => "Clipit",
+    "clipit:quiz:export:title"              => "Exportación de Clipit Test",
     "clipit:quiz:export:keywords"           => "clipit, test, exportación",
     "clipit:quiz:export:scores"             => "Puntuaciones",
     "clipit:quiz:export:quiz_name"          => "Nombre del Test",

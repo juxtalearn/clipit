@@ -73,6 +73,7 @@ foreach($activities as $activity):
                 'style' => 'color: #FFF;',
                 'title' => $activity->name,
                 'text'  => $activity->name,
+                'name'  => elgg_echo('activity:number'),
             ));
             ?>
         </h4>

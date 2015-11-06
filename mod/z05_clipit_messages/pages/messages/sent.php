@@ -42,7 +42,8 @@ foreach($messages as $message){
     }
     $user_avatar = elgg_view('output/img', array(
         'src' => get_avatar($user, 'small'),
-        'class' => 'avatar-tiny'
+        'class' => 'avatar-tiny',
+        'alt' => 'Avatar',
     ));
     $user_data = elgg_view('output/url', array(
         'href'  => "profile/".$user->login,

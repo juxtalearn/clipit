@@ -40,6 +40,7 @@ $swedish = array(
     'clipit:slogan:create' => 'Skapa',
     'clipit:slogan:learn' => 'Lär',
     'clipit:slogan:share' => 'Dela',
+    'clipit:foot:mail' => 'E-post',
 
     // ERROR
     'error:404' => "Tyvärr! Vi kunde inte hitta sidan du letade efter.",

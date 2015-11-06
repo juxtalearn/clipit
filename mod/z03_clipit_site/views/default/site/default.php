@@ -50,7 +50,7 @@ $lang = get_current_language();
     <?php echo elgg_view('page/elements/head', $vars); ?>
 </head>
 <body role="main">
-<div id="wrap" aria-label="<?php echo elgg_echo('main:page')?>" <?php if (!elgg_is_logged_in()) echo 'class="bg-grey"'; ?>>
+<div id="wrap"  aria-label="<?php echo elgg_echo('main:page')?>" <?php if (!elgg_is_logged_in()) echo 'class="bg-grey"'; ?>>
     <div class="elgg-page-messages">
         <?php echo $messages; ?>
     </div>

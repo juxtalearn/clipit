@@ -28,6 +28,7 @@ $input_prefix = elgg_extract('input_prefix', $vars);
         'href'  => "javascript:;",
         'class' => 'remove-answer fa fa-times red pull-right margin-top-10',
         'text'  => '',
+        'aria-label' => elgg_echo('delete'),
     ));
     ?>
     <?php echo elgg_view("input/text", array(

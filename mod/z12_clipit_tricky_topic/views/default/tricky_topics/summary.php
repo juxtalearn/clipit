@@ -16,13 +16,13 @@ $table_orders = elgg_extract('table_orders', $vars);
 $page = 'tricky_topics';
 ?>
 <?php if($tricky_topics):?>
-<table class="table table-striped table-order">
-    <thead>
-    <tr class="title_order">
-        <th><?php echo elgg_echo('name');?></th>
-        <th><?php echo elgg_echo('education_level');?></th>
-        <th><?php echo elgg_echo('tricky_topic:subject');?></th>
-        <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+<table class="table table-striped table-order" role="presentation">
+    <thead role="presentation">
+    <tr role="presentation" class="title_order">
+        <th role="presentation"><?php echo elgg_echo('name');?></th>
+        <th role="presentation"><?php echo elgg_echo('education_level');?></th>
+        <th role="presentation"><?php echo elgg_echo('tricky_topic:subject');?></th>
+        <th role="presentation"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
     </tr>
     </thead>
     <?php
@@ -35,8 +35,8 @@ $page = 'tricky_topics';
             $is_linked = true;
         }
     ?>
-    <tr>
-        <td>
+    <tr role="presentation">
+        <td role="presentation">
             <strong>
                 <?php echo elgg_view('output/url', array(
                     'href'  => "tricky_topics/view/{$tricky_topic->id}",
@@ -47,7 +47,7 @@ $page = 'tricky_topics';
             </strong>
             <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $tricky_topic->tag_array, 'limit' => 3)); ?>
         </td>
-        <td>
+        <td role="presentation">
             <?php echo elgg_view('output/url', array(
                 'href'  => set_search_input($page, array('education_level'=>$tricky_topic->education_level)),
                 'title' => elgg_echo('filter_by', array(elgg_echo('education_level:'.$tricky_topic->education_level))),
@@ -55,7 +55,7 @@ $page = 'tricky_topics';
             ));
             ?>
         </td>
-        <td>
+        <td role="presentation">
             <?php echo elgg_view('output/url', array(
                 'href'  => set_search_input($page, array('subject'=>$tricky_topic->subject)),
                 'title' => $tricky_topic->subject,
@@ -63,7 +63,7 @@ $page = 'tricky_topics';
             ));
             ?>
         </td>
-        <td>
+        <td role="presentation">
             <small>
             <div>
                 <i class="fa-user fa blue"></i>

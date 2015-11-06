@@ -42,6 +42,7 @@
 			<?php echo elgg_view('input/dropdown', array(
 					'name' => 'f5',
 					'id' => 'f5',
+					'label' => 'f5',
 					'options' => array('option 1', 'option 2'),
 					));
 			?>

@@ -34,9 +34,9 @@ $(function(){
         keepOrder: false,
         selectableOptgroup: true,
         selectableHeader: "<h4><?php echo elgg_echo("activity:site:students");?> <span class='pull-right blue-lighter'>0</span></h4>"+
-                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
+                            "<input type='text' aria-label='search-input' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         selectionHeader: "<h4><?php echo elgg_echo("activity:students");?> <span class='pull-right blue-lighter'>0</span></h4>"+
-                            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
+                            "<input type='text' aria-label='search-input' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         afterInit: function(ms){
             selected_count();
             var that = this,

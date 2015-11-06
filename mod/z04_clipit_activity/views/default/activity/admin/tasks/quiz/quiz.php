@@ -55,7 +55,7 @@ $(function(){
 </script>
 <div class="quiz" data-quiz="<?php echo $id;?>">
 
-    <div class="row">
+    <div class="row" role="menu">
         <div class="col-md-7">
             <?php
             if($tricky_topics):
@@ -67,7 +67,7 @@ $(function(){
                     <label for="<?php echo "{$input_prefix}[tricky_topic]";?>">
                         <?php echo elgg_echo('tricky_topic');?>
                     </label>
-                    <select
+                    <select role="menuitem"
                         required="required"
                         class="form-control select-tricky_topic"
                         name="<?php echo $input_prefix;?>[tricky_topic]"
@@ -105,6 +105,7 @@ $(function(){
                     'value' => $entity->name,
                     'autofocus' => true,
                     'required' => true,
+                    'role' => 'menuitem',
                 ));
                 ?>
             </div>
@@ -118,6 +119,7 @@ $(function(){
                                     clipit.tinymce();
                                     tinymce.execCommand(\'mceFocus\',false,this.id);',
                     'rows'  => 1,
+                    'aria-label' => "{$input_prefix}[description]",
                 ));
                 ?>
             </div>
@@ -133,6 +135,7 @@ $(function(){
                     'style' => 'padding: 5px;',
                     'value' => $entity->view_mode,
                     'class' => 'form-control',
+                    'aria-label' => elgg_echo('quiz:view_mode'),
                     'options_values' => array(
                         ClipitQuiz::VIEW_MODE_LIST => elgg_echo('quiz:view_page:'.ClipitQuiz::VIEW_MODE_LIST),
                         ClipitQuiz::VIEW_MODE_PAGED => elgg_echo('quiz:view_page:'.ClipitQuiz::VIEW_MODE_PAGED)
@@ -153,10 +156,12 @@ $(function(){
                         $days = range(0, 30);
                         echo elgg_view("input/dropdown", array(
                             'name' => $input_prefix.'[time][d]',
+                            'label' => $input_prefix.'[time][d]',
                             'style' => 'padding:5px;',
                             'class' => 'form-control margin-top-5',
                             'value' => $entity ? floor($time / 86000):'',
-                            'options_values' => $days
+                            'options_values' => $days,
+                            'aria-label' => elgg_echo('quiz:max_time'),
                         ));
                     ?>
                     </div>
@@ -166,10 +171,12 @@ $(function(){
                         $hours = range(0, 24);
                         echo elgg_view("input/dropdown", array(
                             'name' => $input_prefix.'[time][h]',
+                            'label' => $input_prefix.'[time][h]',
                             'style' => 'padding:5px;',
                             'class' => 'form-control margin-top-5',
                             'value' => $entity ? floor(($time / 3600) % 24):'1',
-                            'options_values' => $hours
+                            'options_values' => $hours,
+                            'aria-label' => elgg_echo('time:hours'),
                         ));
                         ?>
                     </div>
@@ -179,11 +186,13 @@ $(function(){
                         $minutes = array_combine(range(0, 55, 5), range(0, 55, 5));
                         echo elgg_view("input/dropdown", array(
                             'name' => $input_prefix.'[time][m]',
+                            'label' => $input_prefix.'[time][m]',
                             'style' => 'padding:5px;',
                             'class' => 'form-control margin-top-5',
                             'value' => $entity ? floor(($time / 60) % 60):'',
                             'options_values' => $minutes,
-                            'required' => true
+                            'required' => true,
+                            'aria-label' => elgg_echo('time:minutos'),
                         ));
                         ?>
                     </div>
@@ -192,14 +201,14 @@ $(function(){
             <div class="form-group">
                 <label><?php echo elgg_echo('quiz:target');?></label>
                 <label style="font-weight: normal;">
-                    <input type="radio"
+                    <input type="radio" aria-label="<?php echo elgg_echo('clipit:activities');?>"
                            name="<?php echo $input_prefix;?>[target]"
                             <?php echo ($entity->target == ClipitQuiz::TARGET_CLIPIT || !$entity_target) ? 'checked':'';?>
                            value="<?php echo ClipitQuiz::TARGET_CLIPIT;?>">
                     <?php echo elgg_echo('quiz:target:clipit');?>
                 </label>
                 <label style="font-weight: normal;">
-                    <input type="radio"
+                    <input type="radio" aria-label="Large displays"
                            name="<?php echo $input_prefix;?>[target]"
                             <?php echo $entity->target == ClipitQuiz::TARGET_LARGEDISPLAY ? 'checked':'';?>
                            value="<?php echo ClipitQuiz::TARGET_LARGEDISPLAY;?>">

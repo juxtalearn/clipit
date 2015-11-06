@@ -162,7 +162,7 @@ $(function(){
         <?php endif;?>
     </div>
 <?php if($rubrics):?>
-    <div id="rubrics" role="tabpanel" class="tab-pane">
+    <div id="rubrics" role="presentation" class="tab-pane">
         <div class="col-md-12">
             <?php echo elgg_view('rubric/items', array('entities' => $rubrics, 'rating' => true, 'rating_selected' => $rating_rubric));?>
         </div>

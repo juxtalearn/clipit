@@ -20,7 +20,9 @@
         'text'  => '<i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>'.elgg_echo('teacher:authoring_tools'),
         'text' => '<i class="fa fa-cogs visible-xs visible-sm"></i>
                     <i class="fa fa-caret-down pull-right hidden-xs hidden-sm" style="float: right !important;"></i>
-                    <span class="hidden-xs hidden-sm">'.elgg_echo('teacher:authoring_tools'). '</span>'
+                    <span class="hidden-xs hidden-sm">'.elgg_echo('teacher:authoring_tools'). '</span>',
+        'aria-hidden' => 'true',
+        'aria-label' => elgg_echo('teacher:authoring_tools'),
     ));
     ?>
     <!-- Auhtoring menu -->

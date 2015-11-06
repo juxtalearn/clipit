@@ -28,5 +28,7 @@ if($user->id != elgg_get_logged_in_user_guid()){
 echo elgg_view('output/url', array(
         'href'  => "ajax/view/modal/messages/send?id=".$user->id,
         'title' => elgg_echo('message:send'),
+        'name'  => elgg_echo('message:send'),
+        'aria-label'=> elgg_echo('message:send')." ".$user->name,
 
     ) + $params_message); ?>

@@ -28,6 +28,7 @@ foreach ($vars['menu'] as $section => $menu_items) {
 		'class' => "$class elgg-menu-{$vars['name']}-$section",
         'id'    => $vars['id'],
 		'section' => $section,
+		'aria-label' => "menu",
 		'name' => $vars['name'],
 		'show_section_headers' => $headers,
 		'item_class' => $item_class

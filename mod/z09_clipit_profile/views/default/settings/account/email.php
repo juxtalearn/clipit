@@ -18,7 +18,7 @@ if ($user) {
         'value' => $user->email,
     ));
     $content = elgg_view("input/form_group", array(
-        'label' => elgg_echo('email:address:label').':',
+        'aria-label' => elgg_echo('email:address:label').':',
         'name'  => $input_name,
         'input' => $input
     ));

@@ -14,6 +14,7 @@
         'required' => true,
         'name' => 'username',
         'class' => 'form-control input-lg',
+        'aria-label' => 'username',
     ));
     ?>
 </div>
@@ -24,6 +25,7 @@
             'name' => 'password',
             'class' => 'form-control input-lg',
             'required' => true,
+            'aria-label' => 'password',
         ));
     ?>
 </div>

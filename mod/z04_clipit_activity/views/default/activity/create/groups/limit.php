@@ -22,6 +22,7 @@
             'class' => 'form-control',
             'required' => true,
             'placeholder' => '0',
+            'aria-label' => $vars['name'],
             'data-rule-number' => true
         ));
         ?>

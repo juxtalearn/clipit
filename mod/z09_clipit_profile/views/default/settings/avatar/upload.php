@@ -20,6 +20,7 @@ if ($entity->avatar_file) {
         'title' => elgg_echo('avatar:remove'),
         'href' => 'action/settings/avatar/remove?guid=' . elgg_get_page_owner_guid(),
         'is_action' => true,
+        'aria-label' => elgg_echo('delete'),
         'class' => 'show btn btn-danger margin-top-10',
     ));
 }

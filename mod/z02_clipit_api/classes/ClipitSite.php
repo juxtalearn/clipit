@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit - Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_api
  */
 
@@ -19,7 +19,7 @@ class ClipitSite extends UBSite {
 
     const SUBTYPE = "ClipitSite";
 
-    // ClipIt Site Types
+    // Clipit Site Types
     const TYPE_SITE = "site";
     const TYPE_GLOBAL = "global";
     const TYPE_DEMO = "demo";
@@ -37,7 +37,7 @@ class ClipitSite extends UBSite {
     public $file_array = array();
     public $text_array = array();
 
-    // PUBLIC SCOPE (Public for everyone on the Global ClipIt Site)
+    // PUBLIC SCOPE (Public for everyone on the Global Clipit Site)
     const REL_SITE_PUB_TRICKYTOPIC = "ClipitSite-PUB-ClipitTrickyTopic";
     const REL_SITE_PUB_VIDEO = "ClipitSite-PUB-ClipitVideo";
     const REL_SITE_PUB_FILE = "ClipitSite-PUB-ClipitFile";
@@ -289,7 +289,7 @@ class ClipitSite extends UBSite {
         return UBCollection::get_items($id, static::REL_SITE_PUB_ACTIVITY);
     }
 
-    // ClipIt Global (to be called from SITE)
+    // Clipit Global (to be called from SITE)
 
     static function global_site_call($data, $type = "GET"){
         $clipit_global_url = get_config("clipit_global_url");

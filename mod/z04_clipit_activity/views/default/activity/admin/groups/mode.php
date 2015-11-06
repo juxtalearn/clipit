@@ -52,6 +52,7 @@ $(function(){
                 <?php
                     echo elgg_view('input/dropdown', array(
                         'name' => 'group-mode',
+                        'aria-label' => 'group-mode',
                         'class' => 'form-control',
                         'style' => 'width: auto;padding: 2px;',
                         'value' => $activity->group_mode,

@@ -45,7 +45,8 @@ $quiz_id = elgg_extract('quiz_id', $vars);
     <strong>
         <?php echo elgg_view('output/img', array(
             'src' => get_avatar($user, 'small'),
-            'class' => 'avatar-tiny margin-right-5'
+            'class' => 'avatar-tiny margin-right-5',
+            'alt' => 'avatar-tiny',
         ));?>
         <?php echo elgg_view("messages/compose_icon", array('entity' => $user));?>
         <?php echo elgg_view('output/url', array(

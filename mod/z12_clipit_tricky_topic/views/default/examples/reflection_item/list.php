@@ -22,7 +22,7 @@ foreach($items as $item) {
 <span class="text-muted show margin-bottom-10">
     <?php echo elgg_echo('reflection_palette:question');?>
 </span>
-<div role="tabpanel" class="margin-bottom-20">
+<div role="presentation" class="margin-bottom-20">
     <div class="module-controls">
     <!-- Nav tabs -->
     <ul class="navs nav-tab tab-set" role="tablist">
@@ -51,7 +51,7 @@ foreach($items as $item) {
         $x=1;
         foreach($categories as $category => $description):
         ?>
-        <div role="tabpanel" class="<?php echo $x==1 ? 'active':'';?> reflection-item tab-pane row" id="<?php echo elgg_get_friendly_title($category);?>" style="padding: 10px;">
+        <div role="presentation" class="<?php echo $x==1 ? 'active':'';?> reflection-item tab-pane row" id="<?php echo elgg_get_friendly_title($category);?>" style="padding: 10px;">
             <div class="col-md-12">
                 <?php
                 foreach($items as $item):

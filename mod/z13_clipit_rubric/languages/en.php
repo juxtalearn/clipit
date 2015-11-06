@@ -33,6 +33,7 @@ $english = array(
     'rubric:items' => 'Criteria',
     'category' => 'Category',
     'task:rubric:select:required' => 'You must select a Rubric. <br>(If there are no rubrics, you must add one first)',
+    'rubric:description' => 'Rubric level description',
 );
 
 add_translation('en', $english);

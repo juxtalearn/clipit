@@ -5,7 +5,7 @@
     <version>1.0</version>
     <description>This plugin provides the URJC Backend functionality</description>
     <website>http://clipit.es</website>
-    <copyright>(C) JuxtaLearn Project</copyright>
+    <copyright>URJC</copyright>
     <license>GNU General Public License version 3</license>
     <requires>
         <type>elgg_release</type>

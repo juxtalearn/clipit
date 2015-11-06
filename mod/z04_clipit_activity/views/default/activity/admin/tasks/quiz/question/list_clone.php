@@ -18,28 +18,28 @@ $id = elgg_extract('id', $vars);
         <i class="fa fa-level-up fa-rotate-90" style="font-size: 20px;"></i>
     </td>
     <td colspan="4" style="padding: 0">
-        <table class="table">
-            <thead>
-            <tr class="info">
+        <table class="table" role="presentation">
+            <thead role="presentation">
+            <tr class="info" role="presentation">
                 <th><?php echo elgg_echo('select');?></th>
                 <th><?php echo elgg_echo('quiz:question');?></th>
                 <th><?php echo elgg_echo('created');?></th>
                 <th style="width: 110px;"><?php echo elgg_echo('difficulty');?></th>
             </tr>
             </thead>
-            <tbody>
+            <tbody role="presentation">
             <?php
             foreach(ClipitQuizQuestion::get_by_id($questions) as $question_clone):
                 $user = array_pop(ClipitUser::get_by_id(array($question_clone->owner_id)));
                 ?>
-                <tr class="info">
-                    <td>
+                <tr class="info" role="presentation">
+                    <td role="presentation">
                         <a class="btn btn-xs btn-primary questions-select" id="<?php echo $question_clone->id;?>">Select</a>
                     </td>
-                    <td>
+                    <td role="presentation">
                         <?php echo $question_clone->name;?>
                     </td>
-                    <td>
+                    <td role="presentation">
                         <?php echo elgg_view('output/friendlytime', array('time' => $question_clone->time_created));?>
                         <small class="show">
                             <?php echo elgg_echo('by');?>
@@ -51,7 +51,7 @@ $id = elgg_extract('id', $vars);
                             ?>
                         </small>
                     </td>
-                    <td>
+                    <td role="presentation">
                         <?php echo difficulty_bar($question_clone->difficulty);?>
                     </td>
                 </tr>
