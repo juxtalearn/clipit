@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: Pablo Llinás
+ * User: Pablo LlinÃ¡s
  * Date: 01/06/2015
  * Time: 17:22
  */
