@@ -35,7 +35,8 @@ function notification_view($notification){
             $user = array_pop(ClipitUser::get_by_id(array($params['owner'])));
             $params['owner_info'] = elgg_view('output/img', array(
                 'src' => get_avatar($user, 'small'),
-                'class' => 'avatar-tiny image-block margin-top-5'
+                'class' => 'avatar-tiny image-block margin-top-5',
+                'alt' => 'Avatar'
             ));
             break;
     }

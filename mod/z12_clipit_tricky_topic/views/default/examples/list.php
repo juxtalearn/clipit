@@ -26,10 +26,10 @@ $count = elgg_extract('count', $vars);
     ));
     ?>
 </div>
-<div class="table-responsive-list">
-<table class="table table-striped table-order">
-    <thead>
-    <tr>
+<div class="table-responsive-list" role="presentation">
+<table class="table table-striped table-order" role="presentation">
+    <thead role="presentation">
+    <tr role="presentation">
         <?php
         foreach($table_orders as $title => $data):
             switch($title){
@@ -37,25 +37,25 @@ $count = elgg_extract('count', $vars);
                 case 'tricky_topic': $class = 'col-md-3 col-xs-3'; break;
             }
         ?>
-            <th class="<?php echo $class;?>">
+            <th role="presentation" class="<?php echo $class;?>">
                 <a href="<?php echo $data['href'];?>">
                     <i class="fa <?php echo $data['sort_icon'];?> blue margin-right-5" style="position: absolute;left: 0;margin-top: 3px;"></i>
                     <span class="margin-left-5"><?php echo $data['value'];?></span>
                 </a>
             </th>
         <?php endforeach;?>
-        <th class="col-md-2"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-        <th class="col-md-2 hidden-xs"><?php echo elgg_echo("options");?></th>
+        <th role="presentation" class="col-md-2"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+        <th  role="presentation" class="col-md-2 hidden-xs"><?php echo elgg_echo("options");?></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody role="presentation">
     <?php
     foreach($examples as $example):
         $user = array_pop(ClipitUser::get_by_id(array($example->owner_id)));
         $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($example->tricky_topic)));
     ?>
-        <tr>
-            <td data-title="<?php echo elgg_echo('name');?>">
+        <tr role="presentation">
+            <td role="presentation" data-title="<?php echo elgg_echo('name');?>">
                 <strong>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "tricky_topics/examples/view/{$example->id}",
@@ -68,7 +68,7 @@ $count = elgg_extract('count', $vars);
                     <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $example->tag_array, 'limit' => 2, 'width' => '100%')); ?>
                 </div>
             </td>
-            <td data-title="<?php echo elgg_echo('tricky_topic');?>">
+            <td role="presentation" data-title="<?php echo elgg_echo('tricky_topic');?>">
                 <?php if($tricky_topic):?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "tricky_topics/view/{$tricky_topic->id}",
@@ -78,7 +78,7 @@ $count = elgg_extract('count', $vars);
                     ?>
                 <?php endif;?>
             </td>
-            <td data-title="<?php echo elgg_echo('author');?>">
+            <td role="presentation" data-title="<?php echo elgg_echo('author');?>">
                 <small>
                     <div>
                         <?php if($user->id == elgg_get_logged_in_user_guid()):?>
@@ -94,7 +94,7 @@ $count = elgg_extract('count', $vars);
                     <?php echo elgg_view('output/friendlytime', array('time' => $example->time_created));?>
                 </small>
             </td>
-            <td data-title="<?php echo elgg_echo('options');?>" class="hidden-xs hidden-sm">
+            <td role="presentation" data-title="<?php echo elgg_echo('options');?>" class="hidden-xs hidden-sm">
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $example,
                     'user' => $user,

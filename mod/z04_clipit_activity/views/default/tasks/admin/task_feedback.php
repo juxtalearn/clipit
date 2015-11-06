@@ -74,7 +74,7 @@ natural_sort_properties($groups, 'name');
 
     });
 </script>
-<div role="tabpanel">
+<div role="presentation">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
@@ -95,7 +95,7 @@ natural_sort_properties($groups, 'name');
 </div>
 <!-- Tab panes -->
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane active" id="students" style="padding: 10px;">
+    <div role="presentation" class="tab-pane active" id="students" aria-label="<?php echo elgg_echo('students');?>" style="padding: 10px;">
         <p>
             <?php echo elgg_view('output/url', array(
                 'title' => elgg_echo('expand:all'),
@@ -151,7 +151,7 @@ natural_sort_properties($groups, 'name');
             </ul>
         <?php endforeach;?>
     </div>
-    <div role="tabpanel" class="tab-pane margin-top-10" id="items" style="padding: 10px;">
+    <div role="presentation" class="tab-pane margin-top-10" id="items" style="padding: 10px;">
         <?php
         echo elgg_view($list_view, array(
             'entities'    => $entities_ids,
@@ -160,7 +160,7 @@ natural_sort_properties($groups, 'name');
         ?>
     </div>
     <?php if($task->rubric_item_array):?>
-    <div role="tabpanel" class="tab-pane margin-top-10" id="rubric" style="padding: 10px;">
+    <div role="presentation" class="tab-pane margin-top-10" id="rubric" style="padding: 10px;">
         <?php
         echo elgg_view('rubric/items', array(
             'entities'    => ClipitRubricItem::get_by_id($task->rubric_item_array, 0, 0, 'time_created', false),

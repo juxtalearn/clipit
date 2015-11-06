@@ -6,7 +6,7 @@
 
 $portuguese = array(
     'locale' => 'pt_PT',
-
+    'user:profile:avatar'=> 'Avatar de usuário',
     'clipit:site' => 'ClipIt',
     'loading' => 'Carregando',
     'loading:content' => 'Carregando o conteudo',
@@ -16,6 +16,7 @@ $portuguese = array(
     'clipit:slogan:create' => 'Cria',
     'clipit:slogan:learn' => 'Aprende',
     'clipit:slogan:share' => 'Partilha',
+    'clipit:foot:mail' => 'Correio eletrônico',
 
     // ERROR
     'error:404' => "Ficheiro nap encontrado.",

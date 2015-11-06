@@ -20,6 +20,9 @@ $author = elgg_extract('author', $vars);
         'style' => 'background: #'.$activity->color,
         'class' => 'circle-activity',
         'text' => '',
+        'Name' => $activity->name,
+        'aria-hidden' => "true",
+
     ));
     ?>
     <div class="event-section">

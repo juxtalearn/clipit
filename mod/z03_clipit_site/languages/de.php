@@ -6,7 +6,7 @@
 
 $german = array(
     'locale' => 'de_DE',
-
+    'user:profile:avatar'=> 'Avatar del usuario',
     // ERROR
     'error:404' => "Die Datei konnte leider nicht gefunden werden",
     'view_all' => 'Alles anzeigen',
@@ -21,6 +21,7 @@ $german = array(
     'menu:footer_clipit:header:clipit' => 'Clipit',
     'menu:footer_clipit:header:help' => 'Hilfe',
     'menu:footer_clipit:header:legal' => 'Impressum',
+    'clipit:foot:mail' => 'E-mail',
 
     'about' => 'Über',
     'team' => 'Team',

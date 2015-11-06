@@ -100,6 +100,7 @@ $tt = array_diff($tt, $owner_tt);
                 <label class="margin-top-5 margin-bottom-10"><?php echo elgg_echo("education_level");?></label>
                 <?php echo elgg_view("input/dropdown", array(
                     'name' => 'tricky-topic-education_level',
+                    'aria-label' => 'tricky-topic-education_level',
                     'style' => 'padding: 5px',
                     'class' => 'form-control',
                     'options_values' => get_education_levels(),

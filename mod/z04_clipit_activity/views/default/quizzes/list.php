@@ -181,7 +181,7 @@ $(function(){
 <?php endif;?>
 <hr>
 
-<div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>">
+<div class="quiz <?php echo $vars['admin']?'quiz-admin':'';?>" name="Quiz" aria-label="Quiz">
 <?php
 $num = 1;
 foreach($questions as $question):

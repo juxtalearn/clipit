@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit eLearning Platform
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      urjc_backend
  */
 
@@ -80,7 +80,7 @@ class UBSite {
     }
 
     /**
-     * Dummy method in case someone treats ClipIt Site as a typical ClipIt Object
+     * Dummy method in case someone treats Clipit Site as a typical Clipit Object
      *
      * @param int $limit
      * @param int $offset

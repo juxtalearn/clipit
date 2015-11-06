@@ -54,18 +54,18 @@ $account = elgg_extract('accounts', $vars);
                     <div class="arrow">
                         <span class="red"></span>
                     </div>
-                    <img src="<?php echo $images_dir;?>crea.png">
+                    <img alt="<?php echo elgg_echo('clipit:slogan:create');?>" src="<?php echo $images_dir;?>crea.png">
                     <h2><?php echo elgg_echo('clipit:slogan:create');?></h2>
                 </div>
                 <div class="col-sm-4 bg-yellow block text-center">
                     <div class="arrow">
                         <span class="yellow"></span>
                     </div>
-                    <img src="<?php echo $images_dir;?>aprende.png">
+                    <img alt="<?php echo elgg_echo('clipit:slogan:learn');?>" src="<?php echo $images_dir;?>aprende.png">
                     <h2><?php echo elgg_echo('clipit:slogan:learn');?></h2>
                 </div>
                 <div class="col-sm-4 bg-blue block text-center">
-                    <img src="<?php echo $images_dir;?>comparte.png">
+                    <img alt="<?php echo elgg_echo('clipit:slogan:share');?>" src="<?php echo $images_dir;?>comparte.png">
                     <h2><?php echo elgg_echo('clipit:slogan:share');?></h2>
                 </div>
             </div>
@@ -83,7 +83,8 @@ $account = elgg_extract('accounts', $vars);
                     'href' => $account['twitter'],
                     'target' => '_blank',
                     'text'  => elgg_view('output/img', array(
-                        'src' => $images_dir . "social/twitter.png"
+                        'src' => $images_dir . "social/twitter.png",
+                        'alt' => "Twitter",
                     ))
                 ));
                 ?>
@@ -91,7 +92,8 @@ $account = elgg_extract('accounts', $vars);
                     'href' => $account['facebook'],
                     'target' => '_blank',
                     'text'  => elgg_view('output/img', array(
-                        'src' => $images_dir . "social/facebook.png"
+                        'src' => $images_dir . "social/facebook.png",
+                        'alt' => "Facebook",
                     ))
                 ));
                 ?>
@@ -99,7 +101,8 @@ $account = elgg_extract('accounts', $vars);
                     'href' => $account['linkedin'],
                     'target' => '_blank',
                     'text'  => elgg_view('output/img', array(
-                        'src' => $images_dir . "social/linkedin.png"
+                        'src' => $images_dir . "social/linkedin.png",
+                        'alt' => "Linkedin",
                     ))
                 ));
                 ?>
@@ -107,7 +110,8 @@ $account = elgg_extract('accounts', $vars);
                     'href' => $account['youtube'],
                     'target' => '_blank',
                     'text'  => elgg_view('output/img', array(
-                        'src' => $images_dir . "social/youtube.png"
+                        'src' => $images_dir . "social/youtube.png",
+                        'alt' => "Youtube",
                     ))
                 ));
                 ?>
@@ -115,7 +119,8 @@ $account = elgg_extract('accounts', $vars);
                     'href' => $account['vimeo'],
                     'target' => '_blank',
                     'text'  => elgg_view('output/img', array(
-                        'src' => $images_dir . "social/vimeo.png"
+                        'src' => $images_dir . "social/vimeo.png",
+                        'alt' => "Vimeo",
                     ))
                 ));
                 ?>

@@ -133,6 +133,7 @@ elgg_load_js("jquery:quicksearch");
                         <?php if(elgg_get_logged_in_user_guid() != $teacher->id):?>
                             <?php echo elgg_view('output/url', array(
                                 'title' => elgg_echo('delete'),
+                                'aria-label' => elgg_echo('delete'),
                                 'text' => '<i class="fa fa-trash-o"></i>',
                                 'href' => "action/activity/admin/users?activity_id={$activity->id}&act=remove_from_activity&id={$teacher->id}&role=teacher",
                                 'is_action' => true,
@@ -142,7 +143,8 @@ elgg_load_js("jquery:quicksearch");
                         <?php endif;?>
                         <?php echo elgg_view('output/img', array(
                             'src' => get_avatar($teacher, 'small'),
-                            'class' => 'avatar-tiny margin-right-5'
+                            'class' => 'avatar-tiny margin-right-5',
+                            'alt' => $teacher->name,
                         ));
                         ?>
                         <?php echo elgg_view("messages/compose_icon", array('entity' => $teacher));?>
@@ -150,6 +152,7 @@ elgg_load_js("jquery:quicksearch");
                             'title' => $teacher->name,
                             'text' => $teacher->name,
                             'href' => "profile/{$teacher->login}",
+                            'name' => $teacher->name,
                         ));
                         ?>
                     </li>
@@ -167,7 +170,8 @@ elgg_load_js("jquery:quicksearch");
             'is_action' => true,
             'text' => elgg_echo('activity:delete'),
             'href' => "action/activity/remove?id=".$activity->id,
-            'class' => 'btn btn-primary btn-danger remove-object'
+            'class' => 'btn btn-primary btn-danger remove-object',
+            'name' => elgg_echo('activity:delete'),
         ));
         ?>
         <?php

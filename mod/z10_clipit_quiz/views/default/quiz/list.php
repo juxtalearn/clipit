@@ -81,18 +81,18 @@ $(function(){
 });
 </script>
 <div class="table-responsive">
-    <table class="table table-striped margin-top-10">
-        <thead>
-        <tr>
+    <table class="table table-striped margin-top-10" role="presentation">
+        <thead role="presentation">
+        <tr role="presentation">
             <?php if($select):?>
-                <th style="width: 50px;"></th>
+                <th role="presentation" style="width: 50px;"></th>
             <?php endif;?>
-            <th><?php echo elgg_echo('title');?></th>
-            <th><?php echo elgg_echo('tricky_topic');?></th>
-            <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-            <th class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
+            <th role="presentation"><?php echo elgg_echo('title');?></th>
+            <th role="presentation"><?php echo elgg_echo('tricky_topic');?></th>
+            <th role="presentation"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+            <th  role="presentation" class="text-right"><?php echo elgg_echo('quiz:questions');?></th>
             <?php if($options):?>
-                <th style="width: 100px;"><?php echo elgg_echo("options");?></th>
+                <th role="presentation" style="width: 100px;"><?php echo elgg_echo("options");?></th>
             <?php endif;?>
         </tr>
         </thead>
@@ -105,15 +105,15 @@ $(function(){
             $questions = ClipitQuiz::get_quiz_questions($quiz->id);
             $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
         ?>
-            <tr id="<?php echo $quiz->id;?>">
+            <tr role="presentation" id="<?php echo $quiz->id;?>">
             <?php if($select):?>
-                <td>
+                <td role="presentation">
                     <a class="btn btn-xs btn-primary btn-border-blue quiz-select">
                         <?php echo elgg_echo('select');?>
                     </a>
                 </td>
             <?php endif;?>
-                <td>
+                <td role="presentation">
                     <strong>
                         <?php echo elgg_view('output/url', array(
                             'href'  => "quizzes/view/{$quiz->id}",
@@ -123,7 +123,7 @@ $(function(){
                         ?>
                     </strong>
                 </td>
-                <td>
+                <td role="presentation">
                     <?php if($tricky_topic):?>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "tricky_topics/view/{$tricky_topic->id}",
@@ -133,7 +133,7 @@ $(function(){
                     ?>
                     <?php endif;?>
                 </td>
-                <td>
+                <td role="presentation">
                     <small>
                         <div>
                             <i class="fa-user fa blue"></i>
@@ -147,7 +147,7 @@ $(function(){
                         <?php echo elgg_view('output/friendlytime', array('time' => $quiz->time_created));?>
                     </small>
                 </td>
-                <td class="text-right">
+                <td role="presentation" class="text-right">
                     <?php echo elgg_view('output/url', array(
                         'href'  => 'javascript:;',
                         'class' => 'show-questions btn btn-xs btn-border-blue',
@@ -157,7 +157,7 @@ $(function(){
                     ?>
                 </td>
                 <?php if($options):?>
-                    <td>
+                    <td role="presentation">
                         <?php echo elgg_view('page/components/admin_options', array(
                             'entity' => $quiz,
                             'user' => $user,

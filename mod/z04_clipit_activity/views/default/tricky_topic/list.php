@@ -102,6 +102,7 @@ $quizzes = ClipitQuiz::get_from_tricky_topic($tricky_topic->id);
                 'target' => '_blank',
                 'title' => $tricky_topic->subject,
                 'text'  => $tricky_topic->subject,
+                'name' => $tricky_topic->subject,
             ));
             ?>
         </div>

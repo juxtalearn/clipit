@@ -29,7 +29,7 @@ $defaults = array(
 $vars = array_merge($defaults, $vars);
 ?>
 <div class="progress" style="width:<?php echo $vars['width']; ?>">
-  <div class="progress-bar" role="progressbar" <?php echo elgg_format_attributes($vars); ?>>
+  <div class="progress-bar" role="progressbar" aria-label="<?php echo elgg_echo('progressbar:name');?> "<?php echo elgg_format_attributes($vars); ?>>
       <?php echo $value; ?>%
   </div>
 </div>

@@ -1,19 +1,19 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit - Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_api
  */
 
 /**
- * Expose all functions for the ClipIt REST API
+ * Expose all functions for the Clipit REST API
  */
 // Load and call REST API Expose functions
 loadFiles(elgg_get_plugins_path()."z02_clipit_api/libraries/clipit_rest_api/expose_functions/");

@@ -56,6 +56,7 @@ if($user->role == ClipitUser::ROLE_TEACHER) {
             <div class="select-activities" class="margin-top-10" style="display: none;">
             ' . elgg_view("input/dropdown", array(
                     'name' => 'activity',
+                    'aria-label' => 'activity',
                     'class' => 'form-control',
                     'style' => 'padding-top: 5px;padding-bottom: 5px;',
                     'options_values' => $activities

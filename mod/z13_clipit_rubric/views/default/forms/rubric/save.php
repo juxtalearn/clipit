@@ -106,7 +106,8 @@ $(function(){
             'maxlength' => 100,
             'value' => $rubric->name,
             'autofocus' => true,
-            'required' => true
+            'aria-label' => elgg_echo('rubric:name'),
+            'required' => true,
         ));
         ?>
     </div>
@@ -148,7 +149,8 @@ $(function(){
         <?php echo elgg_view('output/url', array(
             'href'  => 'javascript:;',
             'class' => 'remove-rubric btn btn-xs btn-primary margin-bottom-10 btn-border-red show',
-            'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('rubric:item:remove')
+            'text'  => '<i class="fa fa-trash-o"></i> '.elgg_echo('rubric:item:remove'),
+            'aria-label' => elgg_echo('rubric:item:remove'),
         ));
         ?>
         <?php echo elgg_view('input/plaintext', array(
@@ -157,7 +159,8 @@ $(function(){
             'name' => $input_prefix.'[item]['.$id.'][name]',
             'placeholder' => elgg_echo('rubric:item:name'),
             'value' => $rubric_item->name,
-            'required' => true
+            'required' => true,
+            'aria-label'=> elgg_echo('rubric:item:name'),
         ));
         ?>
     </div>
@@ -173,7 +176,7 @@ $(function(){
         ?>
         <div class="col-md-3 col-xs-6 rubric-item">
             <div class="rubric-details" style="border: 1px solid #ccc;border-bottom: 1px solid #eee;border-radius: 4px 4px 0 0;">
-                <a href="javascript:;" class="fa fa-trash-o red remove-rubric-item" tabindex="2" title="<?php echo elgg_echo('rubric:level:remove');?>"></a>
+                <a href="javascript:;" class="fa fa-trash-o red remove-rubric-item" aria-label="<?php echo elgg_echo('rubric:level:remove');?>" name="<?php echo elgg_echo('rubric:level:remove');?>" tabindex="2" title="<?php echo elgg_echo('rubric:level:remove');?>"></a>
                 <span class="pull-right">
                     <small><?php echo elgg_echo('rubric:score');?>: </small>
                     <strong class="blue rubric-rating-value"><?php echo $rating;?></strong>
@@ -184,13 +187,15 @@ $(function(){
                 'name' => $input_prefix.'[item]['.$id.'][level][]',
                 'placeholder' => elgg_echo('rubric:item:level:description'),
                 'value' => $level,
-                'required' => true
+                'required' => true,
+                'aria-label' => elgg_echo('rubric:description').$rating,
+
             ));
             ?>
         </div>
         <?php endforeach;?>
         <div class="col-md-1" style="padding: 0">
-            <a class="add-rubric-item cursor-pointer" href="javascript:;" title="<?php echo elgg_echo('rubric:add_item');?>">
+            <a class="add-rubric-item cursor-pointer" aria-label="<?php echo elgg_echo('rubric:add_item');?>" href="javascript:;" title="<?php echo elgg_echo('rubric:add_item');?>">
                 <div>
                     <span class="fa-stack fa-lg">
                         <i class="fa fa-circle fa-stack-2x blue"></i>

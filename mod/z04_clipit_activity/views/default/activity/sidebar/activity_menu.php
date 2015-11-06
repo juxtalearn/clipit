@@ -17,24 +17,29 @@ $params = array(
     'name' => 'activity_aprofile',
     'text' => elgg_echo('activity:profile'),
     'href' => "clipit_activity/".$activity->id,
+    'aria-describedby' => "activityMenu",
+    'aria-label' => elgg_echo('activity:menu:start'),
 );
 elgg_register_menu_item('activity:menu', $params);
 $params = array(
     'name' => 'activity_sta',
     'text' => elgg_echo('activity:stas'),
     'href' => "clipit_activity/".$activity->id."/resources",
+    'aria-describedby' => "activityMenu",
 );
 elgg_register_menu_item('activity:menu', $params);
 $params = array(
     'name' => 'activity_groups',
     'text' => elgg_echo('activity:groups'),
     'href' => "clipit_activity/".$activity->id."/groups",
+    'aria-describedby' => "activityMenu",
 );
 elgg_register_menu_item('activity:menu', $params);
 $params = array(
     'name' => 'activity_tasks',
     'text' => elgg_echo('activity:tasks'),
     'href' => "clipit_activity/".$activity->id."/tasks",
+    'aria-describedby' => "activityMenu",
 );
 elgg_register_menu_item('activity:menu', $params);
 
@@ -44,12 +49,15 @@ $params = array(
     'text' => elgg_echo('activity:discussion'),
     'href' => "clipit_activity/".$activity->id."/discussion",
     'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
+    'aria-describedby' => "activityMenu",
+    'aria-label' => elgg_echo('activity:menu:discussions'),
 );
 elgg_register_menu_item('activity:menu', $params);
 $params = array(
     'name' => 'activity_publications',
     'text' => elgg_echo('activity:publications'),
     'href' => "clipit_activity/".$activity->id."/publications",
+    'aria-describedby' => "activityMenu",
 );
 elgg_register_menu_item('activity:menu', $params);
 ?>

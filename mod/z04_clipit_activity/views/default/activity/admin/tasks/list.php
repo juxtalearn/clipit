@@ -23,6 +23,7 @@ if($feedback_task_id){
             'class' => 'btn btn-xs btn-danger remove remove-object',
             'is_action' => true,
             'title' => elgg_echo('delete'),
+            'aria-label'=> elgg_echo('delete'),
             'text'  => '<i class="fa fa-times"></i> '.elgg_echo('delete'),
         ));
         ?>

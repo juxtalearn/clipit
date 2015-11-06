@@ -17,6 +17,10 @@ $spanish = array(
  * Sessions
  */
 
+	/** Textos accesibilidad
+	 * */
+	'main:page' => 'Página principal',
+
 	'login' => "Iniciar Sesión",
 	'loginok' => "Bienvenido",
 	'loginerror' => "Información incorrecta. Verifique sus credenciales e intente nuevamente",
@@ -31,8 +35,7 @@ $spanish = array(
 	'loggedinrequired' 	=> "Debe ingresar para poder ver esta página",
 	'adminrequired' 	=> "Debe ser administrador para poder ver esta página",
 	'membershiprequired' => "Debe ser miembro del grupo para poder ver esta página",
- 
- 
+
 /**
  * Errors
  */

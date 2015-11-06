@@ -43,6 +43,7 @@ $tt_tags = ClipitTrickyTopic::get_tags($tricky_topic);
                     'href'  => "javascript:;",
                     'class' => 'btn btn-danger btn-xs',
                     'text'  => elgg_echo('delete'),
+                    'aria-label' => elgg_echo('delete'),
                     'onclick' => '$(this).closest(\'.question\').remove();',
                 ));
                 ?>

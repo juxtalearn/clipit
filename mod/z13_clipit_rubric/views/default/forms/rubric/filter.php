@@ -20,7 +20,8 @@ echo elgg_view("input/hidden", array(
     <?php echo elgg_view("input/text", array(
         'name' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_search_input('name')
+        'value' => get_search_input('name'),
+        'aria-label' => elgg_echo('filter:rubric:name'),
     ));
     ?>
 </div>
@@ -29,7 +30,8 @@ echo elgg_view("input/hidden", array(
     <?php echo elgg_view("input/text", array(
         'name' => 'search[author]',
         'class' => 'form-control',
-        'value' => get_search_input('author')
+        'value' => get_search_input('author'),
+        'aria-label' => elgg_echo('filter:author:name'),
     ));
     ?>
 </div>

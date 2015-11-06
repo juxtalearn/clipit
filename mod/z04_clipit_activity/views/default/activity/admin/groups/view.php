@@ -111,10 +111,10 @@ $(function(){
     $("#called_users").multiSelect({
         keepOrder: false,
         selectableHeader: '<h4 class="margin-bottom-20"><?php echo elgg_echo("activity:students");?> <span class="pull-right blue-lighter">0</span></h4>'+
-            "<input type='text' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
+            "<input type='text' aria-label='search-input' class='search-input form-control margin-bottom-10' autocomplete='off' placeholder='<?php echo elgg_echo('search:filter');?>...'>",
         selectionHeader:
             '<label><?php echo elgg_echo('group:name');?></label>'+
-            '<input type="text" name="group_name" id="group_name" class="form-control margin-bottom-10"/>'+
+            '<input type="text" aria-label="group_name" name="group_name" id="group_name" class="form-control margin-bottom-10"/>'+
             '<h4><?php echo elgg_echo("group:students");?> <span class="pull-right blue-lighter">0</span></h4>',
         afterInit: function(ms){
             $("ul .ms-elem-selectable:not('.disabled')")

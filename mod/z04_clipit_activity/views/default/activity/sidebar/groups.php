@@ -24,6 +24,7 @@ foreach($groups as $group){
         'text' => elgg_echo('group:home'),
         'href' => "clipit_activity/{$activity_id}/group/{$group->id}",
         'priority' => 100,
+        'aria-describedby' => "groupMenu",
     ));
     elgg_register_menu_item('groups:admin_'.$group->id, array(
         'name' => 'group_discussion',
@@ -31,12 +32,14 @@ foreach($groups as $group){
         'href' => "clipit_activity/{$activity_id}/group/{$group->id}/discussion",
         'badge' => $total_unread_posts > 0 ? $total_unread_posts : "",
         'priority' => 200,
+        'aria-describedby' => "groupMenu",
     ));
     elgg_register_menu_item('groups:admin_'.$group->id, array(
         'name' => 'group_files',
         'text' => elgg_echo('group:files'),
         'href' => "clipit_activity/{$activity_id}/group/{$group->id}/repository",
         'priority' => 300,
+        'aria-describedby' => "groupMenu",
     ));
     $body .= '<ul class="nav nav-pills nav-stacked panel">';
     $body .= '<li>';
@@ -45,7 +48,9 @@ foreach($groups as $group){
         'href' => '#collapse_'.$group->id,
         'text'  => '<i class="pull-right fa fa-caret-down"></i>'. $group->name,
         'data-toggle' => 'collapse',
-        'data-parent' => '#accordion'
+        'data-parent' => '#accordion',
+        'aria-label' => $group->id,
+        'aria-describedby' => "groupMenu",
     ));
     $body .= '</li>';
     $body .= elgg_view_menu('groups:admin_'.$group->id, array(

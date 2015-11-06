@@ -82,7 +82,7 @@ $(function(){
         selectableHeader: "<h4 style='margin-top: 70px;'><?php echo elgg_echo("students");?></h4>",
         selectionHeader:
                         '<label>Group name</label>'+
-                        '<input type="text" name="select_group_name" class="form-control margin-bottom-10">'+
+                        '<input type="text" aria-label="select_group_name" name="select_group_name" class="form-control margin-bottom-10">'+
                         '<h4><?php echo elgg_echo("group:students");?></h4>',
         afterInit: function(){
             set_default_group_name();

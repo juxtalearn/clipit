@@ -2,11 +2,11 @@
 
     <div class="form-group">
         <label for="username"><?php echo elgg_echo('user:username:login'); ?></label>
-        <input type="text" class="form-control" name="username" id="input-login" placeholder="<?php echo elgg_echo('loginusername'); ?>" required>
+        <input type="text" aria-label="username" class="form-control" name="username" id="input-login" placeholder="<?php echo elgg_echo('loginusername'); ?>" required>
     </div>
     <div class="form-group">
         <label for="password"><?php echo elgg_echo('password'); ?></label>
-        <input type="password" name="password" id="input-password" class="form-control" placeholder="<?php echo elgg_echo('password'); ?>" required>
+        <input type="password" aria-label="password" name="password" id="input-password" class="form-control" placeholder="<?php echo elgg_echo('password'); ?>" required>
     </div>
     <div class="form-group">
         <label style="font-weight: normal;">

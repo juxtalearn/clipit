@@ -106,7 +106,7 @@ $(function(){
     </div>
     <div class="col-md-6 text-right">
         <i class="fa fa-spinner fa-spin blue margin-right-10" id="move-loading" style="display: none;"></i>
-        <select class="form-control" id="move-group" style="display: inline-block;width: auto;padding: 2px;">
+        <select class="form-control" aria-label="move-group" id="move-group" style="display: inline-block;width: auto;padding: 2px;">
             <option value=""><?php echo elgg_echo('groups:select:move');?></option>
             <?php foreach($groups as $group):?>
                 <option value="<?php echo $group->id;?>">

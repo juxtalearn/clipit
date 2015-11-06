@@ -34,13 +34,14 @@ echo elgg_view("input/hidden", array(
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tags');?></label>
-    <ul id="tags"></ul>
+    <ul id="tags" role="link" aria-label="tags"></ul>
 </div>
 <div class="form-group">
     <label class="text-muted" for="search[education_level]"><?php echo elgg_echo('education_level');?></label>
     <?php echo elgg_view("input/dropdown", array(
         'name' => 'search[education_level]',
         'id' => 'search[education_level]',
+        'aria-label' => 'search[education_level]',
         'style' => 'padding: 0;height: 25px;',
         'value' => get_search_input('education_level'),
         'class' => 'form-control select-question-type',

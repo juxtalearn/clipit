@@ -21,8 +21,8 @@ foreach($groups as $group):
     $tags = ClipitGroup::get_tags($group->id);
 ?>
     <div class="col-md-4 group-list margin-bottom-10">
-        <a title="<?php echo elgg_echo('delete');?>" href="javascript:;" class="pull-right btn btn-xs btn-danger delete-group" rel="nofollow"><i class="fa fa-trash-o"></i></a>
-        <input type="text" name="group[<?php echo $id;?>][name]" value="<?php echo $group->name;?>" style="width: 85%;" class="input-group-name form-control margin-bottom-10">
+        <a title="<?php echo elgg_echo('delete');?>" href="javascript:;" class="pull-right btn btn-xs btn-danger delete-group" aria-label="delete" rel="nofollow"><i class="fa fa-trash-o"></i></a>
+        <input type="text" name="group[<?php echo $id;?>][name]" value="<?php echo $group->name;?>" style="width: 85%;" aria-label="input-group-name" class="input-group-name form-control margin-bottom-10">
         <div class="margin-bottom-5" style="height: 50px;">
             <?php echo elgg_view("page/components/modal_remote", array('id'=> "sb-group-{$group->id}" ));?>
             <small>
@@ -31,6 +31,7 @@ foreach($groups as $group):
                     'href'  => "ajax/view/modal/group/assign_sb?group_id={$group->id}",
                     'text'  => '<i class="fa fa-plus"></i> '.elgg_echo('group:assign_sb'),
                     'id' => 'assign-sb',
+                    'aria-label'=> elgg_echo('delete'),
                     'data-toggle'   => 'modal',
                     'data-target'   => '#sb-group-'.$group->id
                 ));
@@ -49,12 +50,14 @@ foreach($groups as $group):
                         'text' => '<i class="fa fa-trash-o"></i>',
                         'href' => "javascript:;",
                         'style' => 'display:none;',
+                        'aria-label' => 'delete',
                         'class' => 'pull-right btn btn-xs btn-danger delete-user',
                     ));
                     ?>
                     <?php echo elgg_view('output/img', array(
                         'src' => get_avatar($group_user, 'small'),
-                        'class' => 'image-block avatar-tiny'
+                        'class' => 'image-block avatar-tiny',
+                        'alt' => 'avatar-tiny',
                     ));
                     ?>
                     <span class="text-truncate" title="<?php echo $group_user->name;?> (<?php echo $group_user->login;?>)">
@@ -62,9 +65,9 @@ foreach($groups as $group):
                     </span>
                 </li>
             <?php endforeach;?>
-            <input type="hidden" class="input-group" name="group[<?php echo $id;?>][id]" value="<?php echo $group->id;?>">
-            <input type="hidden" class="input-users" name="group[<?php echo $id;?>][users]" value="<?php echo implode(",", $group->user_array);?>">
-            <input type="hidden" class="input-remove-group" name="group[<?php echo $id;?>][remove]">
+            <input type="hidden" aria-label="input-group" class="input-group" name="group[<?php echo $id;?>][id]" value="<?php echo $group->id;?>">
+            <input type="hidden" aria-label="input-users" class="input-users" name="group[<?php echo $id;?>][users]" value="<?php echo implode(",", $group->user_array);?>">
+            <input type="hidden" aria-label="input-remove-group" class="input-remove-group" name="group[<?php echo $id;?>][remove]">
         </ul>
     </div>
 <?php endforeach;?>

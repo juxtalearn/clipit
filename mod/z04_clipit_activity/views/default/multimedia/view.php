@@ -30,7 +30,8 @@ $performance_items = $entity->performance_item_array;
             <small class="show sub-title">
                 <?php echo elgg_view('output/img', array(
                     'src' => get_avatar($owner_user, 'small'),
-                    'class' => 'user-avatar avatar-tiny'
+                    'class' => 'user-avatar avatar-tiny',
+                    'alt' => 'avatar-tiny',
                 ));?>
                 <i>
                     <?php echo elgg_echo('multimedia:uploaded_by');?>

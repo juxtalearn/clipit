@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit - Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_api
  */
 
@@ -489,7 +489,7 @@ class ClipitFile extends UBFile {
     }
 
     /**
-     * Uploads to Google Drive a ClipIt file
+     * Uploads to Google Drive a Clipit file
      *
      * @param int $id Clipit file id to upload to Google Drive
      *

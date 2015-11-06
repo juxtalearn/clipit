@@ -46,12 +46,14 @@ function view_recommended_event($event, $view_type = 'full'){
                 'href'  => "clipit_activity/{$activity->id}",
                 'title' => $activity->name,
                 'text'  => $activity->name,
+                'name'  => $activity->name,
             ));
             $params = array(
                 'title' => elgg_echo ('activity:invited') . "" . /*'Called for '*/ ' ' .$activity_link,
                 'icon' => 'fa-bullhorn',
                 'author' => $entity->owner_id,
-                'body' => ''
+                'body' => '',
+                'name' => $activity->name,
             );
             break;
         case ClipitActivity::REL_ACTIVITY_GROUP:
@@ -61,12 +63,14 @@ function view_recommended_event($event, $view_type = 'full'){
                 'href'  => "clipit_activity/{$activity->id}",
                 'title' => $activity->name,
                 'text'  => $activity->name,
+                'name'  => $activity->name,
             ));
             $params = array(
                 'title' => elgg_echo('group:added'). /* 'Group added to activity'  */ ': <strong class="show">'.$activity_link.'</strong>',
                 'icon' => 'fa-bullhorn',
                 'author' => $entity->id,
-                'body' => ''
+                'body' => '',
+                'name' => $activity->name,
             );
             break;
         case ClipitActivity::REL_ACTIVITY_TASK:
@@ -77,12 +81,14 @@ function view_recommended_event($event, $view_type = 'full'){
                 'href'  => "clipit_activity/{$activity->id}/tasks/view/{$entity->id}",
                 'title' => $entity->name,
                 'text'  => $entity->name,
+                'name'  => $entity->name
             ));
             $params = array(
                 'title' => elgg_echo('task:added'). /*'Added new task */': <strong>'.$task_link.'</strong>',
                 'icon' => 'fa-tasks',
                 'author' => $activity->id,
-                'body' => ''
+                'body' => '',
+                'name' => $activity->name,
             );
             break;
         case ClipitGroup::REL_GROUP_VIDEO:
@@ -149,12 +155,14 @@ function view_recommended_event($event, $view_type = 'full'){
                 'href'  => "clipit_activity/{$activity->id}/group/{$group->id}",
                 'title' => $group->name,
                 'text'  => $group->name,
+                'name' => $group->name,
             ));
             $params = array(
                 'title' => elgg_echo('group:joined').': <strong>'.$group_info.'</strong>',
                 'icon' => 'fa-user',
                 'author' => $entity->id,
-                'body' => ''
+                'body' => '',
+                'name' => $entity->id,
             );
             break;
         // Tasks
@@ -169,11 +177,13 @@ function view_recommended_event($event, $view_type = 'full'){
                 'href'  => "clipit_activity/{$activity->id}/tasks/view/{$relationship->guid_one}",
                 'title' => $entity->name,
                 'text'  => $entity->name,
+                'name' => $entity->name,
             ));
             $params = array(
                 'title' => elgg_echo('task:file_upload') .' '.$file_info,
                 'icon' => 'fa-file',
                 'author' => $group->id,
+                'name' => $group->id,
                 'body' => elgg_view("recommended/events/file", array(
                     'entity' => $entity,
                     'href' => $href,

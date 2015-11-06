@@ -23,6 +23,7 @@ switch($object['subtype']){
                 'title' => $object['name'],
                 'class' => 'show text-truncate',
                 'text'  => $object['name'],
+                'name'  => $object['name'],
             ));
         } else {
             echo "<span class='show'>{$object[name]}</span>";
@@ -34,6 +35,7 @@ switch($object['subtype']){
             'title' => $object['name'],
             'class' => 'show text-truncate',
             'text'  => $object['name'],
+            'name'  => $object['name'],
         ));
         break;
 }
@@ -44,5 +46,6 @@ if($object['type'] == 'user'){
         'title' => $user->name,
         'class' => 'show text-truncate event-author',
         'text'  => $user->name,
+        'name'  => $user->name,
     ));
 }

@@ -90,7 +90,8 @@ switch($action){
                     'id' => $user->id,
                     'avatar' => elgg_view('output/img', array(
                         'src' => get_avatar($user, 'small'),
-                        'class' => 'avatar-tiny'
+                        'class' => 'avatar-tiny',
+                        'alt' => 'Avatar',
                     )),
                     'name' => $user->name
                 );
