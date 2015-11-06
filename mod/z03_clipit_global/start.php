@@ -73,6 +73,7 @@ function clipit_global_init(){
         // Clipit sections
         $return_value[] = 'clipit/team';
         $return_value[] = 'clipit/about';
+        $return_value[] = 'clipit/tutorials';
         $return_value[] = 'clipit/developers';
         // Help sections
         $return_value[] = 'help/support_center';
@@ -459,6 +460,9 @@ function clipit_footer_page($page)
     switch ($page[0]) {
         case "about":
             return false;
+            break;
+        case "tutorials":
+            include "$file_dir/tutorials.php";
             break;
         case "team":
             include "$file_dir/team.php";
