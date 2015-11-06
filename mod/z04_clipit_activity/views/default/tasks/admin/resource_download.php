@@ -13,7 +13,7 @@
 $students = elgg_extract('entities', $vars);
 $task = elgg_extract('task', $vars);
 ?>
-<div role="tabpanel">
+<div role="presentation">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active">
@@ -26,7 +26,7 @@ $task = elgg_extract('task', $vars);
 </div>
 <!-- Tab panes -->
 <div class="tab-content">
-    <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
+    <div role="presentation" class="tab-pane margin-top-10 active" id="students" aria-label="<?php echo elgg_echo('students');?>" style="padding: 10px;">
         <ul class="row">
             <?php foreach($students as $student):?>
                 <li class="list-item col-md-6" data-entity="<?php echo $student->id;?>">
@@ -45,7 +45,7 @@ $task = elgg_extract('task', $vars);
             <?php endforeach;?>
         </ul>
     </div>
-    <div role="tabpanel" class="tab-pane margin-top-10" id="resources">
+    <div role="presentation" class="tab-pane margin-top-10" id="resources">
         <?php echo clipit_task_resource_view($task, 'all', ClipitUser::ROLE_TEACHER);?>
     </div>
 </div>

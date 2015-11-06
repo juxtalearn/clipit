@@ -38,7 +38,7 @@ $activity = elgg_extract('activity', $vars);
 <div id="groups" class="row">
     <?php echo elgg_view('activity/admin/groups/summary', array('users' => $users, 'groups' => $groups));?>
     <div class="col-md-4 margin-bottom-10" style="position: relative;">
-        <a href="#create-group">
+        <a href="#create-group" aria-label="create-group">
         <div class="bg-center-icon" style="cursor: pointer;">
             <div class="bg"></div>
             <div class="center-icon">

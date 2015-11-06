@@ -19,7 +19,8 @@ $user = array_pop(ClipitUser::get_by_id(array($quote->owner_id)));
 <?php echo elgg_view('output/img', array(
     'src' => get_avatar($user, 'small'),
     'style' => 'margin-right: 5px;margin-top: 5px;',
-    'class' => 'image-block avatar-tiny'
+    'class' => 'image-block avatar-tiny',
+    'alt' => 'avatar-tiny',
 ));?>
 <div class="content-block">
     <div>

@@ -30,6 +30,7 @@ foreach($activities as $activity):
                     'text' => $activity->name,
                     'title' => $activity->title,
                     'is_trusted' => true,
+                    'name' => elgg_echo('activity:number'),
                 ));
              ?>
             </h4>

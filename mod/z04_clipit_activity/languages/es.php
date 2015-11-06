@@ -11,6 +11,7 @@
  * @package         ClipIt
  */
 $spanish = array(
+    'user:profile:avatar'=> 'Avatar del usuario',
     'optional' => 'Opcional',
     'options:advanced' => 'Opciones avanzadas',
     'refresh' => 'Actualizar',

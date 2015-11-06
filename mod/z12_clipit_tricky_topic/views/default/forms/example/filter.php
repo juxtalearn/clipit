@@ -28,7 +28,8 @@ echo elgg_view("input/hidden", array(
     <?php echo elgg_view("input/text", array(
         'name' => 'search[name]',
         'class' => 'form-control',
-        'value' => get_search_input('name')
+        'value' => get_search_input('name'),
+        'aria-label' => elgg_echo('example:name'),
     ));
     ?>
 </div>
@@ -37,20 +38,22 @@ echo elgg_view("input/hidden", array(
     <?php echo elgg_view("input/text", array(
         'name' => 'search[tricky_topic]',
         'class' => 'form-control',
-        'value' => get_search_input('tricky_topic')
+        'value' => get_search_input('tricky_topic'),
+        'aria-label' => elgg_echo('filter:tricky'),
     ));
     ?>
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tags');?></label>
-    <ul id="tags"></ul>
+    <ul id="tags" role="link" aria-label="tags"></ul>
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('location');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[location]',
         'class' => 'form-control',
-        'value' => get_search_input('location')
+        'value' => get_search_input('location'),
+        'aria-label' => elgg_echo('filter:location'),
     ));
     ?>
 </div>
@@ -58,10 +61,12 @@ echo elgg_view("input/hidden", array(
     <label class="text-muted"><?php echo elgg_echo('country');?></label>
     <?php echo elgg_view("input/dropdown", array(
         'name' => 'search[country]',
+        'label' => 'search[country]',
         'style' => 'padding: 0;height: 25px;',
         'value' => get_search_input('country'),
         'class' => 'form-control select-question-type',
         'options_values' => get_countries_list(),
+        'aria-label' => elgg_echo('filter:country'),
     ));
     ?>
 </div>

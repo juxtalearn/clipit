@@ -53,6 +53,7 @@ foreach($messages as $message){
             'href'  => elgg_add_action_tokens_to_url($remove_msg_url, true),
             'title' => elgg_echo("message:movetotrash"),
             'text'  => '<i class="fa fa-trash-o" style="color: #fff;font-size: 18px;"></i> ',
+            'aria-label' => elgg_echo('delete'),
             'class' => 'btn btn-danger btn-xs',
         ));
 
@@ -63,7 +64,8 @@ foreach($messages as $message){
     }
     $user_avatar = elgg_view('output/img', array(
         'src' => get_avatar($user, 'small'),
-        'class' => 'avatar-tiny'
+        'class' => 'avatar-tiny',
+        'alt'  => 'Avatar',
     ));
     $user_data = elgg_view('output/url', array(
         'href'  => "profile/".$user->login,

@@ -34,6 +34,9 @@ $spanish = array(
     'category' => 'Categoría',
     'performance_item:example' => 'Ejemplo',
     'task:rubric:select:required' => 'Debes seleccionar una rúbrica de la lista. <br>(Si no hay rubricas debes crear una)',
+
+    //PARA ACCESIBILIDAD
+    'rubric:description' => 'Descripción del nivel de la rúbrica',
 );
 
 add_translation('es', $spanish);

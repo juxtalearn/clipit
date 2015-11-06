@@ -12,6 +12,7 @@ $context = elgg_get_context();
                 'text'  =>
                     elgg_view('output/img', array(
                         'src' => "mod/z03_clipit_site/graphics/icons/clipit_logo.png",
+                        'alt' => "Clipit",
                     ))
             ));
             ?>

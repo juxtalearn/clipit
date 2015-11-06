@@ -36,6 +36,8 @@ if($activity_progress < 0){
                 'style' => "opacity: 0.7;".($activity_progress > $task_progress ? "color:#fff;": ""),
                 'class' => 'fa fa-exclamation',
                 'href' => "clipit_activity/{$activity->id}/tasks/view/{$task->id}",
+                'aria-label' => elgg_echo('activity:task'). ": ".$task->name,
+                'aria-describedby' => elgg_echo('activity:progress'),
             ));
             ?>
         </div>

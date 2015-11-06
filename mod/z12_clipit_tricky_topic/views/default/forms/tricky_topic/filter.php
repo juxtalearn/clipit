@@ -23,7 +23,7 @@ echo elgg_view("input/hidden", array(
 ));
 ?>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('tricky_topic');?></label>
+    <label class="text-muted" for="search[name]"><?php echo elgg_echo('tricky_topic');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[name]',
         'class' => 'form-control',
@@ -33,12 +33,13 @@ echo elgg_view("input/hidden", array(
 </div>
 <div class="form-group">
     <label class="text-muted"><?php echo elgg_echo('tags');?></label>
-    <ul id="tags"></ul>
+    <ul id="tags" role="link" aria-label="tags"></ul>
 </div>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('education_level');?></label>
+    <label class="text-muted" for="search[education_level]"><?php echo elgg_echo('education_level');?></label>
     <?php echo elgg_view("input/dropdown", array(
         'name' => 'search[education_level]',
+        'aria-label' => 'search[education_level]',
         'style' => 'padding: 0;height: 25px;',
         'value' => get_search_input('education_level'),
         'class' => 'form-control select-question-type',
@@ -47,7 +48,7 @@ echo elgg_view("input/hidden", array(
     ?>
 </div>
 <div class="form-group">
-    <label class="text-muted"><?php echo elgg_echo('tricky_topic:subject');?></label>
+    <label class="text-muted" for="search[subject]"><?php echo elgg_echo('tricky_topic:subject');?></label>
     <?php echo elgg_view("input/text", array(
         'name' => 'search[subject]',
         'class' => 'form-control',

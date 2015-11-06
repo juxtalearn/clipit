@@ -6,6 +6,30 @@
 
 $spanish = array(
     'locale' => 'es_ES',
+     //MODIFICACIONES ACCESIBILIDAD
+    'progress:activity' => 'Progreso de la actividad',
+    'progressbar:name' => 'Barra de progreso',
+    'activity:menu:start' => 'Página principal de la actividad',
+    'activity:menu:discussions' => 'Discusiones de la actividad',
+    'btn:expand:questions' => 'Preguntas',
+    'students' => 'Estudiantes',
+    'btn:expand:chart' => 'Gráfico',
+    'table' => 'Tabla',
+    'table:activities' => 'Tabla de las actividades',
+    'filter:search' => 'Filtro por progreso de las actividades',
+    'filter:type' => 'Filtro por tipo de las actividades',
+    'filter:teacher' => 'Búsqueda por profesor',
+    'filter:tricky' => 'Búsqueda por tema',
+    'filter:nameactivity' => 'Filtro por nombre de la actividad',
+    'filter:concepts' => 'Filtro por conceptos',
+    'filter:name' => 'Nombre del ejemplo',
+    'filter:location' => 'Localización',
+    'filter:country' => 'País',
+    'filter:quizname' => 'Filtro por título del test',
+    'delete' => 'Borrar',
+    'clipit:activities' => 'Actividades de Clipit',
+    'filter:rubric:name' => 'Filtro por nombre de la rúbrica',
+    'filter:author:name' => 'Filtro por nombre del autor',
 
     'link:view:less' => 'Ver menos',
     'read_more' => 'Leer más',
@@ -40,6 +64,8 @@ $spanish = array(
     'clipit:slogan:create' => 'Crea',
     'clipit:slogan:learn' => 'Aprende',
     'clipit:slogan:share' => 'Comparte',
+    'clipit:foot:mail' => 'Correo electrónico',
+    'activity:number' => 'Actividad número',
 
     // ERROR
     'error:404' => "Esta funcionalidad aún no está operativa.",

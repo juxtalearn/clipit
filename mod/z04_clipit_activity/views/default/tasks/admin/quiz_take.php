@@ -49,7 +49,7 @@ elgg_load_js('jquery:chartjs');
     <h4 style="margin-top: 0;"><?php echo $quiz->name;?></h4>
 </div>
 <hr>
-<div role="tabpanel" id="quiz-admin" data-quiz="<?php echo $quiz->id;?>">
+<div role="presentation" id="quiz-admin" name="Quiz" data-quiz="<?php echo $quiz->id;?>" aria-label="Quiz">
     <div class="text-right">
         <?php echo elgg_view('output/url', array(
             'class' => 'btn btn-xs btn-primary btn-border-blue margin-right-5',
@@ -81,7 +81,7 @@ elgg_load_js('jquery:chartjs');
     </ul>
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane margin-top-10 active" id="students" style="padding: 10px;">
+        <div role="presentation" class="tab-pane margin-top-10 active" id="students" aria-label="<?php echo elgg_echo('students');?>"   style="padding: 10px;">
           <?php
               elgg_push_context('quizstudents');
                 $params = array(
@@ -114,6 +114,8 @@ elgg_load_js('jquery:chartjs');
                                data-type="student"
                                data-entity-type="questions"
                                data-toggle="collapse"
+                               name="<?php echo elgg_echo('btn:expand:questions');?>"
+                               aria-label="<?php echo elgg_echo('btn:expand:questions');?>"
                                 ></a>
                             <a href="#chart-<?php echo $student->id;?>"
                                class="show-data margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
@@ -121,6 +123,7 @@ elgg_load_js('jquery:chartjs');
                                data-type="student"
                                data-entity-type="chart"
                                aria-expanded="false"
+                               aria-label="<?php echo elgg_echo('btn:expand:chart');?>"
                                 ></a>
                         </span>
                     </div>
@@ -135,7 +138,7 @@ elgg_load_js('jquery:chartjs');
             </ul>
         </div>
         <?php if($groups):?>
-        <div role="tabpanel" class="tab-pane margin-top-10" id="groups" style="padding: 10px;">
+        <div role="presentation" class="tab-pane margin-top-10" id="groups" style="padding: 10px;">
             <?php
             elgg_push_context('quizgroups');
             $params = array(
@@ -168,12 +171,15 @@ elgg_load_js('jquery:chartjs');
                                data-type="group"
                                data-entity-type="questions"
                                data-toggle="collapse"
+                               name="<?php echo elgg_echo('btn:expand:questions');?>"
+                               aria-label="<?php echo elgg_echo('btn:expand:questions');?>"
                                 ></a>
                             <a href="#chart-<?php echo $group->id;?>"
                                class="show-data margin-left-10 btn-icon btn-border-blue btn btn-xs fa fa-bar-chart-o"
                                data-toggle="collapse"
                                data-type="group"
                                data-entity-type="chart"
+                               aria-label="<?php echo elgg_echo('btn:expand:chart');?>"
                                aria-expanded="false"></a>
                         </span>
                     </div>
@@ -200,7 +206,7 @@ elgg_load_js('jquery:chartjs');
             </ul>
         </div>
         <?php endif;?>
-        <div role="tabpanel" class="tab-pane margin-top-10" id="activity" style="padding: 10px;">
+        <div role="presentation" class="tab-pane margin-top-10" id="activity" style="padding: 10px;">
             <?php
             elgg_push_context('quizactivity');
             $params = array(
@@ -218,6 +224,8 @@ elgg_load_js('jquery:chartjs');
                    class="show-data btn-primary btn btn-xs btn-icon btn-border-blue"
                    data-type="activity"
                    data-entity-type="questions"
+                   name="<?php echo elgg_echo('btn:expand:questions');?>"
+                   aria-label="<?php echo elgg_echo('btn:expand:questions');?>"
                    data-toggle="collapse"
                     ><i class="fa-list fa"></i> <?php echo elgg_echo('quiz:questions');?></a>
                 <a href="#chart-<?php echo $activity->id;?>"
@@ -225,6 +233,7 @@ elgg_load_js('jquery:chartjs');
                    data-toggle="collapse"
                    data-type="activity"
                    data-entity-type="chart"
+                   aria-label="<?php echo elgg_echo('btn:expand:chart');?>"
                    aria-expanded="false"><i class="fa-bar-chart-o fa"></i> <?php echo elgg_echo('stats');?></a>
                 <div>
                     <div class="collapse margin-top-10 chart results" style="margin-left: 35px;" id="chart-<?php echo $activity->id;?>"></div>

@@ -27,6 +27,7 @@ $js = elgg_get_loaded_js('footer');
                         'title' => elgg_echo('send:email_to_site'),
                         'text' => elgg_view('output/img', array(
                             'src' => "mod/z03_clipit_site/graphics/mail.png",
+                            'alt' => elgg_echo('clipit:foot:mail'),
                         )),
                         'is_trusted' => true,
                         'target' => '_blank'
@@ -45,6 +46,7 @@ $js = elgg_get_loaded_js('footer');
                     'title' => "JuxtaLearn",
                     'text' => elgg_view('output/img', array(
                         'src' => "mod/z03_clipit_site/graphics/jxl_logo.png",
+                        'alt' => "Juxtalearn"
                     )),
                     'class' => 'col-xs-5 col-md-offset-1',
                     'is_trusted' => true,
@@ -57,6 +59,7 @@ $js = elgg_get_loaded_js('footer');
                     'title' => "FP7",
                     'text' => elgg_view('output/img', array(
                         'src' => "mod/z03_clipit_site/graphics/sponsors.png",
+                        'alt' => "Sponsor"
                     )),
                     'class' => 'col-xs-6',
                     'is_trusted' => true,

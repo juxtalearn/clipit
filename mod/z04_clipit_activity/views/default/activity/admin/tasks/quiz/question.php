@@ -58,6 +58,7 @@ if($question){
                 'href'  => "javascript:;",
                 'class' => 'btn btn-xs btn-border-red remove-question',
                 'text'  => elgg_echo('delete'),
+                'aria-label'=> elgg_echo('delete'),
             ));
             ?>
         </div>
@@ -226,6 +227,7 @@ if($question){
                     <?php echo elgg_view("input/dropdown", array(
                         'name' => $input_prefix.'[question]['.$id.'][type]',
                         'style' => 'padding: 5px;',
+                        'aria-label' => $input_prefix.'[question]['.$id.'][type]',
                         'value' => $question ? $question->option_type: false,
                         'class' => 'form-control select-question-type',
                         'options_values' => $types,

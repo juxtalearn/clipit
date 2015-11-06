@@ -4,8 +4,33 @@
  *
  */
 
-$english = array(
+$english = [
     'locale' => 'en_GB',
+    //ACCESSIBILITY TEXTS
+    'progress:activity' => 'Activity´s progress',
+    'user:profile:avatar'=> 'User´s avatar',
+    'activity:menu:start' => 'Main page of the activity',
+    'activity:menu:discussions' => 'Discussions of the activity',
+    'btn:expand:questions' => 'Questions',
+    'students' => 'Students',
+    'btn:expand:chart' => 'Graph',
+    'table' => 'Table',
+    'table:activities' => 'Activities´ table',
+    'filter:search' => 'Activities´ progress filter',
+    'filter:type' => 'Activities´ type filter',
+    'filter:teacher' => 'Filter by teacher',
+    'filter:tricky' => 'Search by tricky topic',
+    'filter:nameactivity' => 'Filter by activity name',
+    'filter:concepts' => 'Filter by concepts',
+    'filter:name' => 'Example name',
+    'filter:location' => 'Location',
+    'filter:country' => 'Country',
+    'filter:quizname' => 'Filter test by name',
+    'delete' => 'Delete',
+    'clipit:activities' => 'Clipit activities',
+    'filter:rubric:name' => 'Filter by rubric name',
+    'filter:author:name' => 'Filter by author´s name',
+
 
     'link:view:less' => 'View less',
     'read_more' => 'Read more',
@@ -40,6 +65,7 @@ $english = array(
     'clipit:slogan:create' => 'Create',
     'clipit:slogan:learn' => 'Learn',
     'clipit:slogan:share' => 'Share',
+    'clipit:foot:mail' => 'E-mail',
 
     // ERROR
     'error:404' => "Sorry. We could not find the page that you requested.",
@@ -138,6 +164,6 @@ $english = array(
 
     'responsive:desktop' => 'Desktop version',
     'responsive:mobile' => 'Mobile version',
-);
+];
 
 add_translation('en', $english);

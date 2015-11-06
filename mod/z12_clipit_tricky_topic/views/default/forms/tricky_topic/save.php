@@ -46,7 +46,8 @@ if($tricky_topic){
                 'name' => 'title',
                 'value' => $tricky_topic->name,
                 'autofocus' => true,
-                'required' => true
+                'required' => true,
+                'aria-label' => elgg_echo('name'),
             ));
             ?>
         </div>
@@ -55,7 +56,8 @@ if($tricky_topic){
             <?php echo elgg_view('input/plaintext', array(
                 'class' => 'form-control mceEditor',
                 'name' => 'description',
-                'value' => $tricky_topic->description
+                'value' => $tricky_topic->description,
+                'aria-label' => elgg_echo('description'),
             ));
             ?>
         </div>
@@ -89,7 +91,8 @@ if($tricky_topic){
                 'value' => $tricky_topic->education_level,
                 'class' => 'form-control',
                 'options_values' => get_education_levels(),
-                'required' => true
+                'required' => true,
+                'aria-label' => elgg_echo('education_level'),
             ));
             ?>
         </div>
@@ -99,7 +102,8 @@ if($tricky_topic){
                 'name' => 'subject',
                 'value' => $tricky_topic->subject,
                 'class' => 'form-control input-subject',
-                'required' => true
+                'required' => true,
+                'aria-label' => elgg_echo('tricky_topic:subject'),
             ));
             ?>
         </div>

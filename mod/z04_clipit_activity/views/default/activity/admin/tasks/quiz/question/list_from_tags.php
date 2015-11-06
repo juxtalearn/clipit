@@ -37,17 +37,17 @@ function get_questions_from_tag($tag){
             <option>5</option>
         </select>
     </div>
-    <table class="datatable display table table-striped margin-top-5" cellspacing="0" width="100%">
-        <thead>
-        <tr>
-            <th data-dynatable-no-sort="true" style="width: 60px;"></th>
-            <th><?php echo elgg_echo('quiz:question');?></th>
-            <th><?php echo elgg_echo('tags');?></th>
-            <th style="width: 110px;" data-dynatable-sorts="dnumber"><?php echo elgg_echo('difficulty');?></th>
-            <th style="display: none;">Dnumber</th>
+    <table class="datatable display table table-striped margin-top-5" cellspacing="0" width="100%" role="presentation">
+        <thead role="presentation">
+        <tr role="presentation">
+            <th data-dynatable-no-sort="true" style="width: 60px;" role="presentation"></th>
+            <th role="presentation"><?php echo elgg_echo('quiz:question');?></th>
+            <th role="presentation"><?php echo elgg_echo('tags');?></th>
+            <th role="presentation" style="width: 110px;" data-dynatable-sorts="dnumber"><?php echo elgg_echo('difficulty');?></th>
+            <th role="presentation" style="display: none;">Dnumber</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody role="presentation">
         <?php
         $tags = ClipitTrickyTopic::get_tags($tricky_topic);
         foreach($tags as $tag_id):
@@ -57,13 +57,13 @@ function get_questions_from_tag($tag){
                 $clones = false;
                 if(!$question_tag->cloned_from):
                     ?>
-                    <tr>
-                        <td>
+                    <tr role="presentation">
+                        <td role="presentation">
                             <a class="btn btn-xs btn-primary questions-select" id="<?php echo $question_tag->id;?>">
                                 <?php echo elgg_echo('select');?>
                             </a>
                         </td>
-                        <td>
+                        <td role="presentation">
                             <?php echo $question_tag->name;?>
                             <?php if($clones = ClipitQuizQuestion::get_clones($question_tag->id, true)): ?>
                                 <small class="show margin-top-5">
@@ -73,11 +73,11 @@ function get_questions_from_tag($tag){
                                 </small>
                             <?php endif;?>
                         </td>
-                        <td>
+                        <td role="presentation">
                             <?php echo elgg_view('tricky_topic/tags/view', array('limit' => 2, 'tags' => array($tag_id))); ?>
                         </td>
-                        <td><?php echo difficulty_bar($question_tag->difficulty);?></td>
-                        <td style="display: none;"><?php echo $question_tag->difficulty;?></td>
+                        <td role="presentation"><?php echo difficulty_bar($question_tag->difficulty);?></td>
+                        <td role="presentation" style="display: none;"><?php echo $question_tag->difficulty;?></td>
                     </tr>
                 <?php endif;?>
             <?php endforeach;?>

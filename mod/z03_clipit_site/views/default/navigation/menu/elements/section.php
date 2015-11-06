@@ -22,7 +22,7 @@ if ($headers) {
 if($id = $vars['id']){
     $id = 'id="'.$id.'"';
 }
-echo "<ul class=\"$class\" $id role=\"menu\">";
+echo "<ul class=\"$class\" $id aria-label=\"menu\" role=\"presentation\">";
 foreach ($vars['items'] as $menu_item) {
 	echo elgg_view('navigation/menu/elements/item', array(
 		'item' => $menu_item,

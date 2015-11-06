@@ -49,7 +49,7 @@ $id = uniqid();
     });
 </script>
 <div class="quiz" data-quiz="<?php echo $id;?>">
-<div class="row">
+<div class="row" role="presentation">
     <div class="col-md-7">
         <div class="form-group">
             <label>Title</label>
@@ -79,6 +79,7 @@ $id = uniqid();
             <label><?php echo elgg_echo('quiz:view_mode');?></label>
             <?php echo elgg_view("input/dropdown", array(
                 'name' => $input_task.'quiz[view]',
+                'aria-label' => $input_task.'quiz[view]',
                 'style' => 'padding: 5px;',
                 'value' => $entity->view_mode,
                 'class' => 'form-control',
@@ -97,6 +98,7 @@ $id = uniqid();
                 $days = range(1, 30);
                 echo elgg_view("input/dropdown", array(
                     'name' => $input_task.'quiz[time][d]',
+                    'aria-label' => $input_task.'quiz[time][d]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 86000):'',
@@ -107,6 +109,7 @@ $id = uniqid();
                 $hours = range(1, 24);
                 echo elgg_view("input/dropdown", array(
                     'name' => $input_task.'quiz[time][h]',
+                    'aria-label' => $input_task.'quiz[time][h]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor($time / 3600):'',
@@ -117,6 +120,7 @@ $id = uniqid();
                 $minutes = range(1, 60);
                 echo elgg_view("input/dropdown", array(
                     'name' => $input_task.'quiz[time][m]',
+                    'aria-label' => $input_task.'quiz[time][m]',
                     'style' => 'width: 30%;display: inline-block;padding:5px;',
                     'class' => 'form-control',
                     'value' => $entity ? floor(($time / 60) % 60):'',

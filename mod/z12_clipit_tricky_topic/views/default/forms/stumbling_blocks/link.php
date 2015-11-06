@@ -23,6 +23,7 @@ echo elgg_view('input/hidden', array(
 ));
 echo elgg_view("input/dropdown", array(
     'name' => 'tricky_topic',
+    'aria-label' => 'tricky_topic',
     'style' => 'padding:5px;',
     'selected' => true,
     'class' => 'form-control margin-bottom-10',

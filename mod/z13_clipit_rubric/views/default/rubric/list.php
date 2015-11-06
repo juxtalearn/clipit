@@ -80,17 +80,17 @@ $(function(){
 });
 </script>
 <div class="table-responsive">
-<table class="table table-striped" style="table-layout: fixed">
-    <thead>
-        <tr>
+<table class="table table-striped" style="table-layout: fixed" role="presentation">
+    <thead role="presentation">
+        <tr role="presentation">
             <?php if($select):?>
                 <th style="width: 120px;"></th>
             <?php endif;?>
-            <th><?php echo elgg_echo('name');?></th>
-            <th><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
-            <th style="width: 100px;"><?php echo elgg_echo('rubric:items');?></th>
+            <th role="presentation"><?php echo elgg_echo('name');?></th>
+            <th role="presentation"><?php echo elgg_echo('author');?>-<?php echo elgg_echo('date');?></th>
+            <th role="presentation" style="width: 100px;"><?php echo elgg_echo('rubric:items');?></th>
             <?php if(!$select):?>
-            <th style="width: 150px;"><?php echo elgg_echo('options');?></th>
+            <th role="presentation" style="width: 150px;"><?php echo elgg_echo('options');?></th>
             <?php endif;?>
         </tr>
     </thead>
@@ -99,15 +99,15 @@ $(function(){
         if($rubric->cloned_from == 0):
             $owner_user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
     ?>
-        <tr id="<?php echo $rubric->id;?>">
+        <tr role="presentation" id="<?php echo $rubric->id;?>">
             <?php if($select):?>
-            <td>
+            <td role="presentation">
                 <a class="btn btn-xs btn-primary btn-border-blue rubric-select">
                     <?php echo elgg_echo('select');?>
                 </a>
             </td>
             <?php endif;?>
-            <td>
+            <td role="presentation">
                 <strong>
                     <?php echo elgg_view('output/url', array(
                         'href'  => "rubrics/view/{$rubric->id}",
@@ -117,7 +117,7 @@ $(function(){
                     ?>
                 </strong>
             </td>
-            <td>
+            <td role="presentation">
                 <small>
                     <div>
                         <?php if($owner_user->id == elgg_get_logged_in_user_guid()):?>
@@ -133,7 +133,7 @@ $(function(){
                     <?php echo elgg_view('output/friendlytime', array('time' => $rubric->time_created));?>
                 </small>
             </td>
-            <td class="text-right">
+            <td role="presentation" class="text-right">
                 <?php echo elgg_view('output/url', array(
                     'href'  => 'javascript:;',
                     'class' => 'show-items btn btn-xs btn-border-blue',
@@ -143,7 +143,7 @@ $(function(){
                 ?>
             </td>
             <?php if(!$select):?>
-            <td data-title="<?php echo elgg_echo('options');?>" class="hidden-xs hidden-sm">
+            <td role="presentation" data-title="<?php echo elgg_echo('options');?>" class="hidden-xs hidden-sm">
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $rubric,
                     'user' => $owner_user

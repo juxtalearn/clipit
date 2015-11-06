@@ -507,6 +507,7 @@ clipit.tagList = function(e){
             source: elgg.config.wwwroot+"ajax/view/stumbling_blocks/search"
         },
         placeholderText: elgg.echo("tags:commas:separated"),
+
         singleField: true,
         singleFieldNode: that.closest("form").find("input[name=tags]")
     });
@@ -544,6 +545,7 @@ clipit.labelList = function(e){
             source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
         },
         placeholderText: elgg.echo("tags:commas:separated"),
+
         singleField: true,
         singleFieldNode: that.closest("form").find("input[name=labels]")
     });
@@ -795,7 +797,7 @@ $(function(){
                     TABS_OBJECT.activeTabId = 1;
                     TABS_OBJECT.tabsHorizontalContainer = $container;
 
-                    TABS_OBJECT.tabsHorizontalContainer.addClass("responsive-tabs").wrap("<div class='responsive-tabs-container clearfix'></div>");
+                    TABS_OBJECT.tabsHorizontalContainer.addClass("responsive-tabs").wrap("<div class='responsive-tabs-container clearfix' role='tabpanel' aria-label='tabpanel'></div>");
 
                     // Update tabs
                     var update_tabs = function () {

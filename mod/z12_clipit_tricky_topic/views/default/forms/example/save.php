@@ -93,7 +93,7 @@ if($example) {
             ?>
             <div class="information_attach margin-top-10" style="display: <?php echo !empty($multimedia) ? 'block': 'none'?>;">
                 <div class="form-group">
-                    <div role="tabpanel">
+                    <div role="presentation">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
@@ -109,7 +109,7 @@ if($example) {
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active form-group" id="files" style="background: #fff;padding: 10px;">
+                            <div role="presentation" class="tab-pane active form-group" id="files" style="background: #fff;padding: 10px;">
                                 <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
                                         <a href="javascript:;" class="fa fa-trash-o red margin-right-10 remove-input" style="visibility: hidden;"></a>
@@ -146,7 +146,7 @@ if($example) {
                                 </div>
                                 <?php endif;?>
                             </div>
-                            <div role="tabpanel" class="tab-pane form-group" id="videos" style="background: #fff;padding: 10px;">
+                            <div role="presentation" class="tab-pane form-group" id="videos" style="background: #fff;padding: 10px;">
                                 <div class="group-input margin-top-10">
                                     <div class="margin-bottom-20 clone-input">
                                         <div id="panel_1" class="panel-group">
@@ -222,7 +222,7 @@ if($example) {
         <span class="show margin-bottom-10 text-muted">
             <?php echo elgg_echo('reflection_palette:question');?>
         </span>
-        <div role="tabpanel" class="margin-bottom-20">
+        <div role="presentation" class="margin-bottom-20">
             <div class="module-controls">
             <!-- Nav tabs -->
             <ul class="navs nav-tab tab-set " role="tablist">
@@ -254,7 +254,7 @@ if($example) {
                 $i = 1;
                 foreach($categories as $category => $items):
                 ?>
-                <div role="tabpanel"
+                <div role="presentation"
                      class="row tab-pane <?php echo $i==1 ? 'active':'';?>"
                      id="<?php echo elgg_get_friendly_title($category);?>"
                      style="padding: 10px;">

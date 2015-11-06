@@ -38,7 +38,8 @@ if($finished):?>
                         'text'  => elgg_view('output/img', array(
                             'src' => get_avatar($user_result, 'small'),
                             'title' => $user_result->name,
-                            'class' => 'user-avatar avatar-tiny'
+                            'class' => 'user-avatar avatar-tiny',
+                            'alt' => 'avatar-tiny',
                         )),
                         'title' => $user_result->name,
                     ));

@@ -18,7 +18,8 @@ $users = ClipitUser::get_by_id($users);
 <li data-user="<?php echo $user->id;?>" style="cursor: pointer">
     <?php echo elgg_view('output/img', array(
         'src' => get_avatar($user, 'small'),
-        'class' => 'image-block avatar-tiny'
+        'class' => 'image-block avatar-tiny',
+        'alt' => 'avatar-tiny',
     ));
     ?>
     <?php echo $user->name;?>

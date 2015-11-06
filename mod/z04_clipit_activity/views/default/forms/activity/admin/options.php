@@ -47,6 +47,7 @@ if($entity) {
                     <?php echo elgg_view("input/text", array(
                         'name' => 'activity[max_group_size]',
                         'class' => 'form-control',
+                        'aria-label'=> 'activity[max_group_size]',
                         'value' => $entity->max_group_size,
                         'required' => true,
                         'maxlength' => 3,
@@ -63,6 +64,7 @@ if($entity) {
                 <div class="col-md-4">
                     <?php echo elgg_view("input/text", array(
                         'name' => 'activity[max_students]',
+                        'aria-label'=> 'activity[max_students]',
                         'class' => 'form-control',
                         'value' => $entity->max_students ? $entity->max_students:0,
                         'required' => true,
