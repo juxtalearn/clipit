@@ -45,6 +45,7 @@ $(function(){
                     'href' => "clipit_activity/{$activity->id}",
                     'class' => 'activity-point',
                     'style' => "background: #$activity->color;",
+                    'aria-label' => $activity->name,
                     'text' => '',
                     'title' => $activity->name,
                     'is_trusted' => true,

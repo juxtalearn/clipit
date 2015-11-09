@@ -24,8 +24,9 @@ $my_activities = ClipitUser::get_activities(elgg_get_logged_in_user_guid());
                     'class' => 'activity-point',
                     'style' => 'background: #'.$activity->color,
                     'href'  => "clipit_activity/{$activity->id}",
+                    'aria-label'  => $activity->name,
                     'title' => $activity->name,
-                    'text'  => elgg_echo('activity:number'),
+                    'text' => '',
                     'name'  => elgg_echo('activity:number'),
                 ));
                 ?>

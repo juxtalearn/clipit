@@ -29,6 +29,7 @@ foreach(ClipitTask::get_by_id($activity->task_array, 0, 0, 'end') as $task):
                     'href'  => "clipit_activity/{$task->activity}",
                     'title' => $activity->name,
                     'style' => 'background: #'.$activity->color,
+                    'aria-label' => $activity->name,
                     'class' => 'activity-point',
                     'text'  => '',
                 )); ?>

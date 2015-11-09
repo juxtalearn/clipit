@@ -35,6 +35,7 @@ foreach($tasks as $task):
             'href'  => "clipit_activity/{$task->activity}",
             'title' => $activity->name,
             'style' => 'background: #'.$activity->color,
+            'aria-label' => $activity->name,
             'class' => 'activity-point',
             'text'  => '',
         ));?>

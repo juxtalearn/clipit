@@ -62,7 +62,7 @@ foreach($activities as $activity):
             'class' => 'blue-lighter fa collapse-icon fa-chevron-down pull-right margin-top-5 expand',
             'data-toggle' => 'collapse',
             'data-parent' => "#accordion_{$activity->id}",
-           'text' => elgg_echo('activity:number'),
+            'text' => '',
             'title' => $activity->name,
         ));
         ?>
@@ -70,7 +70,8 @@ foreach($activities as $activity):
             'href' => "clipit_activity/{$activity->id}",
             'class' => 'activity-point',
             'style' => "background: #$activity->color;",
-            'text' => "",//elgg_echo('activity:number'),
+            'aria-label' => $activity->name,
+            'text' => "",
             'title' => $activity->name,
             'is_trusted' => true,
         ));
