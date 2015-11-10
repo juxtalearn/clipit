@@ -502,7 +502,6 @@ $(function(){
                 source: elgg.config.wwwroot+"ajax/view/publications/tags/search"
             },
             placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
-            aria-label: "<?php echo elgg_echo("tags:commas:separated");?>",
             singleField: true,
             singleFieldNode: that.closest("form").find("input[name=tags]")
         });
@@ -559,7 +558,6 @@ $(function(){
                 source: elgg.config.wwwroot+"ajax/view/publications/labels/search"
             },
             placeholderText: "<?php echo elgg_echo("tags:commas:separated");?>",
-            aria-label: "<?php echo elgg_echo("tags:commas:separated");?>",
             singleField: true,
             singleFieldNode: that.closest("form").find("input[name=labels]")
         });
