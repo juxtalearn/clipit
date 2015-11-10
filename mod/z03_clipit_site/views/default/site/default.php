@@ -41,14 +41,6 @@ $footer = elgg_view('page/elements/footer', $vars);
 // Set the content type
 header("Content-type: text/html; charset=UTF-8");
 $lang = get_current_language();
-
-setcookie("msg", '', (time() - 1000), '/');
-unset($_COOKIE['msg']);
-if(!empty($_SESSION['msg'])) {
-    setcookie("msg", json_encode($_SESSION['msg']), (time() + 100), '/');
-    $_SESSION['msg'] = array();
-    unset($_SESSION['msg']);
-}
 ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $lang; ?>" lang="<?php echo $lang; ?>">
@@ -56,31 +48,11 @@ if(!empty($_SESSION['msg'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="<?php echo isset($_COOKIE['desktop'])? 'width=1200, initial-scale=1': 'width=device-width, initial-scale=1';?>">
     <?php echo elgg_view('page/elements/head', $vars); ?>
-    <script>
-        $(function() {
-            if(elgg.session.cookie('msg')) {
-                console.log(JSON.parse(elgg.session.cookie('msg')));
-                var success_messages = JSON.parse(elgg.session.cookie('msg')).success,
-                    error_messages = JSON.parse(elgg.session.cookie('msg')).error;
-                for(var i=0; i < success_messages.length; i++) {
-                    success_messages [i] = success_messages[i].replace(/(\+)/g, ' ');
-                }
-                for(var i=0; i < error_messages.length; i++) {
-                    error_messages [i] = error_messages[i].replace(/(\+)/g, ' ');
-                }
-                elgg.system_messages(success_messages, 2000, 'success');
-                elgg.system_messages(error_messages, 2000, 'error');
-                var old_date = new Date();
-                old_date.setTime(0);
-                elgg.session.cookie('msg', [], {path: '/', expires: old_date});
-            }
-        });
-    </script>
 </head>
 <body role="main">
 <div id="wrap"  aria-label="<?php echo elgg_echo('main:page')?>" <?php if (!elgg_is_logged_in()) echo 'class="bg-grey"'; ?>>
     <div class="elgg-page-messages">
-<!--        --><?php //echo $messages; ?>
+        <?php echo $messages; ?>
     </div>
     <header<?php echo !elgg_is_logged_in()? ' class="not-logged-in"':''?>>
         <?php echo $header_top; ?>
