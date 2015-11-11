@@ -1,14 +1,14 @@
 <?php
  /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   25/07/14
  * Last update:     25/07/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $activity = elgg_extract('entity', $vars);
 $users = ClipitUser::get_by_id($activity->student_array, 0, 0, 'name');

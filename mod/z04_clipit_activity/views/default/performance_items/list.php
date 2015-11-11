@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   23/05/14
  * Last update:     23/05/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $entity = elgg_extract('entity', $vars);
 $activity_id = elgg_get_page_owner_guid();

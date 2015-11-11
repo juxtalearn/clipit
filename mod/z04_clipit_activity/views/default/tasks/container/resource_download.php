@@ -1,14 +1,14 @@
 <?php
  /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   08/07/2015
  * Last update:     08/07/2015
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $attach = elgg_extract('params', $vars);
 $attach['id'] = elgg_extract('id', $vars);

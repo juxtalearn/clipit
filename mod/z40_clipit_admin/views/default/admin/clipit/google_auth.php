@@ -1,18 +1,18 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 
 
 if(get_config("google_refresh_token")) {
     echo "<H3>SUCCESS!</H3>";
-    echo "<br/><p>ClipIt is now authenticated with Google</p>";
+    echo "<br/><p>Clipit is now authenticated with Google</p>";
     return;
 }
 
@@ -44,7 +44,7 @@ if($_GET['code']) {
     set_config("google_token", $token_obj->access_token);
     set_config("google_refresh_token", $token_obj->refresh_token);
     $html_title = "SUCCESS!";
-    $html_body .= "ClipIt is now authenticated with Google";
+    $html_body .= "Clipit is now authenticated with Google";
 } elseif($_GET['google_id'] && $_GET['google_secret']) {
     set_config("google_id", $_GET['google_id']);
     set_config("google_secret", $_GET['google_secret']);

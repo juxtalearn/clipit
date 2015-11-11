@@ -1,14 +1,14 @@
 <?php
  /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   28/01/2015
  * Last update:     28/01/2015
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $href = elgg_extract('href', $vars);
 $base_url = elgg_http_remove_url_query_element(current_page_url(), 'offset');

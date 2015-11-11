@@ -1,6 +1,6 @@
 <?php
 /*
- * Project Name:            ClipIt Theme
+ * Project Name:            Clipit Theme
  * Project Description:     Theme for Elgg 1.8
  */
 $url = $CONFIG->url;

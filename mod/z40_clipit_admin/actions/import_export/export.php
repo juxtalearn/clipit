@@ -1,11 +1,11 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 $filename = get_input("filename");

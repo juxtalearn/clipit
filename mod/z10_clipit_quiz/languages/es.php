@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   22/04/14
  * Last update:     22/04/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $spanish = array(
     'download:excel' => 'Descargar Excel',
@@ -41,7 +41,7 @@ $spanish = array(
     'quiz:max_time' => 'Tiempo máximo para hacer el test',
     'quiz:max_time:tooltip' => 'Tiempo máximo que el estudiante tiene para hacer el test',
     'quiz:target' => 'Este Test será utilizado en',
-    'quiz:target:clipit' => 'Actividades de ClipIt',
+    'quiz:target:clipit' => 'Actividades de Clipit',
     'quiz:target:large_display' => 'Large Displays',
     'quiz:options:random' => 'Preguntas y respuestas en orden aleatorio',
     'quiz:options:results_after_finished' => 'Esperar hasta el final de la tarea para mostrar los resultados',

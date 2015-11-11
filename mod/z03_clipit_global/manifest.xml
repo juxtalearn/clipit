@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
-    <name>ClipIt Global</name>
-    <author>JuxtaLearn Team URJC</author>
+    <name>Clipit Global</name>
+    <author>Clipit Team URJC</author>
     <version>1.0</version>
-    <description>ClipIt Global Plugin for Elgg</description>
-    <website>http://www.juxtalearn.eu</website>
-    <copyright>(C) JuxtaLearn Project</copyright>
+    <description>Clipit Global Plugin for Elgg</description>
+    <website>http://clipit.es</website>
+    <copyright>(C) Clipit Project</copyright>
     <license>GNU General Public License version 3</license>
     <requires>
         <type>elgg_release</type>
@@ -17,6 +17,6 @@
     </requires>
     <category>plugin</category>
     <category>front-end</category>
-    <blurb>ClipIt Global plugin</blurb>
+    <blurb>Clipit Global plugin</blurb>
     <activate_on_install>true</activate_on_install>
 </plugin_manifest>

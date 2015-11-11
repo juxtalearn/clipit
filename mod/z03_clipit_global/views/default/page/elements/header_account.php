@@ -16,7 +16,7 @@ $images_dir = elgg_extract('images_dir', $vars);
             <?php echo elgg_view('output/url', array(
                 'href' => "/",
                 'class' => 'navbar-brand',
-                'title' => 'ClipIt '. elgg_echo("home"),
+                'title' => 'Clipit '. elgg_echo("home"),
                 'text'  => elgg_view('output/img', array(
                     'src' => $images_dir . "/icons/clipit_logo.png"
                 ))

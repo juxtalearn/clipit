@@ -7,7 +7,7 @@
 $portuguese = array(
     'locale' => 'pt_PT',
     'user:profile:avatar'=> 'Avatar de usuário',
-    'clipit:site' => 'ClipIt',
+    'clipit:site' => 'Clipit',
     'loading' => 'Carregando',
     'loading:content' => 'Carregando o conteudo',
     'loading:charts' => 'Carregando graficos',

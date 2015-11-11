@@ -1,5 +1,5 @@
 /*
- * ClipIt specific CSS
+ * Clipit specific CSS
  */
 
 .transparent{
@@ -38,7 +38,7 @@
     display:none;
 }
 /****************************************
-    ClipIt ICONS
+    Clipit ICONS
 *************************************** */
 .clipit-icon{
     background: transparent url(../graphics/clipit_icons_sprite.gif) no-repeat left;

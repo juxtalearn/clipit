@@ -5,7 +5,7 @@
  */
 
 $spanish = array(
-    'clipit:site' => 'ClipIt',
+    'clipit:site' => 'Clipit',
     'loading' => 'Cargando',
     'loading:content' => 'Cargando contenido',
     'loading:charts' => 'Cargando gráficas',
@@ -17,10 +17,10 @@ $spanish = array(
     'clipit:slogan:learn_rest' => 'con los vídeos de otros grupos y de sus comentarios.',
     'clipit:slogan:share' => 'Comparte',
     'clipit:slogan:share_rest' => 'tus vídeos con el resto de compañeros de tu centro educativo.',
-    'clipit:slogan:description' => 'ClipIt ofrece un entorno colaborativo para aprender enseñando
+    'clipit:slogan:description' => 'Clipit ofrece un entorno colaborativo para aprender enseñando
                 donde los estudiantes aprenden creando videos y evaluando el resultado
                 de sus compañeros. Los mejores vídeos pueden pasar a formar parte de los recursos
-                educativos de ClipIt.',
+                educativos de Clipit.',
     'clipit:carrousel:define' => 'Define',
     'clipit:carrousel:define_rest' => 'El profesor define el tema y los conceptos clave sobre los que trabajan los estudiantes.
         También puede compartir con los alumnos material de apoyo que sirva de referencia y de guía.',
@@ -36,7 +36,7 @@ $spanish = array(
         En este proceso se guía al estudiante mediante plantillas que guían
         la evaluación de la parte educativa y la creativa.',
     'clipit:carrousel:progress' => 'Progresa',
-    'clipit:carrousel:progress_rest' => 'ClipIt muestra al estudiante un resumen con el progreso de
+    'clipit:carrousel:progress_rest' => 'Clipit muestra al estudiante un resumen con el progreso de
         los grupos donde participa, así como la evolución de cada una de las
         actividades en las que está involucrado. Dispone, además, de analíticas de
         aprendizaje personalizadas a disposición de los estudiantes y del profesor',

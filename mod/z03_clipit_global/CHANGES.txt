@@ -1,5 +1,5 @@
 =======================
-ClipIt v1.1 - Elgg CMS 2013-10-01
+Clipit v1.1 - Elgg CMS 2013-10-01
 =======================
 New plugins: 
     - bottom_bar: add a bottom bar chat similar to Facebook

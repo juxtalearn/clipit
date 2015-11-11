@@ -5,24 +5,24 @@
  */
 
 $swedish = array(
-    'clipit:site' => 'ClipIt',
+    'clipit:site' => 'Clipit',
     'loading' => 'laddar',
     'loading:content' => 'Laddar innehåll',
     'loading:charts' => 'Laddar grafer',
     'follow_us' => 'Följ oss',
     'clipit:slogan' => 'Skapa, lär och dela',
     'clipit:slogan:create' => 'Skapa',
-	'clipit:slogan:create_rest' => 'en video för din grupp med hjälp av ClipIt.',
+	'clipit:slogan:create_rest' => 'en video för din grupp med hjälp av Clipit.',
     'clipit:slogan:learn' => 'Lär',
 	'clipit:slogan:learn_rest' => 'med videos från andra grupper och med peer-feedback.',
     'clipit:slogan:share' => 'Dela',
     'clipit:slogan:share_rest' => 'dina videos med resten av kollegorna på ditt utbildningscenter.',
-    'clipit:slogan:description' => 'ClipIt erbjuder en kollaborativ miljö för att lära genom att lära ut, där studenterna utvecklas genom att skapa sina egna videos och genom att kommentera other\'s. De bäste filmerna väljs ut som en del av de öppna lärresurserna.',
+    'clipit:slogan:description' => 'Clipit erbjuder en kollaborativ miljö för att lära genom att lära ut, där studenterna utvecklas genom att skapa sina egna videos och genom att kommentera other\'s. De bäste filmerna väljs ut som en del av de öppna lärresurserna.',
     'clipit:carrousel:define' => 'Definiera',
     'clipit:carrousel:define_rest' => 'Lärare definierar kluriga ämnen och hinder att arbeta med.
         De kan också dela hjälpmaterial med studenterna som referens och guidning.',
     'clipit:carrousel:collaborate' => 'Kollaborera',
-    'clipit:carrousel:collaborate_rest' => 'Studenterna organiserar sig i grupper för att skapa utbildningsvideos som de laddar upp till ClipIt. 
+    'clipit:carrousel:collaborate_rest' => 'Studenterna organiserar sig i grupper för att skapa utbildningsvideos som de laddar upp till Clipit.
     	Varje grupp har sin egen privata miljö med hjälpfulla verktyg i en säker arbetsyta: ett fildeningsarkiv, 
         ett meddelandesystem och ett diskussionsforum för att underlätta ett kollaborativt arbetssätt.',
     'clipit:carrousel:evaluate' => 'Utvärdera',
@@ -30,8 +30,8 @@ $swedish = array(
         ger konstruktiv feedback som ger skaparna möjlighet att förbättra dessa. Under denna process underlättas
         studenternas utvärdering med hjälp av strukturerade feedbackformulär som hjälper dem dem ge input gällande både videons pedagogiska och kreativa aspekter.',
     'clipit:carrousel:progress' => 'Progression',
-    'clipit:carrousel:progress_rest' => 'ClipIt visar studenterna sammanställningar av gruppens och den personliga progressionen inuti varje 
-        aktivitet och uppgift som de tar del av. ClipIt visar även learning analytics data med
+    'clipit:carrousel:progress_rest' => 'Clipit visar studenterna sammanställningar av gruppens och den personliga progressionen inuti varje
+        aktivitet och uppgift som de tar del av. Clipit visar även learning analytics data med
         personliga indikatorer för både lärare och studenter.',
     'clipit:carrousel:explore' => 'Utforska',
     'clipit:carrousel:explore_rest' => 'XXX Navigate through public videos is easy using Stumbling Blocks tags and

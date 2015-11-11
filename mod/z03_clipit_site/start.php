@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   22/04/14
  * Last update:     22/04/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 elgg_register_event_handler('init', 'system', 'clipit_final_init');
 function clipit_final_init(){
@@ -102,7 +102,7 @@ function clipit_final_init(){
         // Media element plugin
         elgg_register_js("mediaelement", "{$plugin_url}/vendors/mediaelement.min.js", "footer");
 
-        // ClipIt
+        // Clipit
         $clipit_css = elgg_get_simplecache_url('css', 'clipit');
         elgg_register_simplecache_view('css/clipit');
         elgg_register_css("clipit", $clipit_css);

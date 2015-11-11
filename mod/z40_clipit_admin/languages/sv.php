@@ -1,19 +1,19 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 
 $swedish = array(
     "admin:clipit" => "Clipit Administration",
     "admin:clipit:google_auth" => "Google Setup",
-    "admin:clipit:clipit_options" => "ClipIt Options",
-    "admin:clipit:update_clipit" => "Update ClipIt",
+    "admin:clipit:clipit_options" => "Clipit Options",
+    "admin:clipit:update_clipit" => "Update Clipit",
     "admin:clipit:import_export" => "Import / Export",
 );
 add_translation('sv', $swedish);

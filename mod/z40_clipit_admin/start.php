@@ -1,11 +1,11 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 
@@ -15,7 +15,7 @@
 elgg_register_event_handler('init', 'system', 'clipit_admin_init');
 
 /**
- * Initialization method which views and actions for ClipIt Administration pages.
+ * Initialization method which views and actions for Clipit Administration pages.
  */
 function clipit_admin_init() {
     $plugin_name = "z40_clipit_admin";
@@ -48,7 +48,7 @@ function clipit_admin_init() {
         "clipit.admin.export_all",
         "ClipitDataExport::export_all",
         null,
-        "Export all ClipIt classes and relationships in Excel format for download",
+        "Export all Clipit classes and relationships in Excel format for download",
         "GET",
         false,
         true
@@ -57,7 +57,7 @@ function clipit_admin_init() {
         "clipit.admin.set_clipit_version",
         "ClipitUpdate::set_clipit_version",
         array("clipit_version" => array("type" => "string", "required" => true)),
-        "Sets forcefully the current ClipIt version",
+        "Sets forcefully the current Clipit version",
         "POST",
         false,
         true
@@ -67,7 +67,7 @@ function clipit_admin_init() {
         "clipit.admin.update_clipit",
         "ClipitUpdate::update_clipit",
         null,
-        "Update ClipIt to latest tag released",
+        "Update Clipit to latest tag released",
         "POST",
         false,
         true

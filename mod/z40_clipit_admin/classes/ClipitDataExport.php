@@ -1,11 +1,11 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 
@@ -67,8 +67,8 @@ class ClipitDataExport{
         // New Excel object
         $php_excel = new PHPExcel();
         // Set document properties
-        $php_excel->getProperties()->setCreator("ClipIt")
-            ->setTitle("ClipIt export of Relationships")
+        $php_excel->getProperties()->setCreator("Clipit")
+            ->setTitle("Clipit export of Relationships")
             ->setKeywords("clipit export relationships");
 
         // Add table title and columns
@@ -103,8 +103,8 @@ class ClipitDataExport{
         // New Excel object
         $php_excel = new PHPExcel();
         // Set document properties
-        $php_excel->getProperties()->setCreator("ClipIt")
-            ->setTitle("ClipIt export of " . $class_name)
+        $php_excel->getProperties()->setCreator("Clipit")
+            ->setTitle("Clipit export of " . $class_name)
             ->setKeywords("clipit export class");
         // Add table title and columns
         $active_sheet = $php_excel->setActiveSheetIndex(0);
@@ -162,7 +162,7 @@ class ClipitDataExport{
 //    }
 //
 //    /**
-//     * Parse a single role from an Excel file, containing one user, and add it to ClipIt if new
+//     * Parse a single role from an Excel file, containing one user, and add it to Clipit if new
 //     *
 //     * @param PHPExcel_Worksheet_Row $row_iterator
 //     *

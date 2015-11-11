@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   22/04/14
  * Last update:     22/04/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $portuguese = array(
     'status' => 'Estado',
@@ -251,7 +251,7 @@ $portuguese = array(
     'rating:none' => 'Não há pontuação',
     // Create activity
     'or:create' => 'ou cria um',
-    'activity:site:students' => 'Estudantes de ClipIt',
+    'activity:site:students' => 'Estudantes de Clipit',
     'activity:students' => 'Activity students',
     'finish' => 'Terminar',
     'teachers:add' => 'Anexar professores',

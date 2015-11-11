@@ -1,20 +1,20 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 
-echo "<h3>This will check-out the latest ClipIt stable version and apply all necessary updates</h3>";
+echo "<h3>This will check-out the latest Clipit stable version and apply all necessary updates</h3>";
 echo "<br>";
 echo "<h3>Current version: ".get_config("clipit_version")."</h3>";
 $clipit_tag_branch = get_config("clipit_tag_branch");
 if(!empty($clipit_tag_branch)){
-    echo "<h4>ClipIt Tag Branch: $clipit_tag_branch</h4>";
+    echo "<h4>Clipit Tag Branch: $clipit_tag_branch</h4>";
 }
 echo "<br>";
 echo "<form action='".elgg_get_site_url()."action/update_clipit' method='post'>";

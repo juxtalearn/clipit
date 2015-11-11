@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   22/04/14
  * Last update:     22/04/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $spanish = array(
     'user:profile:avatar'=> 'Avatar del usuario',
@@ -358,7 +358,7 @@ $spanish = array(
     'rating:none' => 'No hay puntuacion',
     // Create activity
     'or:create' => 'o crea un',
-    'activity:site:students' => 'Estudiantes de ClipIt',
+    'activity:site:students' => 'Estudiantes de Clipit',
     'activity:students' => 'Estudiantes de la actividad',
     'activity:select' => 'Seleccionar actividad',
     'finish' => 'Terminar',
@@ -368,7 +368,7 @@ $spanish = array(
     'teacher:addedresource' => 'Ha añadido un material a la actividad',
     'called:students:add' => 'Añadir estudiantes manualmente',
     'called:students:add:from_excel' => 'Añadir estudiantes desde un archivo Excel',
-    'called:students:insert_to_site' => 'Añadir a ClipIt',
+    'called:students:insert_to_site' => 'Añadir a Clipit',
     'called:students:insert_to_activity' => 'Añadir a la actividad',
     'activity:grouping_mode' => 'Modo de creación de grupos',
     'activity:grouping_mode:teacher' => 'El profesor hace los grupos',
@@ -377,7 +377,7 @@ $spanish = array(
     'activity:grouping_mode:system' => 'Crear grupos aleatoriamente',
     'activity:download:excel_template' => 'Descargar plantilla Excel',
     'called:students:excel_template' => 'Plantilla Excel',
-    'called:students:add_from_site' => 'Añadir desde ClipIt',
+    'called:students:add_from_site' => 'Añadir desde Clipit',
     'called:students:add_from_excel' => 'Añadir desde un archivo Excel',
     'called:students:add_from_excel:waiting' => 'Espere mientras se está subiendo los estudiantes al sistema',
     'activity:created' => 'La actividad %s ha sido creada',

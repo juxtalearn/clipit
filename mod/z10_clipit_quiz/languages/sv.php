@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   22/04/14
  * Last update:     22/04/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 $swedish = array(
     'clone' => 'Klona',
@@ -35,7 +35,7 @@ $swedish = array(
     'quiz:max_time' => 'Tidsgräns',
     'quiz:max_time:tooltip' => 'Maximal tid som studenter har för att göra färdigt Quizen',
     'quiz:target' => 'Den här Quizen skall användas inom',
-    'quiz:target:clipit' => 'ClipIt Aktiviteter',
+    'quiz:target:clipit' => 'Clipit Aktiviteter',
     'quiz:target:large_display' => 'Stor display',
 );
 

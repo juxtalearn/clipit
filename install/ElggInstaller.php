@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2013-10-10
  * Last update:     $Date$
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      urjc_backend
  */
 
@@ -376,7 +376,7 @@ class ElggInstaller {
         $formVars = array(
             'sitename' => array(
                 'type' => 'text',
-                'value' => 'ClipIt',
+                'value' => 'Clipit',
                 'required' => TRUE,
             ),
             'siteemail' => array(
@@ -1482,7 +1482,7 @@ class ElggInstaller {
 //        set_config('la_metrics_class', $submissionVars['la_metrics_class'], $guid);
 //        set_config('recommendations_class', $submissionVars['recommendations_class'], $guid);
         set_config('clipit_site_type', strtolower($submissionVars['clipit_site_type']), $guid);
-        // Set current ClipIt version and tag branch
+        // Set current Clipit version and tag branch
         $versions_json = file_get_contents(elgg_get_plugins_path()."z40_clipit_admin/updates/versions.json");
         $versions_obj = json_decode($versions_json);
         $clipit_tag_branch = (string)$versions_obj->clipit_tag_branch;

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin_manifest xmlns="http://www.elgg.org/plugin_manifest/1.8">
-    <name>ClipIt Tricky Topic</name>
-    <author>JuxtaLearn Team URJC</author>
+    <name>Clipit Tricky Topic</name>
+    <author>Clipit Team URJC</author>
     <version>1.0</version>
     <category>tricky_topic</category>
-    <blurb>ClipIt Tricky Topic plugin</blurb>
-    <description>ClipIt Tricky Topic page</description>
-    <website>http://www.juxtalearn.eu</website>
+    <blurb>Clipit Tricky Topic plugin</blurb>
+    <description>Clipit Tricky Topic page</description>
+    <website>http://clipit.es</website>
     <license>GNU General Public License version 3</license>
     <requires>
         <type>elgg_release</type>

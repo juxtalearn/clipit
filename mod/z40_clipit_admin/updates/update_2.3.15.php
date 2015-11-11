@@ -14,4 +14,4 @@
 //
 //ClipitUser::delete_by_id($remove_array);
 
-// moved user account cleaning to ClipIt Options page
+// moved user account cleaning to Clipit Options page

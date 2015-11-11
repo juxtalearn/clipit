@@ -1,11 +1,11 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
- * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC JuxtaLearn Team
- * @link            http://www.juxtalearn.eu
+ * @author          Pablo Llinás Arnaiz <pebs74@gmail.com>, URJC Clipit Team
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  * @subpackage      clipit_admin
  */
 
@@ -22,7 +22,7 @@ $performance_palette = (bool)get_config("performance_palette");
 $example_types = (bool)get_config("example_types");
 $quiz_results_after_task_end = (bool)get_config("quiz_results_after_task_end");
 
-echo "<p><strong>*** WARNING *** </strong> These options can break ClipIt, be careful!</p>";
+echo "<p><strong>*** WARNING *** </strong> These options can break Clipit, be careful!</p>";
 
 // Table structure
 echo "<table>";
@@ -39,7 +39,7 @@ echo "</tr>";
 
 echo "<tr height='40'>";
 echo "<td>";
-echo "<strong>Allow students to register in ClipIt?</strong> ";
+echo "<strong>Allow students to register in Clipit?</strong> ";
 echo "</td>";
 echo "<td>";
 if($allow_registration){
@@ -79,7 +79,7 @@ echo "</tr>";
 
 echo "<tr height='40'>";
 echo "<td width='300'>";
-echo "<strong>ClipIt Tag Branch:</strong>";
+echo "<strong>Clipit Tag Branch:</strong>";
 echo "</td>";
 echo "<td>";
 echo "<input name='clipit_tag_branch' value='$clipit_tag_branch' type='text' size='40'/>";

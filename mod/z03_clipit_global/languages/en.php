@@ -5,19 +5,19 @@
  */
 
 $english = array(
-    'clipit:site' => 'ClipIt',
+    'clipit:site' => 'Clipit',
     'loading' => 'loading',
     'loading:content' => 'Loading content',
     'loading:charts' => 'Loading charts',
     'follow_us' => 'Follow us',
     'clipit:slogan' => 'Create, learn and share',
     'clipit:slogan:create' => 'Create',
-    'clipit:slogan:create_rest' => 'a video amongst your group with the help of ClipIt.',
+    'clipit:slogan:create_rest' => 'a video amongst your group with the help of Clipit.',
     'clipit:slogan:learn' => 'Learn',
     'clipit:slogan:learn_rest' => 'with videos from other groups and with peer feedback.',
     'clipit:slogan:share' => 'Share',
     'clipit:slogan:share_rest' => 'your videos with the rest of colleagues from your educational center.',
-    'clipit:slogan:description' => 'ClipIt offers a collaborative environment for learn by teaching, where students
+    'clipit:slogan:description' => 'Clipit offers a collaborative environment for learn by teaching, where students
         progress by creating their own videos, and evaluating other\'s. The best videos are selected as part
         of the public pool of educational resources.',
     'clipit:carrousel:define' => 'Define',
@@ -25,7 +25,7 @@ $english = array(
         They can also share help material with students for refference and guidance.',
     'clipit:carrousel:collaborate' => 'Collaborate',
     'clipit:carrousel:collaborate_rest' => 'Students organize in groups to create educational videos which they
-        upload to ClipIt. Each group has their own private scope with helpful tools in a secure workspace: a file-sharing
+        upload to Clipit. Each group has their own private scope with helpful tools in a secure workspace: a file-sharing
         repository, a messaging system, and a discussion forum to facilitate collaborative work.',
     'clipit:carrousel:evaluate' => 'Evaluate',
     'clipit:carrousel:evaluate_rest' => 'Stuudents review, comment on and rate the videos created by other groups,
@@ -33,8 +33,8 @@ $english = array(
         evaluation is scaffolded using structured feedback forms which guide input for both the pedagogical and
         creative aspects of videos.',
     'clipit:carrousel:progress' => 'Progress',
-    'clipit:carrousel:progress_rest' => 'ClipIt shows students summaries with their group and personal progress inside
-        each of the activities and tasks they\'re taking part in. ClipIt also displays learning analytics with
+    'clipit:carrousel:progress_rest' => 'Clipit shows students summaries with their group and personal progress inside
+        each of the activities and tasks they\'re taking part in. Clipit also displays learning analytics with
         personalized indicators for both teachers and students.',
     'clipit:carrousel:explore' => 'Explore',
     'clipit:carrousel:explore_rest' => 'Navigate through public videos is easy using Stumbling Blocks tags and

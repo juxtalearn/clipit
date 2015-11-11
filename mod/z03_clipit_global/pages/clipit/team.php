@@ -1,14 +1,14 @@
 <?php
 /**
- * ClipIt - JuxtaLearn Web Space
+ * Clipit Web Space
  * PHP version:     >= 5.2
  * Creation date:   2/09/14
  * Last update:     2/09/14
- * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC JuxtaLearn Project
+ * @author          Miguel Ángel Gutiérrez <magutierrezmoreno@gmail.com>, URJC Clipit Project
  * @version         $Version$
- * @link            http://www.juxtalearn.eu
+ * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
- * @package         ClipIt
+ * @package         Clipit
  */
 // Team members description
 $spanish = array(
@@ -44,7 +44,7 @@ add_translation('en', $english);
 // Internships description
 $spanish = array(
     'internship:virginia' => 'Graduada en Ingeniería del Software por la Universidad Rey Juan Carlos. Ha desarrollado un sistema de recomendación basado en contenido.',
-    'internship:angel' => 'Estudiante del Grado en Ingeniería Informática en la Universidad Rey Juan Carlos. Está desarrollando la versión de ClipIt para dispositivos móviles.',
+    'internship:angel' => 'Estudiante del Grado en Ingeniería Informática en la Universidad Rey Juan Carlos. Está desarrollando la versión de Clipit para dispositivos móviles.',
     'internship:rocio' => 'Estudiante de Ingeniería del Software de la Universidad Rey Juan Carlos. Ha desarrollado una herramienta para incluir preguntas.',
 );
 add_translation('es', $spanish);

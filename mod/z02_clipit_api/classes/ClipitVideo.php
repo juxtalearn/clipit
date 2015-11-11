@@ -55,8 +55,7 @@ class ClipitVideo extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function copy_from_elgg($elgg_entity)
-    {
+    protected function copy_from_elgg($elgg_entity){
         parent::copy_from_elgg($elgg_entity);
         $this->tag_array = (array)static::get_tags($this->id);
         $this->label_array = (array)static::get_labels($this->id);
@@ -74,8 +73,7 @@ class ClipitVideo extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg object instance to save $this to
      */
-    protected function copy_to_elgg($elgg_entity)
-    {
+    protected function copy_to_elgg($elgg_entity){
         parent::copy_to_elgg($elgg_entity);
         $elgg_entity->set("overall_rating_average", (float)$this->overall_rating_average);
         $elgg_entity->set("tag_rating_average", (float)$this->tag_rating_average);
@@ -99,8 +97,7 @@ class ClipitVideo extends UBItem {
      *         E.g. the time created property can only beset on ElggObjects during an update. Defaults to false!
      * @return bool|int Returns the Id of the saved instance, or false if error
      */
-    protected function save($double_save = false)
-    {
+    protected function save($double_save = false){
         parent::save($double_save);
         static::set_tags($this->id, (array)$this->tag_array);
         static::set_labels($this->id, (array)$this->label_array);
@@ -108,8 +105,7 @@ class ClipitVideo extends UBItem {
         return $this->id;
     }
 
-    static function update_average_ratings($id)
-    {
+    static function update_average_ratings($id){
         $prop_value_array["overall_rating_average"] = (float)ClipitRating::get_average_rating_for_target($id);
         $prop_value_array["tag_rating_average"] = (float)ClipitTagRating::get_average_rating_for_target($id);
         $prop_value_array["rubric_rating_average"] = (float)ClipitRubricRating::get_average_rating_for_target($id);
@@ -124,7 +120,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool True if OK, false if error
      */
-    static function add_read_array($id, $read_array) {
+    static function add_read_array($id, $read_array){
         return UBCollection::add_items($id, $read_array, static::REL_VIDEO_USER);
     }
 
@@ -136,7 +132,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool True if OK, false if error
      */
-    static function set_read_array($id, $read_array) {
+    static function set_read_array($id, $read_array){
         return UBCollection::set_items($id, $read_array, static::REL_VIDEO_USER);
     }
 
@@ -148,7 +144,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool True if OK, false if error
      */
-    static function remove_read_array($id, $read_array) {
+    static function remove_read_array($id, $read_array){
         return UBCollection::remove_items($id, $read_array, static::REL_VIDEO_USER);
     }
 
@@ -159,7 +155,7 @@ class ClipitVideo extends UBItem {
      *
      * @return static[] Array of Video IDs
      */
-    static function get_read_array($id) {
+    static function get_read_array($id){
         return UBCollection::get_items($id, static::REL_VIDEO_USER);
     }
 
@@ -171,17 +167,16 @@ class ClipitVideo extends UBItem {
      *
      * @return array[bool] Array with key => value: (int)user_id => (bool)read_status
      */
-    static function get_read_status($id, $user_array = null)
-    {
+    static function get_read_status($id, $user_array = null){
         $props = static::get_properties($id, array("read_array", "owner_id"));
         $read_array = $props["read_array"];
         $owner_id = $props["owner_id"];
-        if (!$user_array) {
+        if (!$user_array){
             return $read_array;
         } else {
             $return_array = array();
-            foreach ($user_array as $user_id) {
-                if ((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)) {
+            foreach ($user_array as $user_id){
+                if ((int)$user_id == (int)$owner_id || in_array($user_id, $read_array)){
                     $return_array[$user_id] = true;
                 } else {
                     $return_array[$user_id] = false;
@@ -201,21 +196,20 @@ class ClipitVideo extends UBItem {
      * @return bool|int ID of Video if Ok, false if error
      * @throws InvalidParameterException
      */
-    static function set_read_status($id, $read_value, $user_array)
-    {
+    static function set_read_status($id, $read_value, $user_array){
         $read_array = static::get_read_array($id);
         $update_flag = false;
-        foreach ($user_array as $user_id) {
+        foreach ($user_array as $user_id){
             $index = array_search((int)$user_id, $read_array);
-            if ($read_value === true && $index === false) {
+            if ($read_value === true && $index === false){
                 array_push($read_array, $user_id);
                 $update_flag = true;
-            } elseif ($read_value === false && $index !== false) {
+            } elseif ($read_value === false && $index !== false){
                 array_splice($read_array, $index, 1);
                 $update_flag = true;
             }
         }
-        if ($update_flag) {
+        if ($update_flag){
             return static::set_read_array($id, $read_array);
         } else {
             return $id;
@@ -229,8 +223,7 @@ class ClipitVideo extends UBItem {
      *
      * @return array|bool Returns an array of Tag IDs, or false if error
      */
-    static function get_tags($id)
-    {
+    static function get_tags($id){
         return UBCollection::get_items($id, static::REL_VIDEO_TAG);
     }
 
@@ -242,8 +235,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool Returns true if success, false if error
      */
-    static function add_tags($id, $tag_array)
-    {
+    static function add_tags($id, $tag_array){
         return UBCollection::add_items($id, $tag_array, static::REL_VIDEO_TAG);
     }
 
@@ -255,8 +247,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool Returns true if success, false if error
      */
-    static function remove_tags($id, $tag_array)
-    {
+    static function remove_tags($id, $tag_array){
         return UBCollection::remove_items($id, $tag_array, static::REL_VIDEO_TAG);
     }
 
@@ -273,14 +264,13 @@ class ClipitVideo extends UBItem {
         return UBCollection::set_items($id, $tag_array, static::REL_VIDEO_TAG);
     }
 
-    static function get_by_tag($tag_array)
-    {
+    static function get_by_tag($tag_array){
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get only item ids, not objects
-        foreach ($all_items as $item_id) {
+        foreach ($all_items as $item_id){
             $item_tags = (array)static::get_tags((int)$item_id);
-            foreach ($tag_array as $search_tag) {
-                if (in_array($search_tag, $item_tags)) {
+            foreach ($tag_array as $search_tag){
+                if (in_array($search_tag, $item_tags)){
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -305,8 +295,7 @@ class ClipitVideo extends UBItem {
      *
      * @return array|bool Returns array of Label Ids, or false if error.
      */
-    static function get_labels($id)
-    {
+    static function get_labels($id){
         return UBCollection::get_items($id, static::REL_VIDEO_LABEL);
     }
 
@@ -318,8 +307,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool Returns true if added correctly, or false if error.
      */
-    static function add_labels($id, $label_array)
-    {
+    static function add_labels($id, $label_array){
         return UBCollection::add_items($id, $label_array, static::REL_VIDEO_LABEL);
     }
 
@@ -331,8 +319,7 @@ class ClipitVideo extends UBItem {
      *
      * @return bool Returns true if removed correctly, or false if error.
      */
-    static function remove_labels($id, $label_array)
-    {
+    static function remove_labels($id, $label_array){
         return UBCollection::remove_items($id, $label_array, static::REL_VIDEO_LABEL);
     }
 
@@ -344,19 +331,17 @@ class ClipitVideo extends UBItem {
      *
      * @return bool Returns true if added correctly, or false if error.
      */
-    static function set_labels($id, $label_array)
-    {
+    static function set_labels($id, $label_array){
         return UBCollection::set_items($id, $label_array, static::REL_VIDEO_LABEL);
     }
 
-    static function get_by_label($label_array)
-    {
+    static function get_by_label($label_array){
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
-        foreach ($all_items as $item_id) {
+        foreach ($all_items as $item_id){
             $item_labels = (array)static::get_labels((int)$item_id);
-            foreach ($label_array as $search_tag) {
-                if (in_array($search_tag, $item_labels)) {
+            foreach ($label_array as $search_tag){
+                if (in_array($search_tag, $item_labels)){
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -365,34 +350,29 @@ class ClipitVideo extends UBItem {
         return $return_array;
     }
 
-    static function get_rubric_items($id)
-    {
+    static function get_rubric_items($id){
         return UBCollection::get_items($id, static::REL_VIDEO_RUBRIC);
     }
 
-    static function add_rubric_items($id, $rubric_item_array)
-    {
+    static function add_rubric_items($id, $rubric_item_array){
         return UBCollection::add_items($id, $rubric_item_array, static::REL_VIDEO_RUBRIC);
     }
 
-    static function remove_rubric_items($id, $rubric_item_array)
-    {
+    static function remove_rubric_items($id, $rubric_item_array){
         return UBCollection::remove_items($id, $rubric_item_array, static::REL_VIDEO_RUBRIC);
     }
 
-    static function set_rubric_items($id, $rubric_item_array)
-    {
+    static function set_rubric_items($id, $rubric_item_array){
         return UBCollection::set_items($id, $rubric_item_array, static::REL_VIDEO_RUBRIC);
     }
 
-    static function get_by_rubric_item($rubric_item_array)
-    {
+    static function get_by_rubric_item($rubric_item_array){
         $return_array = array();
         $all_items = static::get_all(0, 0, "", true, true); // Get all item ids, not objects
-        foreach ($all_items as $item_id) {
+        foreach ($all_items as $item_id){
             $item_rubric_items = static::get_rubric_items((int)$item_id);
-            foreach ($rubric_item_array as $search_tag) {
-                if (in_array($search_tag, $item_rubric_items)) {
+            foreach ($rubric_item_array as $search_tag){
+                if (in_array($search_tag, $item_rubric_items)){
                     $return_array[(int)$item_id] = new static((int)$item_id);
                     break;
                 }
@@ -401,46 +381,44 @@ class ClipitVideo extends UBItem {
         return $return_array;
     }
 
-    static function get_scope($id)
-    {
+    static function get_scope($id){
         $site = static::get_site($id, false);
-        if (!empty($site)) {
+        if (!empty($site)){
             return static::SCOPE_SITE;
         }
         $example = static::get_example($id);
-        if (!empty($example)) {
+        if (!empty($example)){
             return static::SCOPE_EXAMPLE;
         }
         $task = static::get_task($id);
-        if (!empty($task)) {
+        if (!empty($task)){
             return static::SCOPE_TASK;
         }
         $group = static::get_group($id);
-        if (!empty($group)) {
+        if (!empty($group)){
             return static::SCOPE_GROUP;
         }
         $activity = static::get_activity($id);
-        if (!empty($activity)) {
+        if (!empty($activity)){
             return static::SCOPE_ACTIVITY;
         }
         $tricky_topic = static::get_tricky_topic($id);
-        if (!empty($tricky_topic)) {
+        if (!empty($tricky_topic)){
             return static::SCOPE_TRICKYTOPIC;
         }
         return null;
     }
 
-    static function get_site($id, $recursive = false)
-    {
+    static function get_site($id, $recursive = false){
         $site_array = UBCollection::get_items($id, static::REL_SITE_VIDEO, true);
-        if (!empty($site_array)) {
+        if (!empty($site_array)){
             return array_pop($site_array);
         }
-        if ($recursive) {
+        if ($recursive){
             $clone_array = static::get_clones($id, true);
-            foreach ($clone_array as $clone_id) {
+            foreach ($clone_array as $clone_id){
                 $site_array = UBCollection::get_items($clone_id, static::REL_SITE_VIDEO, true);
-                if (!empty($site_array)) {
+                if (!empty($site_array)){
                     return array_pop($site_array);
                 }
             }
@@ -448,19 +426,17 @@ class ClipitVideo extends UBItem {
         return null;
     }
 
-    static function get_example($id)
-    {
+    static function get_example($id){
         $example = UBCollection::get_items($id, static::REL_EXAMPLE_VIDEO, true);
-        if (empty($example)) {
+        if (empty($example)){
             return null;
         }
         return array_pop($example);
     }
 
-    static function get_task($id)
-    {
+    static function get_task($id){
         $task = UBCollection::get_items($id, static::REL_TASK_VIDEO, true);
-        if (empty($task)) {
+        if (empty($task)){
             return null;
         }
         return array_pop($task);
@@ -473,35 +449,34 @@ class ClipitVideo extends UBItem {
      *
      * @return int|null Returns the Group ID, or null if none.
      */
-    static function get_group($id) {
+    static function get_group($id){
         $video = new static($id);
-        if(!empty($video->cloned_from)) {
+        if(!empty($video->cloned_from)){
             return static::get_group($video->cloned_from);
         }
         $group = UBCollection::get_items($id, static::REL_GROUP_VIDEO, true);
-        if(empty($group)) {
+        if(empty($group)){
             return null;
         }
         return (int)array_pop($group);
     }
 
-    static function get_activity($id) {
+    static function get_activity($id){
         $group_id = static::get_group($id);
-        if(!empty($group_id)) {
+        if(!empty($group_id)){
             return ClipitGroup::get_activity($group_id);
         } else {
             $activity = UBCollection::get_items($id, static::REL_ACTIVITY_VIDEO, true);
-            if(empty($activity)) {
+            if(empty($activity)){
                 return null;
             }
             return array_pop($activity);
         }
     }
 
-    static function get_tricky_topic($id)
-    {
+    static function get_tricky_topic($id){
         $activity_array = UBCollection::get_items($id, static::REL_TRICKYTOPIC_VIDEO, true);
-        if (empty($activity_array)) {
+        if (empty($activity_array)){
             return null;
         }
         return array_pop($activity_array);
@@ -515,9 +490,8 @@ class ClipitVideo extends UBItem {
      *
      * @return string YouTube video URL
      */
-    static function upload_to_youtube($local_video_path, $title = "")
-    {
-        if (!get_config("google_refresh_token")) {
+    static function upload_to_youtube($local_video_path, $title = ""){
+        if (!get_config("google_refresh_token")){
             return false;
         }
         set_include_path(
@@ -532,14 +506,14 @@ class ClipitVideo extends UBItem {
         $client->setClientSecret(get_config("google_secret"));
         try {
             $client->setAccessToken(get_config("google_token"));
-        } catch (Exception $e) {
+        } catch (Exception $e){
             error_log($e);
         }
-        if ($client->isAccessTokenExpired()) {
+        if ($client->isAccessTokenExpired()){
             $refresh_token = get_config("google_refresh_token");
             $client->refreshToken($refresh_token);
         }
-        if (!$client->getAccessToken()) {
+        if (!$client->getAccessToken()){
             return null;
         }
         // Define an object that will be used to make all API requests.
@@ -576,7 +550,7 @@ class ClipitVideo extends UBItem {
         // Read the media file and upload it chunk by chunk.
         $status = false;
         $handle = fopen($local_video_path, "rb");
-        while (!$status && !feof($handle)) {
+        while (!$status && !feof($handle)){
             $chunk = fread($handle, $chunkSizeBytes);
             $status = $media->nextChunk($chunk);
         }
@@ -592,14 +566,13 @@ class ClipitVideo extends UBItem {
      * @param $url
      * @return array|bool
      */
-    static function video_url_parser($url)
-    {
-        if ($parse_url = parse_url($url)) {
-            if (!isset($parts["scheme"])) {
+    static function video_url_parser($url){
+        if ($parse_url = parse_url($url)){
+            if (!isset($parts["scheme"])){
                 $url = "http://$url";
             }
         }
-        if (!isset($url) || !filter_var($url, FILTER_VALIDATE_URL)) {
+        if (!isset($url) || !filter_var($url, FILTER_VALIDATE_URL)){
             return false;
         }
         $video_patterns = array('#(((http://)?)|(^./))(((www.)?)|(^./))youtube\.com/watch[?]v=([^\[\]()<.,\s\n\t\r]+)#i'
@@ -610,10 +583,10 @@ class ClipitVideo extends UBItem {
         $favicon_url_base = "http://www.google.com/s2/favicons?domain=";
 
         $output = array();
-        foreach ($video_patterns as $video_pattern) {
-            if (preg_match($video_pattern, $url) > 0) {
+        foreach ($video_patterns as $video_pattern){
+            if (preg_match($video_pattern, $url) > 0){
                 // Youtube
-                if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false) {
+                if (strpos($url, 'youtube.com') != false || strpos($url, 'youtu.be') != false){
                     preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $matches);
                     $output = array(
                         'id' => $matches[0],
@@ -622,7 +595,7 @@ class ClipitVideo extends UBItem {
                         'favicon' => $favicon_url_base . $parse_url['host']
                     );
                     // Vimeo
-                } else if (strpos($url, 'vimeo.com') != false) {
+                } else if (strpos($url, 'vimeo.com') != false){
                     preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\/)[^&\n]+(?=\?)|(?<=v=)[^&\n]+|(?<=vimeo.com/)[^&\n]+#", $url, $matches);
                     $data = file_get_contents("http://vimeo.com/api/v2/video/$matches[0].json");
                     $data = array_pop(json_decode($data));
@@ -635,7 +608,7 @@ class ClipitVideo extends UBItem {
                 }
             }
         }
-        if (!$output['id']) {
+        if (!$output['id']){
             return false;
         }
         // Video Data output
