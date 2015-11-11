@@ -413,9 +413,8 @@ function setup_footer_menus()
         'footer_clipit',
         array(
             'name' => 'student',
-            'href' => 'http://clipit.es/tutorials/student_'.get_current_language().'.pdf',
+            'href' => 'clipit/tutorials/student',
             'text' => elgg_echo('student'),
-            'target' => '_blank',
             'priority' => 460,
             'section' => 'tutorials',
         )
@@ -424,9 +423,8 @@ function setup_footer_menus()
         'footer_clipit',
         array(
             'name' => 'teacher',
-            'href' => 'http://clipit.es/tutorials/teacher_'.get_current_language().'.pdf',
+            'href' => 'clipit/tutorials/teacher',
             'text' => elgg_echo('teacher'),
-            'target' => '_blank',
             'priority' => 465,
             'section' => 'tutorials',
         )

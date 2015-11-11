@@ -9,6 +9,7 @@ $english = array(
     'locale' => 'en_GB',
     'profile:avatar:from' => '%s\'s avatar',
     //ACCESSIBILITY TEXTS
+    'content:show_hide' => 'Show/Hide content',
     'progress:activity' => 'Activity\'s progress',
     'user:profile:avatar'=> 'User\'s avatar',
     'activity:menu:start' => 'Main page of the activity',

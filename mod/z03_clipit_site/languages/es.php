@@ -9,6 +9,7 @@ $spanish = array(
     'locale' => 'es_ES',
     'profile:avatar:from' => 'Imagen de perfil de %s',
      //MODIFICACIONES ACCESIBILIDAD
+    'content:show_hide' => 'Ocultar/Mostrar contenido',
     'progress:activity' => 'Progreso de la actividad',
     'progressbar:name' => 'Barra de progreso',
     'activity:menu:start' => 'Página principal de la actividad',

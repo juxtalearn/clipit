@@ -51,6 +51,7 @@ if (is_array($items) && count($items) > 0):
                             'class' => 'activity-point margin-right-10 pull-left',
                             'style' => 'width: 15px; height: 15px; background: #'.$item->color,
                             'text' => '',
+                            'aria-label' => $item->name,
                             'title' => $item->name,
                             'is_trusted' => true,
                         ));

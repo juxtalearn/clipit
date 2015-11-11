@@ -10,7 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         Clipit
  */
-$header ='<a class="fa fa-minus collapse" aria-hidden="true" aria-label="Ocultar/Mostrar contenido" href="javascript:;"></a>';
+$header ='<a class="fa fa-minus collapse" aria-hidden="true" aria-label="'.elgg_echo('content:show_hide').'" href="javascript:;"></a>';
 $header .= "<span class=\"widget-viewall\">{$vars['all_link']}</span>";
 $header .= '<h3>' . $vars['title'] . '</h3>';
 $class = "module-".$vars['name'];
