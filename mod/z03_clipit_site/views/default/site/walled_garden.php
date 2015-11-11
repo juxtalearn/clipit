@@ -24,13 +24,13 @@ $header_top = elgg_view('page/elements/header_top', array('walled_garden' => tru
 $header_account = elgg_view('page/elements/header_account', array('images_dir' => $images_dir));
 
 
-$accounts = array(
-    'facebook'  => 'https://www.facebook.com/jxl.juxtalearn',
-    'twitter'   => 'https://twitter.com/juxtalearn_eu',
-    'youtube'   => 'https://www.youtube.com/channel/UCAZfYqqx1pGvpyUaxikBlTw',
-    'vimeo'     => 'http://vimeo.com/jxl',
-    'linkedin'  => 'https://www.linkedin.com/groups?gid=4841898',
-);
+$accounts = [
+    'facebook'  => 'https://www.facebook.com/clipit.es',
+    'twitter'   => 'https://twitter.com/clipit_es',
+    'youtube'   => 'https://www.youtube.com/channel/UCbIQ6SMg1MKbkSfjXzJxslA',
+    'vimeo'     => 'remove-me', //@todo
+    'linkedin'  => 'https://www.linkedin.com/grp/home?gid=8433294',
+];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
