@@ -133,7 +133,7 @@ $spanish = array(
     'position:ta' => 'Consultor Técnico',
 
     // Landing page
-    'sites' => 'Sitios',
+    'sites' => 'Centros',
     'videos' => 'Explorar',
     'connect' => 'Conéctate',
     'try_out' => 'Demo',

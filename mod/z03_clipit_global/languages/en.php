@@ -126,17 +126,16 @@ $english = array(
     'position:ra' => 'Research Advisor',
     'position:ta' => 'Technical Advisor',
     // Landing page
-    'sites' => 'Sites',
+    'sites' => 'Centres',
     'videos' => 'Explore',
     'connect' => 'Connect',
-    'sites' => 'Sites',
     'try_out' => 'Demo',
     'latest:videos' => 'Latest videos',
     'published:on' => 'Published on',
     'videos:view_all' => 'View videos',
     'tricky_topics:view_all' => 'View tricky topics',
-    'educational:center' => 'Educational center',
-    'educational:centers' => 'Educational centers',
+    'educational:center' => 'Educational centre',
+    'educational:centers' => 'Educational centres',
     'instalations' => 'Trials',
 
     // Countries
