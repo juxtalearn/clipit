@@ -3,7 +3,7 @@ Clipit Reference: http://juxtalearn.github.io/clipit/
 /**
  * Clipit - The Clipit project Web space
  * Creation date:   2013-10-10
- * @author          URJC LITE Team - See CONTRIBUTORS.txt
+ * @author          URJC Clipit Team - See CONTRIBUTORS.txt
  * @version         2.3
  * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
@@ -12,7 +12,7 @@ Clipit Reference: http://juxtalearn.github.io/clipit/
 
 See CONTRIBUTORS.txt for development credits.
 
-The Clipit project site can be found at http://juxtalearn.eu
+The Clipit site can be found at http://clipit.es
 
 Clipit is released under the GNU Affero General Public License v3.
 See LICENSE.txt in the root of the package you downloaded.
