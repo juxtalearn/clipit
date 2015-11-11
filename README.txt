@@ -4,7 +4,7 @@ Clipit Reference: http://juxtalearn.github.io/clipit/
  * Clipit - The Clipit project Web space
  * Creation date:   2013-10-10
  * @author          URJC Clipit Team - See CONTRIBUTORS.txt
- * @version         2.3
+ * @version         2.4.x
  * @link            http://clipit.es
  * @license         GNU Affero General Public License v3
  * @package         Clipit
