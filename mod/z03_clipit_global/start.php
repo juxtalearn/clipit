@@ -73,7 +73,7 @@ function clipit_global_init(){
         // Clipit sections
         $return_value[] = 'clipit/team';
         $return_value[] = 'clipit/about';
-        $return_value[] = 'clipit/tutorials';
+        $return_value[] = 'clipit/tutorials/.*';
         $return_value[] = 'clipit/developers';
         // Help sections
         $return_value[] = 'help/support_center';
