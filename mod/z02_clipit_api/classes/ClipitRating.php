@@ -44,8 +44,7 @@ class ClipitRating extends UBItem {
      *
      * @param ElggEntity $elgg_entity Elgg Object to load parameters from.
      */
-    protected function copy_from_elgg($elgg_entity)
-    {
+    protected function copy_from_elgg($elgg_entity){
         parent::copy_from_elgg($elgg_entity);
         $this->target = (int)$elgg_entity->get("target");
         $this->overall = (bool)$elgg_entity->get("overall");
@@ -76,8 +75,7 @@ class ClipitRating extends UBItem {
         return $this->id;
     }
 
-    static function get_target($id)
-    {
+    static function get_target($id){
         $prop_value_array = static::get_properties($id, array("target"));
         if (empty($prop_value_array)) {
             return null;
@@ -93,8 +91,7 @@ class ClipitRating extends UBItem {
      *
      * @return ClipitRating|null Returns a Rating, or null if any.
      */
-    static function get_user_rating_for_target($user_id, $target_id)
-    {
+    static function get_user_rating_for_target($user_id, $target_id){
         $rating = elgg_get_entities_from_metadata(array(
             'type' => static::TYPE,
             'subtype' => static::SUBTYPE,
@@ -116,8 +113,7 @@ class ClipitRating extends UBItem {
      *
      * @return float Average overall rating [0.0-1.0]
      */
-    static function get_average_rating_for_target($target_id)
-    {
+    static function get_average_rating_for_target($target_id){
         $rating_array = static::get_by_target(array($target_id));
         $rating_array = $rating_array[$target_id];
         $average_rating = 0;
