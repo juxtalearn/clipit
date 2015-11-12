@@ -13,10 +13,11 @@
 $tag = elgg_extract('tag', $vars);
 $tag_rating = elgg_extract('rating_tag', $vars);
 
-if($tag_rating < 0.3){
+if($tag_rating <= 0.33){
     $icon = 'fa-frown-o red';
-}
-if($tag_rating >= 0.75){
+} elseif($tag_rating <= 0.66){
+    $icon = 'fa-meh-o yellow';
+} else{
     $icon = 'fa-smile-o green';
 }
 ?>
