@@ -37,6 +37,7 @@ $href = elgg_extract('href', $vars);
                     ?>
                 </h4>
                 <?php echo elgg_view('tricky_topic/tags/view', array('tags' => $video->tag_array, 'width' => 105, 'limit' => 2)); ?>
+                <?php if($vars['comments'] !== false):?>
                 <small class="show" style="margin-top: -5px;">
                     <?php
                     $total_comments = array_pop(ClipitComment::count_by_destination(array($video->id), true));
@@ -52,6 +53,7 @@ $href = elgg_extract('href', $vars);
                     </strong>
                     <?php echo elgg_view('output/friendlytime', array('time' => $video->time_created));?>
                 </small>
+                <?php endif;?>
             </div>
         </div>
     </div>

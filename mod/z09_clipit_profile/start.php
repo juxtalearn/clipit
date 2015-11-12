@@ -49,7 +49,7 @@ function profile_page_handler($page){
                 $sub_title = '<small class="margin-top-5 show yellow">'.elgg_echo('teacher').'</small>';
                 break;
             case ClipitUser::ROLE_ADMIN:
-                $sub_title = '<small class="margin-top-5 red">'.elgg_echo('admin').'</small>';
+                $sub_title = '<small class="margin-top-5 show red">'.elgg_echo('admin').'</small>';
                 break;
         }
         $params = array(
