@@ -450,15 +450,15 @@ class ClipitVideo extends UBItem {
      * @return int|null Returns the Group ID, or null if none.
      */
     static function get_group($id){
+        $group = UBCollection::get_items($id, static::REL_GROUP_VIDEO, true);
+        if(!empty($group)){
+            return (int)array_pop($group);
+        }
         $video = new static($id);
         if(!empty($video->cloned_from)){
             return static::get_group($video->cloned_from);
         }
-        $group = UBCollection::get_items($id, static::REL_GROUP_VIDEO, true);
-        if(empty($group)){
-            return null;
-        }
-        return (int)array_pop($group);
+        return null;
     }
 
     static function get_activity($id){
