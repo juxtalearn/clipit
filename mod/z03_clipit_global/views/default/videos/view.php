@@ -29,7 +29,7 @@ $edu = elgg_extract('site', $vars);
     </div>
     <div class="details">
         <div class="description shorten row" style="background: #fff;">
-            <div class="col-md-7">
+            <div class="col-md-<?php echo $edu ? '7':'12';?>">
                 <small class="show margin-bottom-10">
                     <strong><?php echo elgg_echo('published:on');?></strong>
                     <?php echo $date;?>
@@ -45,6 +45,7 @@ $edu = elgg_extract('site', $vars);
                     <?php echo elgg_view("global/tags/view", array('tags' => $video->tag_array)); ?>
                 <?php endif;?>
             </div>
+            <?php if($edu):?>
             <div class="col-md-5">
                 <div class="content-block">
                     <small><strong><?php echo elgg_echo('educational:centers');?></strong></small>
@@ -67,6 +68,7 @@ $edu = elgg_extract('site', $vars);
                     </div>
                 </div>
             </div>
+            <?php endif;?>
         </div>
     </div>
 </div>

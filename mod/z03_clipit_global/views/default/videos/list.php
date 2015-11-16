@@ -11,6 +11,7 @@
  * @package         Clipit
  */
 $videos = elgg_extract('entities', $vars);
+$total_count = elgg_extract('total_count', $vars);
 ?>
 <script>
     $(function(){
@@ -190,6 +191,7 @@ $videos = elgg_extract('entities', $vars);
 
     ?>
 </div>
+<?php echo clipit_get_pagination(array('count' => $total_count, 'limit' => 12)); ?>
 <style>
     .tags{
         display: block;

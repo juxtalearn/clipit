@@ -66,12 +66,14 @@ $videos = elgg_extract('videos', $vars);
                 </strong>
                 <small class="show">
                     <?php
-                    echo elgg_view('output/url', array(
-                        'href' => "videos/".elgg_get_friendly_title($edu->name)."/".$edu->id,
-                        'text'  => $edu->name,
-                        'class' => 'text-muted',
-                        'title' => $edu->name,
-                    ));
+                    if(isset($edu)) {
+                        echo elgg_view('output/url', array(
+                            'href' => "videos/" . elgg_get_friendly_title($edu->name) . "/" . $edu->id,
+                            'text' => $edu->name,
+                            'class' => 'text-muted',
+                            'title' => $edu->name,
+                        ));
+                    }
                     ?>
                 </small>
             </div>
