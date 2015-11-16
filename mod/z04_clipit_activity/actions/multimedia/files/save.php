@@ -34,6 +34,14 @@ $data = array(
 );
 $href = REFERER;
 
+if(get_input('clone') && $entity_id){
+    $clone_id = ClipitFile::create_clone($entity_id, false, true);
+    ClipitFile::set_properties($clone_id, array('time_created' => time()));
+    if($group_id = ClipitFile::get_group($entity_id)){
+        ClipitGroup::add_files($group_id, array($clone_id));
+    }
+    forward($href);
+}
 if(trim($file_name) == ""){
     register_error(elgg_echo("file:cantedit"));
 } else{

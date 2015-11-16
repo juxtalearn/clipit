@@ -27,7 +27,9 @@ if($entity->owner_id == $user_id || hasTeacherAccess($user->role) || ($member_gr
             "href" => elgg_get_site_url()."ajax/view/modal/multimedia/{$type}/edit?id={$entity->id}",
             "data-toggle" => "modal"
         ),
-        'remove' => array("href" => "action/multimedia/{$type}s/remove?id={$entity->id}")
+        'remove' => array("href" => "action/multimedia/{$type}s/remove?id={$entity->id}"),
+        'clone' => array("href" => "action/multimedia/{$type}s/save?clone=true&entity-id={$entity->id}"),
+        'disabled' => $vars['disabled']
     );
     if($entity->owner_id == $user_id && $vars['remove'] !== false){
         $options['remove'] = array("href" => "action/multimedia/{$type}s/remove?id={$entity->id}");

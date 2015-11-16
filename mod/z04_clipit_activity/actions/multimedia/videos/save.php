@@ -28,6 +28,14 @@ $data = array(
     'description' => $description,
 );
 $href = REFERER;
+if(get_input('clone') && $video_id){
+    $clone_id = ClipitVideo::create_clone($video_id, false, true);
+    ClipitVideo::set_properties($clone_id, array('time_created' => time()));
+    if($group_id = ClipitVideo::get_group($video_id)){
+        ClipitGroup::add_videos($group_id, array($clone_id));
+    }
+    forward($href);
+}
 if(trim($title) == ""){
     register_error(elgg_echo("video:cantadd"));
 } else {

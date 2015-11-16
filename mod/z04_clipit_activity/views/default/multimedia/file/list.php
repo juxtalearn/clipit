@@ -42,7 +42,7 @@ if(!empty($files)) {
         width: 100%;
     }
     .elements-list{
-        overflow: hidden;
+        /*overflow: hidden;*/
     }
     .elements-list > li{
         padding: 10px 0;
@@ -65,6 +65,9 @@ if(!empty($files)) {
     .select-simple{
         vertical-align: top
     }
+    #add-file .required-message{
+        display: none;
+    }
 </style>
 <?php if($vars['options'] !== false && $vars['create']):?>
     <?php echo elgg_view("page/elements/list/options", array('options' => $list_options));?>
@@ -72,7 +75,7 @@ if(!empty($files)) {
 <?php endif;?>
 <div class="clearfix"></div>
 <?php if(!empty($files)):?>
-<ul class="elements-list margin-top-10">
+<ul class="elements-list margin-top-10 clearfix">
     <?php foreach($files as $file):
         $file_url = "{$href}/view/{$file->id}". ($task_id ? "?task_id=".$task_id: "");
         $unlinked = false;
@@ -155,11 +158,18 @@ if(!empty($files)) {
                     endif;
                 endif;
                 ?>
-                <?php if($vars['options'] !== false || $vars['actions']):?>
+                <?php
+                if($vars['options'] !== false || $vars['actions']):
+                    $disabled = false;
+                    if(count(ClipitFile::get_clones($file->id))){
+                        $disabled = array('remove', 'edit');
+                    }
+                ?>
                     <?php echo elgg_view("multimedia/owner_options", array(
                         'entity' => $file,
                         'type' => 'file',
                         'remove' => count(ClipitFile::get_clones($file->id)) > 0 ? false:true,
+                        'disabled' => $disabled
                     ));
                     ?>
                 <?php endif;?>

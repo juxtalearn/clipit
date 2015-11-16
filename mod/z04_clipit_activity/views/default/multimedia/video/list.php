@@ -107,11 +107,18 @@ if($unlink){
                     ?>
                 <?php endif; ?>
 
-                <?php if($vars['actions']):?>
+                <?php
+                if($vars['actions']):
+                    $disabled = false;
+                    if(count(ClipitVideo::get_clones($video->id))){
+                        $disabled = array('remove', 'edit');
+                    }
+                ?>
                     <?php echo elgg_view("multimedia/owner_options", array(
                         'entity' => $video,
                         'type' => 'video',
                         'remove' => count(ClipitVideo::get_clones($video->id)) > 0 ? false:true,
+                        'disabled' => $disabled
                     ));
                     ?>
                 <?php endif; ?>
