@@ -8,7 +8,7 @@ clipit.init = function() {
         if($(this).find('input, select').filter('[required]')) {
             $(this).find('input[required], select[required]').prev('label:not(:empty)').addClass('label-asterisk');
             var btn = $(this).find('input[type="submit"]');
-            btn.parent('div').prepend('<small class="pull-left" style="line-height: 30px;margin-right: 20px;">'+elgg.echo('input:required:information')+'</small>');
+            btn.parent('div').prepend('<small class="pull-left required-message" style="line-height: 30px;margin-right: 20px;">'+elgg.echo('input:required:information')+'</small>');
         }
     });
     /**

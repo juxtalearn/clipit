@@ -11,22 +11,49 @@
  * @package         Clipit
  */
 $entity = elgg_extract('entity', $vars);
+$disabled = elgg_extract('disabled', $vars);
 $options_list = array();
+
 if(isset($vars['edit'])){
-    $options_list[] = array(
+    $params = array('icon' => 'pencil');
+    if(in_array('edit', $disabled)){
+        $params = array(
+            'icon' => 'ban',
+            'item_class' => 'disabled',
+            'attr' => array_merge($vars['edit'], array('href' => false, 'data-target' => false))
+        );
+    }
+    $options_list[] = array_merge(array(
         'attr' => $vars['edit'],
         'text' => elgg_echo('edit'),
-        'icon' => 'pencil'
-    );
+    ), $params);
 }
+
 if(isset($vars['remove'])){
     $vars['remove']['href'] =  elgg_add_action_tokens_to_url(elgg_normalize_url($vars['remove']['href']), true);
     $vars['remove']['class'] = "remove remove-object";
     $vars['id']['class'] = $entity->id;
-    $options_list[] = array(
+    $params = array('icon' => 'trash-o');
+    if(in_array('remove', $disabled)){
+        $params = array(
+            'icon' => 'ban',
+            'item_class' => 'disabled',
+            'attr' => array_merge($vars['remove'], array('href' => false, 'class' => 'remove'))
+        );
+    }
+    $options_list[] = array_merge(array(
         'attr' => $vars['remove'],
         'text' => elgg_echo('remove'),
-        'icon' => 'trash-o',
+    ), $params);
+}
+
+if(isset($vars['clone'])){
+    $vars['clone']['href'] =  elgg_add_action_tokens_to_url(elgg_normalize_url($vars['clone']['href']), true);
+    $vars['id']['class'] = $entity->id;
+    $options_list[] = array(
+        'attr' => $vars['clone'],
+        'text' => elgg_echo('duplicate'),
+        'icon' => 'copy'
     );
 }
 
