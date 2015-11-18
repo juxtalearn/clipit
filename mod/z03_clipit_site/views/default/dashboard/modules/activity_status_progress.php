@@ -104,7 +104,8 @@ foreach($activities as $activity):
         <ul class="panel-group margin-top-10 collapse" id="accordion_<?php echo $activity->id;?>">
         <li class="text-muted margin-bottom-5"><?php echo elgg_echo('activity:tasks');?></li>
         <?php foreach($tasks as $task): ?>
-            <li class="panel panel-blue list-item">
+
+            <li class="panel panel-blue list-item-5" style="border-bottom: 1px solid #ccc;">
                 <div class="panel-heading task-view" data-task="<?php echo $task->id;?>" style="cursor: pointer" data-toggle="collapse" data-parent="#accordion_<?php echo $activity->id;?>" href="#collapse_<?php echo $task->id;?>">
                     <div class="pull-right margin-top-5">
                         <?php echo elgg_view("tasks/icon_task_status", array('status' => $task->status)); ?>

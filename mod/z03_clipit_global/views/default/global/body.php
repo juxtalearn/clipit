@@ -240,15 +240,6 @@ $account = elgg_extract('accounts', $vars);
                         ))
                     ));
                     ?>
-                    <?php echo elgg_view('output/url', array(
-                        'href' => $account['vimeo'],
-                        'target' => '_blank',
-                        'text'  => elgg_view('output/img', array(
-                            'src' => $images_dir . "/social/vimeo.png",
-                            'alt' => 'Vimeo logo'
-                        ))
-                    ));
-                    ?>
                 </div>
             </div>
         </div>

@@ -16,6 +16,7 @@ $entity = elgg_extract('entity', $vars);
 $input_array = elgg_extract('input_array', $vars);
 echo elgg_view("multimedia/file/templates/attach", array('input_prefix' => $input_array));
 ?>
+<p><strong><?php echo elgg_echo('task:resource_download:select');?></strong></p>
 <?php if($entity->task_type == ClipitTask::TYPE_RESOURCE_DOWNLOAD):?>
     <script>
         $(function(){

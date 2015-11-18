@@ -213,6 +213,7 @@ clipit.task.selectResource_download = function(hook, type, params, value){
         elgg.get('ajax/view/multimedia/attach/list', {
             success: function (data) {
                 $container.html(data).show();
+                $container.prepend('<p><strong>'+elgg.echo('task:resource_download:select')+'</strong></p>');
                 var $attach_list = $container.find('.attach_list');
                 $attach_list.show();
                 $attach_list.attach_multimedia({
@@ -238,6 +239,19 @@ clipit.task.selectOther = function(hook, type, params, value){
     return value;
 };
 elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectOther);
+
+clipit.task.selectText_upload = function(hook, type, params, value){
+    if(params.type == '<?php echo ClipitTask::TYPE_TEXT_UPLOAD;?>'){
+        var $task = params.element,
+            $container = params.container,
+            $feedback_task = $task.find('.feedback_task');;
+        $container.html('').hide();
+        $task.find('.feedback-module').fadeIn('fast');
+        $feedback_task.find('.feedback-task-type').val('<?php echo ClipitTask::TYPE_TEXT_UPLOAD;?>');
+    }
+    return value;
+};
+elgg.register_hook_handler('clipit:task:type', 'system', clipit.task.selectText_upload);
 
 clipit.task.selectVideo_upload = function(hook, type, params, value){
     if(params.type == '<?php echo ClipitTask::TYPE_VIDEO_UPLOAD;?>'){
@@ -308,7 +322,7 @@ clipit.task.onSelect = function(e){
     $options_container.find('.task-advanced-options-collapse').addClass('collapse').removeClass('in');
     $options_container.hide().find('.select-options').hide();
     if($options.length > 0){
-        $options_container.fadeIn('slow');
+        $options.fadeIn('slow');
         $options.show();
     }
     // Trigger task type event

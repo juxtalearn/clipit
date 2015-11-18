@@ -321,6 +321,7 @@ $spanish = array(
     'task:select:task_type' => 'Seleccionar tipo de tarea',
     'task:task_type' => 'Tipo de tarea',
     'task:resource_download' => 'Ver/Descargar materiales',
+    'task:resource_download:select' => 'Selecciona los materiales para esta tarea',
     'task:feedback' => 'Tarea de feedback',
     'task:feedback:linked' => 'Tarea de feedback vinculada',
     'task:feedback:check' => 'Añadir una tarea de feedback',

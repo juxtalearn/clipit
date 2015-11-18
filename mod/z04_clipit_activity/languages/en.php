@@ -319,6 +319,7 @@ $english = array(
     'task:select:task_type' => 'Select task type',
     'task:task_type' => 'Task type',
     'task:resource_download' => 'View teacher materials',
+    'task:resource_download:select' => 'Select the materials for this task',
     'task:feedback' => 'Task feedback',
     'task:feedback:linked' => 'Link to',
     'task:feedback:check' => 'Check to create a feedback task',

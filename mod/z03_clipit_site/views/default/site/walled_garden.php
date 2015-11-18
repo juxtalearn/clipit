@@ -28,7 +28,6 @@ $accounts = [
     'facebook'  => 'https://www.facebook.com/clipit.es',
     'twitter'   => 'https://twitter.com/clipit_es',
     'youtube'   => 'https://www.youtube.com/channel/UCbIQ6SMg1MKbkSfjXzJxslA',
-    'vimeo'     => 'remove-me', //@todo
     'linkedin'  => 'https://www.linkedin.com/grp/home?gid=8433294',
 ];
 ?>
