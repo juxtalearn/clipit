@@ -21,6 +21,16 @@ if($input_prefix) {
 $object = ClipitSite::lookup($entity_id);
 $files = $object['subtype']::get_files($entity_id);
 $id = uniqid('attach_files_');
+
+switch($object['subtype']){
+    case 'ClipitActivity':
+        $href_file = "clipit_activity/{$entity_id}/resources/view/";
+        break;
+    case 'ClipitGroup':
+        $activity_id = ClipitGroup::get_activity($entity_id);
+        $href_file = "clipit_activity/{$activity_id}/group/{$entity_id}/repository/view/";
+        break;
+}
 ?>
 <script>
     var $container = $('#<?php echo $id;?>'),
@@ -78,6 +88,22 @@ foreach($files as $file_id):
             value="<?php echo $file_id;?>"
             id="item_<?php echo $file_id;?>"
             >
+        <div class="attach-options">
+            <?php echo elgg_view('output/url', array(
+                'href' => 'file/download/'.$file_id,
+                'class' => 'fa fa-download btn-icon',
+                'target' => '_blank',
+                'text'  => ''
+            ));
+            ?>
+            <?php echo elgg_view('output/url', array(
+                'href' => $href_file.$file_id,
+                'class' => 'fa fa-external-link btn-icon',
+                'target' => '_blank',
+                'text'  => ''
+            ));
+            ?>
+        </div>
         <div class="attach-block <?php echo  $selected ? 'selected' : false;?>">
             <div class="multimedia-preview" >
                 <?php echo elgg_view("multimedia/file/preview", array('file'  => $file, 'size' => 'medium'));?>

@@ -375,6 +375,23 @@
       border-radius: 4px;
     }
   }
+  .multimedia-block {
+    .attach-options {
+      position: absolute;
+      z-index: 40;
+      bottom: 0;
+      right: 0;
+      margin: 5px;
+      display: none;
+    }
+    &:hover,
+    &:focus{
+      .attach-options {
+        display: block;
+      }
+    }
+  }
+
 }
 .attach-preview{
   width: 60px;

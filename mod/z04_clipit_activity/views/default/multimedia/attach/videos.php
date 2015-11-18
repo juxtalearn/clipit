@@ -21,6 +21,16 @@ if($input_prefix) {
 $object = ClipitSite::lookup($entity_id);
 $videos = $object['subtype']::get_videos($entity_id);
 $id = uniqid('add_video_');
+
+switch($object['subtype']){
+    case 'ClipitActivity':
+        $href_video = "clipit_activity/{$entity_id}/resources/view/";
+        break;
+    case 'ClipitGroup':
+        $activity_id = ClipitGroup::get_activity($entity_id);
+        $href_video = "clipit_activity/{$activity_id}/group/{$entity_id}/repository/view/";
+        break;
+}
 ?>
 <script>
 $(function() {
@@ -153,6 +163,15 @@ $(function() {
                     value="<?php echo $video_id;?>"
                     id="item_<?php echo $video_id;?>"
                     >
+                <div class="attach-options">
+                    <?php echo elgg_view('output/url', array(
+                        'href' => $href_video.$video_id,
+                        'class' => 'fa fa-external-link btn-icon',
+                        'target' => '_blank',
+                        'text'  => ''
+                    ));
+                    ?>
+                </div>
                 <div class="attach-block <?php echo  $selected ? 'selected' : false;?>">
                     <div class="multimedia-preview" style="margin-right: 0;float: none;display: block;height: 100%;">
                         <img src="<?php echo $video->preview;?>" style="width: 100%;">
