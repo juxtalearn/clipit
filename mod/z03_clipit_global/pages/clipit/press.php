@@ -12,6 +12,8 @@
  */
 $id = '0B9WHmENWg_ExUmJ3eDZ1blRRblk';
 $view_type = 'grid';
+$title = elgg_echo('press_kit');
+
 $content = '<iframe src="https://drive.google.com/embeddedfolderview?id='.$id.'#'.$view_type.'" width="100%" height="500" frameborder="0"></iframe>';
 $params = array(
     'content' => $content,

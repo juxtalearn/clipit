@@ -10,6 +10,7 @@
  * @license         GNU Affero General Public License v3
  * @package         Clipit
  */
+$title = elgg_echo('menu:footer_clipit:header:tutorials').': '.elgg_echo('student');
 $id_array = array(
     'student' => array(
         'es' => '19NW2yKFpEu7bO-anlYTpyKoykGebpB7EmvUg60ylHDs',
