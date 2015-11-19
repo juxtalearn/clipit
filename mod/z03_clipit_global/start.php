@@ -502,6 +502,16 @@ function setup_footer_menus()
     elgg_register_menu_item(
         'footer_clipit',
         array(
+            'name' => 'press',
+            'href' => 'clipit/press',
+            'text' => elgg_echo('press_kit'),
+            'priority' => 455,
+            'section' => 'clipit',
+        )
+    );
+    elgg_register_menu_item(
+        'footer_clipit',
+        array(
             'name' => 'developers',
             'href' => 'http://juxtalearn.github.io/clipit/',
             'text' => elgg_echo('developers'),
@@ -563,6 +573,9 @@ function clipit_footer_page($page)
             break;
         case "tutorials":
             include "$file_dir/tutorials.php";
+            break;
+        case "press":
+            include "$file_dir/press.php";
             break;
         case "team":
             include "$file_dir/team.php";

@@ -5,6 +5,7 @@
  */
 
 $english = array(
+
     'input:required:information' => 'All required fields are marked with an asterisk (*)',
     'locale' => 'en_GB',
     'profile:avatar:from' => '%s\'s avatar',
@@ -111,6 +112,7 @@ $english = array(
     'send:email_to_site' => 'Send email to site',
 
     'about' => 'About',
+    'press_kit' => 'Press',
     'team' => 'Team',
     'internship' => 'Internship',
     'internships' => 'Internships',

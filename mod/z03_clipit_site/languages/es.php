@@ -111,6 +111,7 @@ $spanish = array(
     'send:email_to_site' => 'Enviar email al sitio web',
 
     'about' => 'Sobre',
+    'press_kit' => 'Prensa',
     'team' => 'Equipo',
     'internship' => 'Colaborador',
     'internships' => 'Colaboradores',
