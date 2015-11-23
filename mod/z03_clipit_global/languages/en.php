@@ -5,6 +5,8 @@
  */
 
 $english = array(
+    'global:videos:none' => 'No public videos',
+    'global:videos:other' => 'Other public videos',
     'clipit:site' => 'Clipit',
     'loading' => 'loading',
     'loading:content' => 'Loading content',

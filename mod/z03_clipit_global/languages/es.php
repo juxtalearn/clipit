@@ -5,6 +5,8 @@
  */
 
 $spanish = array(
+    'global:videos:none' => 'No hay vídeos públicos',
+    'global:videos:other' => 'Vídeos de otros centros',
     'clipit:site' => 'Clipit',
     'loading' => 'Cargando',
     'loading:content' => 'Cargando contenido',

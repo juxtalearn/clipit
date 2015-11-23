@@ -361,15 +361,22 @@ function videos_section($page){
                     clipit_get_offset()
                 );
             }
-            $sidebar .= elgg_view_module('aside',
-                false,
-                elgg_view('walled_garden/sidebar/videos',
-                    array('videos' => array_slice($videos, 0, 5))
-                )
-            );
-            $content = elgg_view('output/empty', array('value' => elgg_echo('videos:none')));
+
             if($videos){
                 $content = elgg_view('videos/list', array('entities' => $videos, 'total_count' => $total_videos));
+                $sidebar .= elgg_view_module('aside',
+                    false,
+                    elgg_view('walled_garden/sidebar/videos',
+                        array('videos' => array_slice($videos, 0, 5))
+                    )
+                );
+            } else {
+                $content = elgg_view('output/empty', array('value' => elgg_echo('global:videos:none')));
+                $content .= '<hr/> ';
+                $content .= '<h2 class="title-block">'.elgg_echo('global:videos:other').'</h2>';
+                $content .= elgg_view('videos/list_summary', array(
+                    'entities' => ClipitRemoteVideo::get_all(10, 0)
+                ));
             }
 
             break;
