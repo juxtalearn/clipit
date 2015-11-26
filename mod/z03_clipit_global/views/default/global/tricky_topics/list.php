@@ -28,6 +28,7 @@ $total_count = elgg_extract('total_count', $vars);
 <?php
 foreach($entities as $entity):
     $remote_site = array_pop(ClipitRemoteSite::get_by_id(array($entity->remote_site)));
+    $videos = ClipitRemoteVideo::get_by_tags($entity->tag_array);
 ?>
     <li class="row list-item list-even">
         <div class="col-md-8">
@@ -56,19 +57,14 @@ foreach($entities as $entity):
             </div>
             <div>
                 <strong>
-                    <?php echo elgg_view('output/url', array(
-                        'href' => "videos/search?by=trickytopic&id=".$entity->id,
-                        'title' => 'Ver videos',
-                        'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('videos:related')
-                    ));
-                    ?>
-<!--                    --><?php //echo elgg_view('output/url', array(
-//                        'href' => $video_url,
-//                        'class' => 'pull-right',
-//                        'title' => 'Ver videos',
-//                        'text'  => '<i class="fa fa-youtube-play"></i> '.'Ver videos'
-//                    ));
-//                    ?>
+                    <?php if($videos):?>
+                        <?php echo elgg_view('output/url', array(
+                            'href' => "videos/search?by=trickytopic&id=".$entity->id,
+                            'title' => 'Ver videos',
+                            'text'  => '<i class="fa fa-youtube-play"></i> '.elgg_echo('videos:related')
+                        ));
+                        ?>
+                    <?php endif;?>
 <!--                    --><?php //echo elgg_view('output/url', array(
 //                        'href' => $video_url,
 //                        'title' => $video->name,

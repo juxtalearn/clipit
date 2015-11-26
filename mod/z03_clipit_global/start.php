@@ -75,6 +75,7 @@ function clipit_global_init(){
         $return_value[] = 'clipit/about';
         $return_value[] = 'clipit/tutorials/.*';
         $return_value[] = 'clipit/developers';
+        $return_value[] = 'clipit/press';
         // Help sections
         $return_value[] = 'help/support_center';
         $return_value[] = 'help/basics';
@@ -372,10 +373,12 @@ function videos_section($page){
                 );
             } else {
                 $content = elgg_view('output/empty', array('value' => elgg_echo('global:videos:none')));
+                $edu = array_pop(ClipitRemoteSite::get_by_id(array($entity->remote_site)));
+                $content .= '<p style="color: #666;">'.elgg_echo('global:videos:trickytopic:none:information', array('<a href="'.$edu->url.'">'.$edu->name.'</a>')).'</p>';
                 $content .= '<hr/> ';
                 $content .= '<h2 class="title-block">'.elgg_echo('global:videos:other').'</h2>';
                 $content .= elgg_view('videos/list_summary', array(
-                    'entities' => ClipitRemoteVideo::get_all(10, 0)
+                    'entities' => ClipitRemoteVideo::get_all(6, 0)
                 ));
             }
 

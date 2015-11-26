@@ -40,8 +40,8 @@ $entities = elgg_extract('entities', $vars);
         $edu = array_pop(ClipitRemoteSite::get_by_id(array($video->remote_site)));
         $video_url = "video/".elgg_get_friendly_title($video->name)."/".$video->id;
     ?>
-        <li class="list-item col-md-6">
-            <div class="col-md-5">
+        <li class="col-md-4 margin-bottom-20">
+            <div class="col-md-12">
                 <div class="wrapper-ratio">
                     <?php echo elgg_view('output/url', array(
                         'href' => $video_url,
@@ -53,7 +53,7 @@ $entities = elgg_extract('entities', $vars);
                     ?>
                 </div>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <strong>
                     <?php
                     echo elgg_view('output/url', array(

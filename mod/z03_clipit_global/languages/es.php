@@ -7,6 +7,7 @@
 $spanish = array(
     'global:videos:none' => 'No hay vídeos públicos',
     'global:videos:other' => 'Vídeos de otros centros',
+    'global:videos:trickytopic:none:information' => 'Consulte el sitio del centro educativo %s para poder acceder a los mismos',
     'clipit:site' => 'Clipit',
     'loading' => 'Cargando',
     'loading:content' => 'Cargando contenido',
