@@ -198,21 +198,14 @@ $(function(){
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" style="display: none;">
                 <label><?php echo elgg_echo('quiz:target');?></label>
                 <label style="font-weight: normal;">
                     <input type="radio" aria-label="<?php echo elgg_echo('clipit:activities');?>"
                            name="<?php echo $input_prefix;?>[target]"
-                            <?php echo ($entity->target == ClipitQuiz::TARGET_CLIPIT || !$entity_target) ? 'checked':'';?>
+                            checked
                            value="<?php echo ClipitQuiz::TARGET_CLIPIT;?>">
                     <?php echo elgg_echo('quiz:target:clipit');?>
-                </label>
-                <label style="font-weight: normal;">
-                    <input type="radio" aria-label="Large displays"
-                           name="<?php echo $input_prefix;?>[target]"
-                            <?php echo $entity->target == ClipitQuiz::TARGET_LARGEDISPLAY ? 'checked':'';?>
-                           value="<?php echo ClipitQuiz::TARGET_LARGEDISPLAY;?>">
-                    <?php echo elgg_echo('quiz:target:large_display');?>
                 </label>
             </div>
         </div>

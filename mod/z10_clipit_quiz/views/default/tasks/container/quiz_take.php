@@ -14,12 +14,13 @@ $id = elgg_extract('id', $vars);
 $entity = elgg_extract('entity', $vars);
 $input_array = elgg_extract('input_array', $vars);
 ?>
-<?php if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE):?>
-    <?php
+<?php if($entity->task_type == ClipitTask::TYPE_QUIZ_TAKE):
+    $quiz = array_pop(ClipitQuiz::get_by_id(array($entity->quiz)));
+
     echo elgg_view('activity/admin/tasks/quiz/quiz', array(
-        'entity' => array_pop(ClipitQuiz::get_by_id(array($entity->quiz))),
+        'entity' => $quiz,
         'activity_id' => $entity->activity,
-        'tricky_topic' => ClipitActivity::get_tricky_topic($entity->activity),
+        'tricky_topic' => $quiz->tricky_topic,
         'input_prefix' => "task{$input_array}"
     ));
     ?>
