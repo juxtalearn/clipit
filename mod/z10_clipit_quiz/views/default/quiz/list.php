@@ -104,6 +104,10 @@ $(function(){
             $user = array_pop(ClipitUser::get_by_id(array($quiz->owner_id)));
             $questions = ClipitQuiz::get_quiz_questions($quiz->id);
             $tricky_topic = array_pop(ClipitTrickyTopic::get_by_id(array($quiz->tricky_topic)));
+            $is_linked = false;
+            if($quiz->clone_array){
+                $is_linked = true;
+            }
         ?>
             <tr role="presentation" id="<?php echo $quiz->id;?>">
             <?php if($select):?>
@@ -161,6 +165,7 @@ $(function(){
                         <?php echo elgg_view('page/components/admin_options', array(
                             'entity' => $quiz,
                             'user' => $user,
+                            'is_linked' => $is_linked
                         ));
                         ?>
                     </td>

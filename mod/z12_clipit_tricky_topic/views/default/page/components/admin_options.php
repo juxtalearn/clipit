@@ -79,6 +79,10 @@ switch($object['subtype']){
                 'edit' => 'quizzes/edit/'.$entity->id,
                 'remove' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/quiz/remove?id='.$entity->id), true),
             );
+            if($is_linked){
+                $locked = true;
+                $href['remove'] = false;
+            }
         }
         $href['duplicate'] = 'quizzes/create/'.$entity->id;
         break;
