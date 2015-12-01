@@ -102,6 +102,10 @@ switch($object['subtype']){
                 'edit' => 'rubrics/edit/'.$entity->id,
                 'remove' => elgg_add_action_tokens_to_url(elgg_normalize_url('action/rubric/remove?id='.$entity->id), true),
             );
+            if($is_linked){
+                $locked = true;
+                $href['remove'] = false;
+            }
         } else {
             $edit = false;
             $remove = false;

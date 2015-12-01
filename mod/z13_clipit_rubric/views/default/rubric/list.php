@@ -70,6 +70,10 @@ if($select = get_input('select')){
     foreach($rubrics as $rubric):
         if($rubric->cloned_from == 0):
             $owner_user = array_pop(ClipitUser::get_by_id(array($rubric->owner_id)));
+            $is_linked = false;
+            if($rubric->clone_array){
+                $is_linked = true;
+            }
     ?>
         <tr role="presentation" id="<?php echo $rubric->id;?>">
             <?php if($select):?>
@@ -118,7 +122,8 @@ if($select = get_input('select')){
             <td role="presentation" data-title="<?php echo elgg_echo('options');?>" class="hidden-xs hidden-sm">
                 <?php echo elgg_view('page/components/admin_options', array(
                     'entity' => $rubric,
-                    'user' => $owner_user
+                    'user' => $owner_user,
+                    'is_linked' => $is_linked
                 ));?>
             </td>
             <?php endif;?>
