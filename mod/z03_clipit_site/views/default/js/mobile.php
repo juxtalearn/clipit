@@ -79,8 +79,9 @@ function mobileLoad() {
             closeSidebar();
         });
         $('.tags').each(function () {
-            $(this).find('a').css('maxWidth', '50%');
-            $(this).find('a:gt(1)').hide();
+
+            if(!$(this).parent('.popover-content'))
+                $(this).find('a').css('maxWidth', '50%');
         });
         if ($('.groups-list').length > 0) {
             $('.groups-list .group-students').addClass('collapse');
