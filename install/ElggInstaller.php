@@ -92,8 +92,8 @@ class ElggInstaller {
      *
      * @return void
      */
-    public function setAutoLogin(bool $flag) {
-        $this->autoLogin = $flag;
+    public function setAutoLogin($flag) {
+        $this->autoLogin = (bool)$flag;
     }
 
     /**
