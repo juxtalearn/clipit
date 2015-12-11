@@ -18,7 +18,24 @@ if($access == 'ACCESS_TEACHER'){
     $groups = ClipitGroup::get_by_id($activity->group_array, 0, 0, 'name');
     natural_sort_properties($groups, 'name');
 } else {
-    $tasks = ClipitTask::get_by_id($activity->task_array, 4, 0, 'start', true);
+    $tasks = ClipitTask::get_by_id($activity->task_array, 0, 0, 'end', true);
+//    end_date <= date()
+    $tasks_filtered = array();
+    foreach ($tasks as $task) {
+        $status = get_task_status($task);
+        if (time() < $task->start) {
+            $num = 4;
+        } else {
+            switch($status['color']){
+                case 'yellow':  $num = 1; break;
+                case 'green':   $num = 2; break;
+                case 'red':     $num = 3; break;
+            }
+        }
+        $tasks_filtered[$num."_".$task->id] = $task;
+    }
+    ksort($tasks_filtered);
+    $tasks = $tasks_filtered;
 }
 ?>
 <div class="row">
@@ -40,7 +57,7 @@ if($access == 'ACCESS_TEACHER'){
             'tasks' => $tasks,
             'href' => "clipit_activity/{$activity->id}/tasks",
             'activity' => $activity,
-            'style' => $access == 'ACCESS_TEACHER' ? 'max-height: 200px;overflow: auto;' : ''
+            'style' => 'max-height: 200px;overflow: auto;'
         ));
         ?>
         <?php if($tasks): ?>

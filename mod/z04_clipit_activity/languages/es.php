@@ -55,7 +55,7 @@ $spanish = array(
     'end' => 'Fin',
     'expand:all' => 'Expandir todos',
     'collapse:all' => 'Cerrar todos',
-    'click_add' => 'Haga click para añadir',
+    'click_add' => 'Click para añadir',
     'view'  => 'Ver',
     'bulk_actions' => 'Acciones en lote',
     // Activity
