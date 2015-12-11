@@ -92,8 +92,8 @@ class ElggInstaller {
      *
      * @return void
      */
-    public function setAutoLogin(bool $flag) {
-        $this->autoLogin = $flag;
+    public function setAutoLogin($flag) {
+        $this->autoLogin = (bool)$flag;
     }
 
     /**
@@ -416,17 +416,17 @@ class ElggInstaller {
             ),
             "clipit_global_url" => array(
                 "type" => "text",
-                "value" => "http://clipit.es/landing/services/api/rest/json/",
+                "value" => "http://clipit.es/global/services/api/rest/json/",
                 "required" => FALSE,
             ),
             "clipit_global_login" => array(
                 "type" => "text",
-                "value" => "admin",
+                "value" => "",
                 "required" => FALSE,
             ),
             "clipit_global_password" => array(
                 "type" => "text",
-                "value" => "*****",
+                "value" => "",
                 "required" => FALSE,
             ),
 //            'jxl_secret' => array(
