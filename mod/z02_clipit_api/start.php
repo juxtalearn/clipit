@@ -49,6 +49,9 @@ function clipit_override_permissions($hook, $type, $value, $params){
         case ClipitFile::SUBTYPE:
             $entity_group = ClipitFile::get_group($entity->guid);
             break;
+        case ClipitText::SUBTYPE:
+            $entity_group = ClipitText::get_group($entity->guid);
+            break;
         default:
             $entity_group = null;
     }

@@ -99,7 +99,7 @@ class UBFile extends UBItem {
      * @param ElggFile $elgg_file Elgg object instance to save $this to
      */
     protected function copy_to_elgg($elgg_file) {
-        if ($this->time_created == 0) { // new file
+        if ($this->time_created == 0 || !$elgg_file->getFilename()) { // new file
             $elgg_file->set("filename", (string)rand());
         }
         $elgg_file->description = (string)$this->description;
@@ -120,7 +120,7 @@ class UBFile extends UBItem {
         } elseif (!empty($this->temp_path)) { // File was uploaded into local temp dir
             $elgg_file->open("write"); // to ensure file is created in disk
             $elgg_file->close();
-            move_uploaded_file($this->temp_path, $elgg_file->getFilenameOnFilestore());
+            copy($this->temp_path, $elgg_file->getFilenameOnFilestore());
         }
         // if the mimetype is already set, use the whole $this->name as name
         if(!empty($this->mime_full)){
@@ -184,14 +184,13 @@ class UBFile extends UBItem {
      * @return bool|int Id of the new clone Item, false in case of error.
      */
     static function create_clone($id, $linked = true, $keep_owner = false) {
-        $elgg_file = new ElggFile($id);
-        $elgg_file_clone = clone $elgg_file;
-        $elgg_file_clone->save();
+        $parent_file = new ClipitFile($id);
         $prop_value_array = static::get_properties($id);
+        $prop_value_array["temp_path"] = $parent_file->file_path;
         if($keep_owner === false){
             $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
         }
-        $clone_id = static::set_properties($elgg_file_clone->getGUID(), $prop_value_array);
+        $clone_id = static::set_properties(null, $prop_value_array);
         if($linked){
             static::link_parent_clone($id, $clone_id);
         }
