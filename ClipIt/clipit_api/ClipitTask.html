@@ -58,6 +58,10 @@
 
 				</div>
 								<div class="const-title">
+					<a href="#REL_TASK_PERFORMANCE" title="details" class="const-name">REL_TASK_PERFORMANCE</a> = 					<span class="var-type"> &quot;ClipitTask-ClipitPerformanceItem&quot;</span>
+
+				</div>
+								<div class="const-title">
 					<a href="#REL_TASK_QUIZ" title="details" class="const-name">REL_TASK_QUIZ</a> = 					<span class="var-type"> &quot;ClipitTask-ClipitQuiz&quot;</span>
 
 				</div>
@@ -131,7 +135,7 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																																								<div class="var-title">
+																																																																																																																<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$activity" title="details" class="var-name">$activity</a>
 				</div>
@@ -146,6 +150,10 @@
 																<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$parent_task" title="details" class="var-name">$parent_task</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$performance_item_array" title="details" class="var-name">$performance_item_array</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
@@ -200,6 +208,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
+										<a href="#add_performance_items" title="details" class="method-name">add_performance_items</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
 										<a href="#add_storyboards" title="details" class="method-name">add_storyboards</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
 									</div>
@@ -230,6 +243,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
+										<a href="#get_performance_items" title="details" class="method-name">get_performance_items</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
 										<a href="#get_quiz" title="details" class="method-name">get_quiz</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
 									</div>
@@ -255,6 +273,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
+										<a href="#remove_performance_items" title="details" class="method-name">remove_performance_items</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
 										<a href="#remove_storyboards" title="details" class="method-name">remove_storyboards</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$storyboard_array</span>)
 									</div>
@@ -275,6 +298,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
+										<a href="#set_performance_items" title="details" class="method-name">set_performance_items</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
 										<a href="#set_quiz" title="details" class="method-name">set_quiz</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$quiz_id</span>)
 									</div>
@@ -289,7 +317,7 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$video_array</span>)
 									</div>
 								
-																																				<div class="method-definition">
+																																												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_from_elgg" title="details" class="method-name">copy_from_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
@@ -299,12 +327,12 @@
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 									</div>
-																																																																																																								<div class="method-definition">
+																																																																																																																								<div class="method-definition">
 											<span class="method-result">bool|int</span>
 										<a href="#save" title="details" class="method-name">save</a>
 											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$double_save</span> = <span class="var-default">false</span>])
 									</div>
-																																																</div>
+																																																								</div>
 		</div>
 	</div>		
 
@@ -330,7 +358,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$activity</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">47</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">48</span>)
 		</span>
 	</div>
 
@@ -351,7 +379,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$end</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">43</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">44</span>)
 		</span>
 	</div>
 
@@ -372,7 +400,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$file_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">51</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">52</span>)
 		</span>
 	</div>
 
@@ -393,111 +421,6 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$parent_task</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">45</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$quiz" id="$quiz"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$quiz</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">48</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$start" id="$start"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$start</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">42</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$status" id="$status"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$status</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">44</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$storyboard_array" id="$storyboard_array"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$storyboard_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">49</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$task_count" id="$task_count"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$task_count</span>
 			 = <span class="var-default"> 0</span>			(line <span class="line-number">46</span>)
 		</span>
 	</div>
@@ -512,14 +435,140 @@
 		
 
 </div>
-<a name="var$task_type" id="$task_type"><!-- --></A>
+<a name="var$performance_item_array" id="$performance_item_array"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$performance_item_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">53</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$quiz" id="$quiz"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
+			<span class="var-name">$quiz</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">49</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$start" id="$start"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$start</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">43</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$status" id="$status"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$status</span>
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$storyboard_array" id="$storyboard_array"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$storyboard_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">50</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$task_count" id="$task_count"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$task_count</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$task_type" id="$task_type"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
 			<span class="var-name">$task_type</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">41</span>)
+			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">42</span>)
 		</span>
 	</div>
 
@@ -534,13 +583,13 @@
 
 </div>
 <a name="var$video_array" id="$video_array"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$video_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">50</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">51</span>)
 		</span>
 	</div>
 
@@ -601,10 +650,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodadd_files" id="add_files"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_files</span> (line <span class="line-number">202</span>)
+		<span class="method-title">static method add_files</span> (line <span class="line-number">206</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -629,11 +678,40 @@
 		
 			
 	</div>
+<a name="methodadd_performance_items" id="add_performance_items"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method add_performance_items</span> (line <span class="line-number">223</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			add_performance_items
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$performance_item_array</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodadd_storyboards" id="add_storyboards"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_storyboards</span> (line <span class="line-number">168</span>)
+		<span class="method-title">static method add_storyboards</span> (line <span class="line-number">172</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -662,7 +740,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_videos</span> (line <span class="line-number">185</span>)
+		<span class="method-title">static method add_videos</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -691,7 +769,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_activity</span> (line <span class="line-number">137</span>)
+		<span class="method-title">static method get_activity</span> (line <span class="line-number">141</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -721,7 +799,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_child</span> (line <span class="line-number">224</span>)
+		<span class="method-title">static method get_child</span> (line <span class="line-number">246</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -751,7 +829,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_completed_status</span> (line <span class="line-number">247</span>)
+		<span class="method-title">static method get_completed_status</span> (line <span class="line-number">269</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -780,7 +858,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_files</span> (line <span class="line-number">214</span>)
+		<span class="method-title">static method get_files</span> (line <span class="line-number">218</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -802,11 +880,37 @@
 		
 			
 	</div>
-<a name="methodget_quiz" id="get_quiz"><!-- --></a>
+<a name="methodget_performance_items" id="get_performance_items"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_quiz</span> (line <span class="line-number">159</span>)
+		<span class="method-title">static method get_performance_items</span> (line <span class="line-number">235</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_performance_items
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_quiz" id="get_quiz"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_quiz</span> (line <span class="line-number">163</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -829,10 +933,10 @@
 			
 	</div>
 <a name="methodget_status" id="get_status"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_status</span> (line <span class="line-number">241</span>)
+		<span class="method-title">static method get_status</span> (line <span class="line-number">263</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -860,10 +964,10 @@
 			
 	</div>
 <a name="methodget_storyboards" id="get_storyboards"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_storyboards</span> (line <span class="line-number">180</span>)
+		<span class="method-title">static method get_storyboards</span> (line <span class="line-number">184</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -886,10 +990,10 @@
 			
 	</div>
 <a name="methodget_videos" id="get_videos"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_videos</span> (line <span class="line-number">197</span>)
+		<span class="method-title">static method get_videos</span> (line <span class="line-number">201</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -912,10 +1016,10 @@
 			
 	</div>
 <a name="methodremove_files" id="remove_files"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_files</span> (line <span class="line-number">210</span>)
+		<span class="method-title">static method remove_files</span> (line <span class="line-number">214</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -940,11 +1044,40 @@
 		
 			
 	</div>
+<a name="methodremove_performance_items" id="remove_performance_items"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method remove_performance_items</span> (line <span class="line-number">231</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			remove_performance_items
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$performance_item_array</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodremove_storyboards" id="remove_storyboards"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_storyboards</span> (line <span class="line-number">176</span>)
+		<span class="method-title">static method remove_storyboards</span> (line <span class="line-number">180</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -973,7 +1106,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_videos</span> (line <span class="line-number">193</span>)
+		<span class="method-title">static method remove_videos</span> (line <span class="line-number">197</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1002,7 +1135,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_activity</span> (line <span class="line-number">150</span>)
+		<span class="method-title">static method set_activity</span> (line <span class="line-number">154</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1035,7 +1168,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_files</span> (line <span class="line-number">206</span>)
+		<span class="method-title">static method set_files</span> (line <span class="line-number">210</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1060,11 +1193,40 @@
 		
 			
 	</div>
-<a name="methodset_quiz" id="set_quiz"><!-- --></a>
+<a name="methodset_performance_items" id="set_performance_items"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_quiz</span> (line <span class="line-number">155</span>)
+		<span class="method-title">static method set_performance_items</span> (line <span class="line-number">227</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			set_performance_items
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$performance_item_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_quiz" id="set_quiz"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_quiz</span> (line <span class="line-number">159</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1090,10 +1252,10 @@
 			
 	</div>
 <a name="methodset_storyboards" id="set_storyboards"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_storyboards</span> (line <span class="line-number">172</span>)
+		<span class="method-title">static method set_storyboards</span> (line <span class="line-number">176</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1119,10 +1281,10 @@
 			
 	</div>
 <a name="methodset_videos" id="set_videos"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_videos</span> (line <span class="line-number">189</span>)
+		<span class="method-title">static method set_videos</span> (line <span class="line-number">193</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1149,10 +1311,10 @@
 	</div>
 
 <a name="methodcopy_from_elgg" id="copy_from_elgg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">58</span>)
+		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">60</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1178,10 +1340,10 @@
 			
 	</div>
 <a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">85</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">88</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1207,10 +1369,10 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">save</span> (line <span class="line-number">99</span>)
+		<span class="method-title">save</span> (line <span class="line-number">102</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1262,13 +1424,28 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constREL_TASK_FILE" id="REL_TASK_FILE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
 			<span class="const-name">REL_TASK_FILE</span>
 			 = <span class="const-default"> &quot;ClipitTask-ClipitFile&quot;</span>
 			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_TASK_PERFORMANCE" id="REL_TASK_PERFORMANCE"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_TASK_PERFORMANCE</span>
+			 = <span class="const-default"> &quot;ClipitTask-ClipitPerformanceItem&quot;</span>
+			(line <span class="line-number">36</span>)
 		</span>
 	</div>
 
@@ -1328,7 +1505,7 @@
 		<span class="const-title">
 			<span class="const-name">STATUS_ACTIVE</span>
 			 = <span class="const-default"> &quot;active&quot;</span>
-			(line <span class="line-number">38</span>)
+			(line <span class="line-number">39</span>)
 		</span>
 	</div>
 
@@ -1343,7 +1520,7 @@
 		<span class="const-title">
 			<span class="const-name">STATUS_FINISHED</span>
 			 = <span class="const-default"> &quot;finished&quot;</span>
-			(line <span class="line-number">39</span>)
+			(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
@@ -1358,7 +1535,7 @@
 		<span class="const-title">
 			<span class="const-name">STATUS_LOCKED</span>
 			 = <span class="const-default"> &quot;locked&quot;</span>
-			(line <span class="line-number">37</span>)
+			(line <span class="line-number">38</span>)
 		</span>
 	</div>
 
@@ -1505,7 +1682,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:30 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:05 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

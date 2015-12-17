@@ -71,18 +71,6 @@
 					<th class="class-table-header">Description</th>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../Elgg-Core/Groups/ElggGroup.html">ElggGroup</a></td>
-					<td>
-											Class representing a container for other elgg entities.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataMode-Site/ElggSite.html">ElggSite</a></td>
-					<td>
-											A Site entity.
-										</td>
-				</tr>
-								<tr>
 					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></td>
 					<td>
 											Elgg Object
@@ -92,6 +80,18 @@
 					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataModel-User/ElggUser.html">ElggUser</a></td>
 					<td>
 											ElggUser
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataMode-Site/ElggSite.html">ElggSite</a></td>
+					<td>
+											A Site entity.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Elgg-Core/Groups/ElggGroup.html">ElggGroup</a></td>
+					<td>
+											Class representing a container for other elgg entities.
 										</td>
 				</tr>
 							</table>
@@ -868,16 +868,16 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodcanComment">ElggGroup::canComment()</a>
-								: Can a user comment on this group?
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodcanComment">ElggObject::canComment()</a>
 								: Can a user comment on this object?
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodcanComment">ElggUser::canComment()</a>
 								: Can a user comment on this user?
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodcanComment">ElggGroup::canComment()</a>
+								: Can a user comment on this group?
 							</li>
 				</ul>
 	</div>
@@ -1179,16 +1179,16 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methoddelete">ElggSite::delete()</a>
-								: Delete the site.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-File/ElggFile.html#methoddelete">ElggFile::delete()</a>
 								: Delete this file.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methoddelete">ElggUser::delete()</a>
 								: User specific override of the entity delete method.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methoddelete">ElggSite::delete()</a>
+								: Delete the site.
 							</li>
 				</ul>
 	</div>
@@ -1598,16 +1598,16 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodget">ElggGroup::get()</a>
-								: Returns an attribute or metadata.
+				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodget">ElggWidget::get()</a>
+								: Override entity get and sets in order to save data to private data store.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodget">ElggPlugin::get()</a>
 								: Get a value from private settings.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodget">ElggWidget::get()</a>
-								: Override entity get and sets in order to save data to private data store.
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodget">ElggGroup::get()</a>
+								: Returns an attribute or metadata.
 							</li>
 				</ul>
 	</div>
@@ -1976,7 +1976,11 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodgetExportableValues">ElggGroup::getExportableValues()</a>
+				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodgetExportableValues">ElggObject::getExportableValues()</a>
+								: Return an array of fields which can be exported.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodgetExportableValues">ElggUser::getExportableValues()</a>
 								: Return an array of fields which can be exported.
 							</li>
 					<li>
@@ -1984,11 +1988,7 @@
 								: Return an array of fields which can be exported.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodgetExportableValues">ElggObject::getExportableValues()</a>
-								: Return an array of fields which can be exported.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodgetExportableValues">ElggUser::getExportableValues()</a>
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodgetExportableValues">ElggGroup::getExportableValues()</a>
 								: Return an array of fields which can be exported.
 							</li>
 				</ul>
@@ -2615,16 +2615,12 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodinitializeAttributes">ElggGroup::initializeAttributes()</a>
-								: Sets the type to group.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodinitializeAttributes">ElggSite::initializeAttributes()</a>
-								: Initialise the attributes array.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodinitializeAttributes">ElggObject::initializeAttributes()</a>
 								: Initialise the attributes array to include the type,  title, and description.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodinitializeAttributes">ElggWidget::initializeAttributes()</a>
+								: Set subtype to widget.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-File/ElggFile.html#methodinitializeAttributes">ElggFile::initializeAttributes()</a>
@@ -2635,12 +2631,16 @@
 								: Set subtype to 'plugin'
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodinitializeAttributes">ElggWidget::initializeAttributes()</a>
-								: Set subtype to widget.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodinitializeAttributes">ElggUser::initializeAttributes()</a>
 								: Initialise the attributes array.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodinitializeAttributes">ElggSite::initializeAttributes()</a>
+								: Initialise the attributes array.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodinitializeAttributes">ElggGroup::initializeAttributes()</a>
+								: Sets the type to group.
 							</li>
 				</ul>
 	</div>
@@ -2724,20 +2724,20 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodload">ElggGroup::load()</a>
-								: Load the ElggGroup data from the database
-							</li>
-					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodload">ElggSite::load()</a>
-								: Loads the full ElggSite when given a guid.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodload">ElggObject::load()</a>
 								: Loads the full ElggObject when given a guid.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodload">ElggUser::load()</a>
 								: Load the ElggUser data from the database
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodload">ElggSite::load()</a>
+								: Loads the full ElggSite when given a guid.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodload">ElggGroup::load()</a>
+								: Load the ElggGroup data from the database
 							</li>
 				</ul>
 	</div>
@@ -2835,14 +2835,6 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodsave">ElggGroup::save()</a>
-								: Override the save function.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodsave">ElggSite::save()</a>
-								: Saves site-specific attributes.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodsave">ElggObject::save()</a>
 								: Saves object-specific attributes.
 							</li>
@@ -2857,6 +2849,14 @@
 					<li>
 				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodsave">ElggUser::save()</a>
 								: Saves this user to the database.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodsave">ElggSite::save()</a>
+								: Saves site-specific attributes.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodsave">ElggGroup::save()</a>
+								: Override the save function.
 							</li>
 				</ul>
 	</div>
@@ -2903,12 +2903,12 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodset">ElggPlugin::set()</a>
-								: Save a value as private setting or attribute.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodset">ElggWidget::set()</a>
 								: Override entity get and sets in order to save data to private data store.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodset">ElggPlugin::set()</a>
+								: Save a value as private setting or attribute.
 							</li>
 				</ul>
 	</div>
@@ -3349,7 +3349,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:33 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:08 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

@@ -57,9 +57,9 @@
 					<th class="class-table-header">Description</th>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitPost.html">ClipitPost</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitComment.html">ClipitComment</a></td>
 					<td>
-											A discussion forum Post which can be a topic starter or a reply to another Post. Contains Link to the topic starter  Post ID, and may have files and/or Resources as attachments.
+											A rich-text Comment written by a User and directed to any single Resource. It may contain attached files, and can  respond to another user's comment (optionally).
 										</td>
 				</tr>
 								<tr>
@@ -69,9 +69,9 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitComment.html">ClipitComment</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitPost.html">ClipitPost</a></td>
 					<td>
-											A rich-text Comment written by a User and directed to any single Resource. It may contain attached files, and can  respond to another user's comment (optionally).
+											A discussion forum Post which can be a topic starter or a reply to another Post. Contains Link to the topic starter  Post ID, and may have files and/or Resources as attachments.
 										</td>
 				</tr>
 							</table>
@@ -100,6 +100,10 @@
 				</div>
 								<div class="const-title">
 					<a href="#REL_MESSAGE_FILE" title="details" class="const-name">REL_MESSAGE_FILE</a> = 					<span class="var-type"> &quot;UBMessage-UBFile&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#REL_MESSAGE_USER" title="details" class="const-name">REL_MESSAGE_USER</a> = 					<span class="var-type"> &quot;UBMessage-UBUser&quot;</span>
 
 				</div>
 								<div class="const-title">
@@ -161,6 +165,11 @@
 										<a href="#add_files" title="details" class="method-name">add_files</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$file_array</span>)
 									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#add_read_array" title="details" class="method-name">add_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+									</div>
 																																<div class="method-definition">
 					static 						<span class="method-result">array</span>
 										<a href="#count_by_destination" title="details" class="method-name">count_by_destination</a>
@@ -193,6 +202,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">static[]</span>
+										<a href="#get_read_array" title="details" class="method-name">get_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">static[]</span>
 										<a href="#get_read_status" title="details" class="method-name">get_read_status</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, [<span class="var-type">null|array</span>&nbsp;<span class="var-name">$user_array</span> = <span class="var-default">null</span>])
 									</div>
@@ -206,6 +220,11 @@
 										<a href="#remove_files" title="details" class="method-name">remove_files</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$file_array</span>)
 									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#remove_read_array" title="details" class="method-name">remove_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+									</div>
 																								<div class="method-definition">
 					static 						<span class="method-result">bool</span>
 										<a href="#set_destination" title="details" class="method-name">set_destination</a>
@@ -215,6 +234,11 @@
 					static 						<span class="method-result">bool</span>
 										<a href="#set_files" title="details" class="method-name">set_files</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$file_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#set_read_array" title="details" class="method-name">set_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">bool|int</span>
@@ -232,7 +256,7 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$sender_array</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$user_id</span>)
 									</div>
 								
-																				<div class="method-definition">
+																												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_from_elgg" title="details" class="method-name">copy_from_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
@@ -242,12 +266,12 @@
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 									</div>
-																																																																																								<div class="method-definition">
+																																																																																																								<div class="method-definition">
 											<span class="method-result">bool|int</span>
 										<a href="#save" title="details" class="method-name">save</a>
 											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$double_save</span> = <span class="var-default">false</span>])
 									</div>
-																																																</div>
+																																																								</div>
 		</div>
 	</div>		
 
@@ -274,7 +298,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$destination</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">26</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">27</span>)
 		</span>
 	</div>
 
@@ -295,7 +319,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$file_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">27</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">28</span>)
 		</span>
 	</div>
 
@@ -316,7 +340,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$read_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">25</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
@@ -381,7 +405,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_files</span> (line <span class="line-number">194</span>)
+		<span class="method-title">static method add_files</span> (line <span class="line-number">198</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -410,11 +434,44 @@
 		
 			
 	</div>
-<a name="methodcount_by_destination" id="count_by_destination"><!-- --></a>
+<a name="methodadd_read_array" id="add_read_array"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method count_by_destination</span> (line <span class="line-number">302</span>)
+		<span class="method-title">static method add_read_array</span> (line <span class="line-number">245</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add Read Array for a Message</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if OK, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			add_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Message</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$read_array</span><span class="var-description">: Array of User IDs who have read the Message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcount_by_destination" id="count_by_destination"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method count_by_destination</span> (line <span class="line-number">349</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -444,10 +501,10 @@
 			
 	</div>
 <a name="methodcount_by_sender" id="count_by_sender"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method count_by_sender</span> (line <span class="line-number">320</span>)
+		<span class="method-title">static method count_by_sender</span> (line <span class="line-number">367</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -474,10 +531,10 @@
 			
 	</div>
 <a name="methodget_by_destination" id="get_by_destination"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_by_destination</span> (line <span class="line-number">78</span>)
+		<span class="method-title">static method get_by_destination</span> (line <span class="line-number">82</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -519,10 +576,10 @@
 			
 	</div>
 <a name="methodget_by_sender" id="get_by_sender"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_by_sender</span> (line <span class="line-number">139</span>)
+		<span class="method-title">static method get_by_sender</span> (line <span class="line-number">143</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -549,10 +606,10 @@
 			
 	</div>
 <a name="methodget_destination" id="get_destination"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_destination</span> (line <span class="line-number">150</span>)
+		<span class="method-title">static method get_destination</span> (line <span class="line-number">154</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -579,10 +636,10 @@
 			
 	</div>
 <a name="methodget_files" id="get_files"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_files</span> (line <span class="line-number">229</span>)
+		<span class="method-title">static method get_files</span> (line <span class="line-number">233</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -608,11 +665,41 @@
 		
 			
 	</div>
+<a name="methodget_read_array" id="get_read_array"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_read_array</span> (line <span class="line-number">280</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get Read Array for a Message</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of File IDs</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">static[]</span>
+		<span class="method-name">
+			get_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Message</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodget_read_status" id="get_read_status"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_read_status</span> (line <span class="line-number">241</span>)
+		<span class="method-title">static method get_read_status</span> (line <span class="line-number">292</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -645,7 +732,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_sender</span> (line <span class="line-number">181</span>)
+		<span class="method-title">static method get_sender</span> (line <span class="line-number">185</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -675,7 +762,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_files</span> (line <span class="line-number">218</span>)
+		<span class="method-title">static method remove_files</span> (line <span class="line-number">222</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -704,11 +791,44 @@
 		
 			
 	</div>
-<a name="methodset_destination" id="set_destination"><!-- --></a>
+<a name="methodremove_read_array" id="remove_read_array"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_destination</span> (line <span class="line-number">166</span>)
+		<span class="method-title">static method remove_read_array</span> (line <span class="line-number">269</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove Read Array for a Message</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if OK, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			remove_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Message</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$read_array</span><span class="var-description">: Array of User IDs who have read the Message</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_destination" id="set_destination"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_destination</span> (line <span class="line-number">170</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -738,10 +858,10 @@
 			
 	</div>
 <a name="methodset_files" id="set_files"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_files</span> (line <span class="line-number">206</span>)
+		<span class="method-title">static method set_files</span> (line <span class="line-number">210</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -770,11 +890,44 @@
 		
 			
 	</div>
+<a name="methodset_read_array" id="set_read_array"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_read_array</span> (line <span class="line-number">257</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set Read Array for a Message</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if OK, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			set_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Message</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$read_array</span><span class="var-description">: Array of User IDs who have read the Message</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodset_read_status" id="set_read_status"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_read_status</span> (line <span class="line-number">270</span>)
+		<span class="method-title">static method set_read_status</span> (line <span class="line-number">321</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -811,7 +964,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method unread_by_destination</span> (line <span class="line-number">329</span>)
+		<span class="method-title">static method unread_by_destination</span> (line <span class="line-number">376</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -843,7 +996,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method unread_by_sender</span> (line <span class="line-number">353</span>)
+		<span class="method-title">static method unread_by_sender</span> (line <span class="line-number">400</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -873,7 +1026,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">34</span>)
+		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">36</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -901,11 +1054,11 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../ClipIt/clipit_api/ClipitPost.html#methodcopy_from_elgg">ClipitPost::copy_from_elgg()</a>
+				<a href="../../ClipIt/clipit_api/ClipitChat.html#methodcopy_from_elgg">ClipitChat::copy_from_elgg()</a>
 								: Loads object parameters stored in Elgg
 							</li>
 					<li>
-				<a href="../../ClipIt/clipit_api/ClipitChat.html#methodcopy_from_elgg">ClipitChat::copy_from_elgg()</a>
+				<a href="../../ClipIt/clipit_api/ClipitPost.html#methodcopy_from_elgg">ClipitPost::copy_from_elgg()</a>
 								: Loads object parameters stored in Elgg
 							</li>
 				</ul>
@@ -914,7 +1067,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">46</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">49</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -942,11 +1095,11 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../ClipIt/clipit_api/ClipitPost.html#methodcopy_to_elgg">ClipitPost::copy_to_elgg()</a>
+				<a href="../../ClipIt/clipit_api/ClipitChat.html#methodcopy_to_elgg">ClipitChat::copy_to_elgg()</a>
 								: Copy $this object parameters into an Elgg entity.
 							</li>
 					<li>
-				<a href="../../ClipIt/clipit_api/ClipitChat.html#methodcopy_to_elgg">ClipitChat::copy_to_elgg()</a>
+				<a href="../../ClipIt/clipit_api/ClipitPost.html#methodcopy_to_elgg">ClipitPost::copy_to_elgg()</a>
 								: Copy $this object parameters into an Elgg entity.
 							</li>
 				</ul>
@@ -955,7 +1108,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">save</span> (line <span class="line-number">58</span>)
+		<span class="method-title">save</span> (line <span class="line-number">61</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1045,8 +1198,23 @@
 	
 	
 </div>
-<a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
+<a name="constREL_MESSAGE_USER" id="REL_MESSAGE_USER"><!-- --></A>
 <div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_MESSAGE_USER</span>
+			 = <span class="const-default"> &quot;UBMessage-UBUser&quot;</span>
+			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1079,7 +1247,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:56 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:23 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

@@ -116,11 +116,43 @@
 
 				</div>
 								<div class="const-title">
+					<a href="#REL_RESOURCE_USER" title="details" class="const-name">REL_RESOURCE_USER</a> = 					<span class="var-type"> &quot;ClipitResource-ClipitUser&quot;</span>
+
+				</div>
+								<div class="const-title">
 					<a href="#REL_SITE_RESOURCE" title="details" class="const-name">REL_SITE_RESOURCE</a> = 					<span class="var-type"> &quot;&quot;</span>
 
 				</div>
 								<div class="const-title">
 					<a href="#REL_TASK_RESOURCE" title="details" class="const-name">REL_TASK_RESOURCE</a> = 					<span class="var-type"> &quot;&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#REL_TRICKYTOPIC_RESOURCE" title="details" class="const-name">REL_TRICKYTOPIC_RESOURCE</a> = 					<span class="var-type"> &quot;&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SCOPE_ACTIVITY" title="details" class="const-name">SCOPE_ACTIVITY</a> = 					<span class="var-type"> &quot;activity&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SCOPE_EXAMPLE" title="details" class="const-name">SCOPE_EXAMPLE</a> = 					<span class="var-type"> &quot;example&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SCOPE_GROUP" title="details" class="const-name">SCOPE_GROUP</a> = 					<span class="var-type"> &quot;group&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SCOPE_SITE" title="details" class="const-name">SCOPE_SITE</a> = 					<span class="var-type"> &quot;site&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SCOPE_TASK" title="details" class="const-name">SCOPE_TASK</a> = 					<span class="var-type"> &quot;task&quot;</span>
+
+				</div>
+								<div class="const-title">
+					<a href="#SCOPE_TRICKYTOPIC" title="details" class="const-name">SCOPE_TRICKYTOPIC</a> = 					<span class="var-type"> &quot;tricky_topic&quot;</span>
 
 				</div>
 								<div class="const-title">
@@ -205,6 +237,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">bool</span>
+										<a href="#add_read_array" title="details" class="method-name">add_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
 										<a href="#add_tags" title="details" class="method-name">add_tags</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$tag_array</span>)
 									</div>
@@ -217,11 +254,6 @@
 					static 						<span class="method-result">void</span>
 										<a href="#get_by_labels" title="details" class="method-name">get_by_labels</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$label_array</span>)
-									</div>
-																<div class="method-definition">
-					static 						<span class="method-result">void</span>
-										<a href="#get_by_performance_items" title="details" class="method-name">get_by_performance_items</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
@@ -250,6 +282,11 @@
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">static[]</span>
+										<a href="#get_read_array" title="details" class="method-name">get_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">array[bool]</span>
 										<a href="#get_read_status" title="details" class="method-name">get_read_status</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, [<span class="var-type">null|array</span>&nbsp;<span class="var-name">$user_array</span> = <span class="var-default">null</span>])
 									</div>
@@ -261,7 +298,7 @@
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
 										<a href="#get_site" title="details" class="method-name">get_site</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$recursive</span> = <span class="var-default">false</span>])
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">array|bool</span>
@@ -274,6 +311,11 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
 									</div>
 																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_tricky_topic" title="details" class="method-name">get_tricky_topic</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
 					static 						<span class="method-result">bool</span>
 										<a href="#remove_labels" title="details" class="method-name">remove_labels</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$label_array</span>)
@@ -282,6 +324,11 @@
 					static 						<span class="method-result">void</span>
 										<a href="#remove_performance_items" title="details" class="method-name">remove_performance_items</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#remove_read_array" title="details" class="method-name">remove_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">bool</span>
@@ -299,6 +346,11 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
 									</div>
 																<div class="method-definition">
+					static 						<span class="method-result">bool</span>
+										<a href="#set_read_array" title="details" class="method-name">set_read_array</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+									</div>
+																<div class="method-definition">
 					static 						<span class="method-result">bool|int</span>
 										<a href="#set_read_status" title="details" class="method-name">set_read_status</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">bool</span>&nbsp;<span class="var-name">$read_value</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$user_array</span>)
@@ -314,7 +366,7 @@
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
 									</div>
 								
-																																				<div class="method-definition">
+																																												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_from_elgg" title="details" class="method-name">copy_from_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
@@ -324,12 +376,12 @@
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 									</div>
-																																																																																																																																																<div class="method-definition">
+																																																																																																																																																																<div class="method-definition">
 											<span class="method-result">bool|int</span>
 										<a href="#save" title="details" class="method-name">save</a>
 											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$double_save</span> = <span class="var-default">false</span>])
 									</div>
-																																																</div>
+																																																								</div>
 		</div>
 	</div>		
 
@@ -350,13 +402,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$label_array" id="$label_array"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$label_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">35</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">45</span>)
 		</span>
 	</div>
 
@@ -371,13 +423,13 @@
 
 </div>
 <a name="var$overall_rating_average" id="$overall_rating_average"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$overall_rating_average</span>
-			 = <span class="var-default"> 0.0</span>			(line <span class="line-number">39</span>)
+			 = <span class="var-default"> 0.0</span>			(line <span class="line-number">48</span>)
 		</span>
 	</div>
 
@@ -392,13 +444,13 @@
 
 </div>
 <a name="var$performance_item_array" id="$performance_item_array"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$performance_item_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">36</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">44</span>)
 		</span>
 	</div>
 
@@ -413,13 +465,13 @@
 
 </div>
 <a name="var$performance_rating_average" id="$performance_rating_average"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$performance_rating_average</span>
-			 = <span class="var-default"> 0.0</span>			(line <span class="line-number">41</span>)
+			 = <span class="var-default"> 0.0</span>			(line <span class="line-number">50</span>)
 		</span>
 	</div>
 
@@ -434,13 +486,13 @@
 
 </div>
 <a name="var$read_array" id="$read_array"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$read_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">37</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">46</span>)
 		</span>
 	</div>
 
@@ -455,13 +507,13 @@
 
 </div>
 <a name="var$tag_array" id="$tag_array"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$tag_array</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">34</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">43</span>)
 		</span>
 	</div>
 
@@ -476,13 +528,13 @@
 
 </div>
 <a name="var$tag_rating_average" id="$tag_rating_average"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$tag_rating_average</span>
-			 = <span class="var-default"> 0.0</span>			(line <span class="line-number">40</span>)
+			 = <span class="var-default"> 0.0</span>			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -544,10 +596,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodadd_labels" id="add_labels"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_labels</span> (line <span class="line-number">273</span>)
+		<span class="method-title">static method add_labels</span> (line <span class="line-number">229</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -577,10 +629,10 @@
 			
 	</div>
 <a name="methodadd_performance_items" id="add_performance_items"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_performance_items</span> (line <span class="line-number">312</span>)
+		<span class="method-title">static method add_performance_items</span> (line <span class="line-number">180</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -605,11 +657,44 @@
 		
 			
 	</div>
+<a name="methodadd_read_array" id="add_read_array"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method add_read_array</span> (line <span class="line-number">105</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Add Read Array for a Resource</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if OK, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			add_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Resource</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$read_array</span><span class="var-description">: Array of User IDs who have read the Resource</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodadd_tags" id="add_tags"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_tags</span> (line <span class="line-number">226</span>)
+		<span class="method-title">static method add_tags</span> (line <span class="line-number">374</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -642,7 +727,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_activity</span> (line <span class="line-number">189</span>)
+		<span class="method-title">static method get_activity</span> (line <span class="line-number">344</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -668,7 +753,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_by_labels</span> (line <span class="line-number">108</span>)
+		<span class="method-title">static method get_by_labels</span> (line <span class="line-number">193</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -690,37 +775,11 @@
 		
 			
 	</div>
-<a name="methodget_by_performance_items" id="get_by_performance_items"><!-- --></a>
+<a name="methodget_by_tags" id="get_by_tags"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_by_performance_items</span> (line <span class="line-number">123</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-	
-	<div class="method-signature">
-	    static
-		<span class="method-result">void</span>
-		<span class="method-name">
-			get_by_performance_items
-		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$performance_item_array</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$performance_item_array</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="methodget_by_tags" id="get_by_tags"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">static method get_by_tags</span> (line <span class="line-number">93</span>)
+		<span class="method-title">static method get_by_tags</span> (line <span class="line-number">152</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -743,10 +802,10 @@
 			
 	</div>
 <a name="methodget_example" id="get_example"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_example</span> (line <span class="line-number">202</span>)
+		<span class="method-title">static method get_example</span> (line <span class="line-number">307</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -769,10 +828,10 @@
 			
 	</div>
 <a name="methodget_group" id="get_group"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_group</span> (line <span class="line-number">169</span>)
+		<span class="method-title">static method get_group</span> (line <span class="line-number">332</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -799,10 +858,10 @@
 			
 	</div>
 <a name="methodget_labels" id="get_labels"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_labels</span> (line <span class="line-number">308</span>)
+		<span class="method-title">static method get_labels</span> (line <span class="line-number">216</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -829,10 +888,10 @@
 			
 	</div>
 <a name="methodget_performance_items" id="get_performance_items"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_performance_items</span> (line <span class="line-number">324</span>)
+		<span class="method-title">static method get_performance_items</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -854,22 +913,52 @@
 		
 			
 	</div>
-<a name="methodget_read_status" id="get_read_status"><!-- --></a>
-<div class="oddrow">
+<a name="methodget_read_array" id="get_read_array"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_read_status</span> (line <span class="line-number">336</span>)
+		<span class="method-title">static method get_read_array</span> (line <span class="line-number">140</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Get a list of Users who have Read a Resource, or optionally whether certain Users have read it</p>
+<p class="short-description">Get Read Array for a Resource</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> Array with key =&gt; value: user_id =&gt; read_status, where read_status is bool</li>
+				<li><span class="field">return:</span> Array of Resource IDs</li>
 			</ul>
 	
 	<div class="method-signature">
 	    static
 		<span class="method-result">static[]</span>
+		<span class="method-name">
+			get_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Resource</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_read_status" id="get_read_status"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_read_status</span> (line <span class="line-number">401</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get a list of Users who have Read a Resource, or optionally whether certain Users have read it</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array with key =&gt; value: (int)user_id =&gt; (bool)read_status</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">array[bool]</span>
 		<span class="method-name">
 			get_read_status
 		</span>
@@ -891,7 +980,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_scope</span> (line <span class="line-number">138</span>)
+		<span class="method-title">static method get_scope</span> (line <span class="line-number">260</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -917,7 +1006,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_site</span> (line <span class="line-number">210</span>)
+		<span class="method-title">static method get_site</span> (line <span class="line-number">289</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -928,13 +1017,16 @@
 		<span class="method-name">
 			get_site
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$recursive</span> = <span class="var-default">false</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$id</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$recursive</span>			</li>
 				</ul>
 		
 			
@@ -943,7 +1035,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_tags</span> (line <span class="line-number">261</span>)
+		<span class="method-title">static method get_tags</span> (line <span class="line-number">175</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -973,7 +1065,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_task</span> (line <span class="line-number">181</span>)
+		<span class="method-title">static method get_task</span> (line <span class="line-number">316</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -995,11 +1087,37 @@
 		
 			
 	</div>
-<a name="methodremove_labels" id="remove_labels"><!-- --></a>
+<a name="methodget_tricky_topic" id="get_tricky_topic"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_labels</span> (line <span class="line-number">297</span>)
+		<span class="method-title">static method get_tricky_topic</span> (line <span class="line-number">357</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_tricky_topic
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodremove_labels" id="remove_labels"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method remove_labels</span> (line <span class="line-number">242</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1029,10 +1147,10 @@
 			
 	</div>
 <a name="methodremove_performance_items" id="remove_performance_items"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_performance_items</span> (line <span class="line-number">320</span>)
+		<span class="method-title">static method remove_performance_items</span> (line <span class="line-number">186</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1057,11 +1175,44 @@
 		
 			
 	</div>
+<a name="methodremove_read_array" id="remove_read_array"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method remove_read_array</span> (line <span class="line-number">129</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Remove Read Array for a Resource</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if OK, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			remove_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Resource</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$read_array</span><span class="var-description">: Array of User IDs who have read the Resource</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodremove_tags" id="remove_tags"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_tags</span> (line <span class="line-number">250</span>)
+		<span class="method-title">static method remove_tags</span> (line <span class="line-number">387</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1094,7 +1245,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_labels</span> (line <span class="line-number">285</span>)
+		<span class="method-title">static method set_labels</span> (line <span class="line-number">255</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1127,7 +1278,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_performance_items</span> (line <span class="line-number">316</span>)
+		<span class="method-title">static method set_performance_items</span> (line <span class="line-number">183</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1152,11 +1303,44 @@
 		
 			
 	</div>
-<a name="methodset_read_status" id="set_read_status"><!-- --></a>
+<a name="methodset_read_array" id="set_read_array"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_read_status</span> (line <span class="line-number">364</span>)
+		<span class="method-title">static method set_read_array</span> (line <span class="line-number">117</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Set Read Array for a Resource</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> True if OK, false if error</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			set_read_array
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$read_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$id</span><span class="var-description">: ID of the Resource</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$read_array</span><span class="var-description">: Array of User IDs who have read the Resource</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodset_read_status" id="set_read_status"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method set_read_status</span> (line <span class="line-number">431</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1190,10 +1374,10 @@
 			
 	</div>
 <a name="methodset_tags" id="set_tags"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_tags</span> (line <span class="line-number">238</span>)
+		<span class="method-title">static method set_tags</span> (line <span class="line-number">462</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1223,10 +1407,10 @@
 			
 	</div>
 <a name="methodupdate_average_ratings" id="update_average_ratings"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method update_average_ratings</span> (line <span class="line-number">86</span>)
+		<span class="method-title">static method update_average_ratings</span> (line <span class="line-number">144</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1250,10 +1434,10 @@
 	</div>
 
 <a name="methodcopy_from_elgg" id="copy_from_elgg"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">48</span>)
+		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">57</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1291,10 +1475,10 @@
 				</ul>
 	</div>
 <a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">65</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">74</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1332,10 +1516,10 @@
 				</ul>
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">save</span> (line <span class="line-number">78</span>)
+		<span class="method-title">save</span> (line <span class="line-number">87</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1388,11 +1572,26 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constREL_ACTIVITY_RESOURCE" id="REL_ACTIVITY_RESOURCE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
 			<span class="const-name">REL_ACTIVITY_RESOURCE</span>
+			 = <span class="const-default"> &quot;&quot;</span>
+			(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_EXAMPLE_RESOURCE" id="REL_EXAMPLE_RESOURCE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_EXAMPLE_RESOURCE</span>
 			 = <span class="const-default"> &quot;&quot;</span>
 			(line <span class="line-number">30</span>)
 		</span>
@@ -1402,29 +1601,14 @@
 	
 	
 </div>
-<a name="constREL_EXAMPLE_RESOURCE" id="REL_EXAMPLE_RESOURCE"><!-- --></A>
-<div class="evenrow">
-
-	<div class="const-header">
-		<span class="const-title">
-			<span class="const-name">REL_EXAMPLE_RESOURCE</span>
-			 = <span class="const-default"> &quot;&quot;</span>
-			(line <span class="line-number">29</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	
-	
-</div>
 <a name="constREL_GROUP_RESOURCE" id="REL_GROUP_RESOURCE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
 			<span class="const-name">REL_GROUP_RESOURCE</span>
 			 = <span class="const-default"> &quot;&quot;</span>
-			(line <span class="line-number">32</span>)
+			(line <span class="line-number">34</span>)
 		</span>
 	</div>
 
@@ -1433,7 +1617,7 @@
 	
 </div>
 <a name="constREL_RESOURCE_LABEL" id="REL_RESOURCE_LABEL"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1448,7 +1632,7 @@
 	
 </div>
 <a name="constREL_RESOURCE_PERFORMANCE" id="REL_RESOURCE_PERFORMANCE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1463,13 +1647,28 @@
 	
 </div>
 <a name="constREL_RESOURCE_TAG" id="REL_RESOURCE_TAG"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
 			<span class="const-name">REL_RESOURCE_TAG</span>
 			 = <span class="const-default"> &quot;ClipitResource-ClipitTag&quot;</span>
 			(line <span class="line-number">24</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_RESOURCE_USER" id="REL_RESOURCE_USER"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_RESOURCE_USER</span>
+			 = <span class="const-default"> &quot;ClipitResource-ClipitUser&quot;</span>
+			(line <span class="line-number">27</span>)
 		</span>
 	</div>
 
@@ -1484,7 +1683,7 @@
 		<span class="const-title">
 			<span class="const-name">REL_SITE_RESOURCE</span>
 			 = <span class="const-default"> &quot;&quot;</span>
-			(line <span class="line-number">28</span>)
+			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
@@ -1499,7 +1698,112 @@
 		<span class="const-title">
 			<span class="const-name">REL_TASK_RESOURCE</span>
 			 = <span class="const-default"> &quot;&quot;</span>
-			(line <span class="line-number">31</span>)
+			(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constREL_TRICKYTOPIC_RESOURCE" id="REL_TRICKYTOPIC_RESOURCE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">REL_TRICKYTOPIC_RESOURCE</span>
+			 = <span class="const-default"> &quot;&quot;</span>
+			(line <span class="line-number">32</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSCOPE_ACTIVITY" id="SCOPE_ACTIVITY"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SCOPE_ACTIVITY</span>
+			 = <span class="const-default"> &quot;activity&quot;</span>
+			(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSCOPE_EXAMPLE" id="SCOPE_EXAMPLE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SCOPE_EXAMPLE</span>
+			 = <span class="const-default"> &quot;example&quot;</span>
+			(line <span class="line-number">39</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSCOPE_GROUP" id="SCOPE_GROUP"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SCOPE_GROUP</span>
+			 = <span class="const-default"> &quot;group&quot;</span>
+			(line <span class="line-number">36</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSCOPE_SITE" id="SCOPE_SITE"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SCOPE_SITE</span>
+			 = <span class="const-default"> &quot;site&quot;</span>
+			(line <span class="line-number">38</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSCOPE_TASK" id="SCOPE_TASK"><!-- --></A>
+<div class="evenrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SCOPE_TASK</span>
+			 = <span class="const-default"> &quot;task&quot;</span>
+			(line <span class="line-number">41</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+</div>
+<a name="constSCOPE_TRICKYTOPIC" id="SCOPE_TRICKYTOPIC"><!-- --></A>
+<div class="oddrow">
+
+	<div class="const-header">
+		<span class="const-title">
+			<span class="const-name">SCOPE_TRICKYTOPIC</span>
+			 = <span class="const-default"> &quot;tricky_topic&quot;</span>
+			(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
@@ -1508,7 +1812,7 @@
 	
 </div>
 <a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1541,7 +1845,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:29 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:05 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

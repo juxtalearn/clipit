@@ -3,13 +3,13 @@
   <html xmlns="http://www.w3.org/1999/xhtml">
 		<head>
 			<!-- template designed by Marco Von Ballmoos -->
-			<title>Docs For Class ClipitLA</title>
+			<title>Docs For Class ClipitRemoteVideo</title>
 			<link rel="stylesheet" href="../../media/stylesheet.css" />
 			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
 		</head>
 		<body>
 			<div class="page-body">			
-<h2 class="class-name">Class ClipitLA</h2>
+<h2 class="class-name">Class ClipitRemoteVideo</h2>
 
 <a name="sec-description"></a>
 <div class="info-box">
@@ -24,15 +24,15 @@
 			</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Learning Analytics instance and interface class, for working with the external Learning Analytics Toolkit.</p>
+<p class="short-description">An class which holds properties for Remote Video objects.</p>
 		<p class="notes">
-			Located in <a class="field" href="_mod---z02_clipit_api---classes---ClipitLA.php.html">/mod/z02_clipit_api/classes/ClipitLA.php</a> (line <span class="field">18</span>)
+			Located in <a class="field" href="_mod---z02_clipit_api---classes---ClipitRemoteVideo.php.html">/mod/z02_clipit_api/classes/ClipitRemoteVideo.php</a> (line <span class="field">17</span>)
 		</p>
 		
 				
 		<pre><a href="../../ClipIt/urjc_backend/UBItem.html">UBItem</a>
    |
-   --ClipitLA</pre>
+   --ClipitRemoteVideo</pre>
 	
 			</div>
 </div>
@@ -54,7 +54,7 @@
 		<div class="info-box-body">
 			<div class="const-summary">
 								<div class="const-title">
-					<a href="#SUBTYPE" title="details" class="const-name">SUBTYPE</a> = 					<span class="var-type"> &quot;ClipitLA&quot;</span>
+					<a href="#SUBTYPE" title="details" class="const-name">SUBTYPE</a> = 					<span class="var-type"> &quot;ClipitRemoteVideo&quot;</span>
 
 				</div>
 							</div>
@@ -75,25 +75,17 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																								<div class="var-title">
+																																								<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$context" title="details" class="var-name">$context</a>
+					<a href="#$remote_id" title="details" class="var-name">$remote_id</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$file_id" title="details" class="var-name">$file_id</a>
+					<a href="#$remote_site" title="details" class="var-name">$remote_site</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$metric_id" title="details" class="var-name">$metric_id</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$metric_received" title="details" class="var-name">$metric_received</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$status_code" title="details" class="var-name">$status_code</a>
+					<a href="#$tag_array" title="details" class="var-name">$tag_array</a>
 				</div>
 											</div>
 		</div>
@@ -115,26 +107,46 @@
 			<div class="method-summary">
 																												<div class="method-definition">
 					static 						<span class="method-result">void</span>
-										<a href="#get_metric" title="details" class="method-name">get_metric</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$metric_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$context</span>)
+										<a href="#create" title="details" class="method-name">create</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$prop_value_array</span>)
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
-										<a href="#save_metric" title="details" class="method-name">save_metric</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$return_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$status_code</span>)
+										<a href="#delete_by_remote_id" title="details" class="method-name">delete_by_remote_id</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$remote_id_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#delete_from_site" title="details" class="method-name">delete_from_site</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_by_remote_id" title="details" class="method-name">get_by_remote_id</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$remote_id_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_by_tags" title="details" class="method-name">get_by_tags</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$tag_array</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#get_from_site" title="details" class="method-name">get_from_site</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$remote_ids_only</span> = <span class="var-default">false</span>])
 									</div>
 								
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_from_elgg" title="details" class="method-name">copy_from_elgg</a>
-											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
+											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
-											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
+											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 									</div>
-																								</div>
+																																																								</div>
 		</div>
 	</div>		
 
@@ -153,14 +165,14 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$context" id="$context"><!-- --></A>
+			<a name="var$remote_id" id="$remote_id"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$context</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">25</span>)
+			<span class="var-name">$remote_id</span>
+						(line <span class="line-number">19</span>)
 		</span>
 	</div>
 
@@ -174,14 +186,14 @@
 		
 
 </div>
-<a name="var$file_id" id="$file_id"><!-- --></A>
+<a name="var$remote_site" id="$remote_site"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$file_id</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">26</span>)
+			<span class="var-name">$remote_site</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">20</span>)
 		</span>
 	</div>
 
@@ -195,56 +207,14 @@
 		
 
 </div>
-<a name="var$metric_id" id="$metric_id"><!-- --></A>
+<a name="var$tag_array" id="$tag_array"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$metric_id</span>
-			 = <span class="var-default"> &quot;&quot;</span>			(line <span class="line-number">24</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$metric_received" id="$metric_received"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$metric_received</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">27</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$status_code" id="$status_code"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$status_code</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">23</span>)
+			<span class="var-name">$tag_array</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">21</span>)
 		</span>
 	</div>
 
@@ -304,11 +274,11 @@
 		</div>
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
-<a name="methodget_metric" id="get_metric"><!-- --></a>
+<a name="methodcreate" id="create"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_metric</span> (line <span class="line-number">58</span>)
+		<span class="method-title">static method create</span> (line <span class="line-number">44</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -317,27 +287,24 @@
 	    static
 		<span class="method-result">void</span>
 		<span class="method-name">
-			get_metric
+			create
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$metric_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$context</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$prop_value_array</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">$metric_id</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$context</span>			</li>
+				<span class="var-name">$prop_value_array</span>			</li>
 				</ul>
 		
 			
 	</div>
-<a name="methodsave_metric" id="save_metric"><!-- --></a>
+<a name="methoddelete_by_remote_id" id="delete_by_remote_id"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method save_metric</span> (line <span class="line-number">72</span>)
+		<span class="method-title">static method delete_by_remote_id</span> (line <span class="line-number">87</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -346,21 +313,128 @@
 	    static
 		<span class="method-result">void</span>
 		<span class="method-name">
-			save_metric
+			delete_by_remote_id
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$return_id</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$data</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$status_code</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$remote_id_array</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">$return_id</span>			</li>
+				<span class="var-name">$remote_site</span>			</li>
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">$data</span>			</li>
+				<span class="var-name">$remote_id_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddelete_from_site" id="delete_from_site"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method delete_from_site</span> (line <span class="line-number">112</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			delete_from_site
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>)
+			</div>
+	
+			<ul class="parameters">
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">$status_code</span>			</li>
+				<span class="var-name">$remote_site</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_by_remote_id" id="get_by_remote_id"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_by_remote_id</span> (line <span class="line-number">76</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_by_remote_id
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$remote_id_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$remote_site</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$remote_id_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_by_tags" id="get_by_tags"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_by_tags</span> (line <span class="line-number">64</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_by_tags
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$tag_array</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$tag_array</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_from_site" id="get_from_site"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_from_site</span> (line <span class="line-number">97</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			get_from_site
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$remote_site</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$remote_ids_only</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$remote_site</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$remote_ids_only</span>			</li>
 				</ul>
 		
 			
@@ -370,7 +444,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">35</span>)
+		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">27</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -384,13 +458,13 @@
 		<span class="method-name">
 			copy_from_elgg
 		</span>
-					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
+					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>
-				<span class="var-name">$elgg_object</span><span class="var-description">: Elgg Object to load parameters from.</span>			</li>
+				<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+				<span class="var-name">$elgg_entity</span><span class="var-description">: Elgg Object to load parameters from.</span>			</li>
 				</ul>
 		
 			
@@ -399,11 +473,11 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">49</span>)
+		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">38</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Copy $this file parameters into an Elgg File entity.</p>
+<p class="short-description">Copy $this object parameters into an Elgg entity.</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> protected</li>
 			</ul>
@@ -413,13 +487,13 @@
 		<span class="method-name">
 			copy_to_elgg
 		</span>
-					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>&nbsp;<span class="var-name">$elgg_object</span>)
+					(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../../Elgg-Core/DataModel-Object/ElggObject.html">ElggObject</a></span>
-				<span class="var-name">$elgg_object</span><span class="var-description">: Elgg object instance to save $this to</span>			</li>
+				<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>
+				<span class="var-name">$elgg_entity</span><span class="var-description">: Elgg object instance to save $this to</span>			</li>
 				</ul>
 		
 			
@@ -455,8 +529,8 @@
 	<div class="const-header">
 		<span class="const-title">
 			<span class="const-name">SUBTYPE</span>
-			 = <span class="const-default"> &quot;ClipitLA&quot;</span>
-			(line <span class="line-number">22</span>)
+			 = <span class="const-default"> &quot;ClipitRemoteVideo&quot;</span>
+			(line <span class="line-number">18</span>)
 		</span>
 	</div>
 
@@ -483,7 +557,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 17 Dec 2015 15:26:04 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:05 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

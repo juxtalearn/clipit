@@ -73,21 +73,21 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitQuizQuestion.html">ClipitQuizQuestion</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitQuiz.html">ClipitQuiz</a></td>
 					<td>
-											A Quiz Question containing a main question (in the &quot;name&quot; and &quot;description&quot; properties), with a set of Options,  a Validation array with the correct pattern of Options, a Difficulty value, can be Tagged, can be linked to a Video,  and contains links to all Results submitted by Students to this Question.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitLA.html">ClipitLA</a></td>
-					<td>
-											Learning Analytics instance and interface class, for working with the external Learning Analytics Toolkit.
+											&lt;Class Description&gt;
 										</td>
 				</tr>
 								<tr>
 					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitRating.html">ClipitRating</a></td>
 					<td>
 											A complete User Rating linked to a published Resource, containing an Overall boolean rating, links to Tag Ratings and  Performance item Ratings.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitTagRating.html">ClipitTagRating</a></td>
+					<td>
+											A rating of whether a Tag (Stumbling Block) has correctly been covered in a Resource. It is contained inside of a  ClipitRating instance which points to a specific Resource.
 										</td>
 				</tr>
 								<tr>
@@ -103,45 +103,21 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitActivity.html">ClipitActivity</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitGroup.html">ClipitGroup</a></td>
 					<td>
-											Contains all elements required to carry out the JuxtaLearn learning method in which Student work in Groups around a  selected Tricky Topic.
+											A collection of Students contained inside an Activity. Also links to all Group Resources.
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitRemoteResource.html">ClipitRemoteResource</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitPerformanceItem.html">ClipitPerformanceItem</a></td>
 					<td>
-											An class which holds properties for Remote Resource objects.
+											A Performance item which can be linked from Resources to denote that it has been applied to them, and allows for  richer linkage, searching and context of Resources.
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitTagRating.html">ClipitTagRating</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitRemoteVideo.html">ClipitRemoteVideo</a></td>
 					<td>
-											A rating of whether a Tag (Stumbling Block) has correctly been covered in a Resource. It is contained inside of a  ClipitRating instance which points to a specific Resource.
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitTrickyTopic.html">ClipitTrickyTopic</a></td>
-					<td>
-											A main topic to explain through videos, which can be decomposed into tags (Stumbling Blocks).
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/urjc_backend/ClipitExampleType.html">ClipitExampleType</a></td>
-					<td>
-											&lt;Class Description&gt;
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitQuiz.html">ClipitQuiz</a></td>
-					<td>
-											&lt;Class Description&gt;
-										</td>
-				</tr>
-								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitLabel.html">ClipitLabel</a></td>
-					<td>
-											A key term (Label) which can be linked from any Resource as metadata for richer linkage, searching and context.
+											An class which holds properties for Remote Video objects.
 										</td>
 				</tr>
 								<tr>
@@ -151,15 +127,27 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitGroup.html">ClipitGroup</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/urjc_backend/ClipitExampleType.html">ClipitExampleType</a></td>
 					<td>
-											A collection of Students contained inside an Activity. Also links to all Group Resources.
+											&lt;Class Description&gt;
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitResource.html">ClipitResource</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitQuizQuestion.html">ClipitQuizQuestion</a></td>
 					<td>
-											An extensible class which holds common functionality and properties for Resource objects such as Videos or  Storyboards.
+											A Quiz Question containing a main question (in the &quot;name&quot; and &quot;description&quot; properties), with a set of Options,  a Validation array with the correct pattern of Options, a Difficulty value, can be Tagged, can be linked to a Video,  and contains links to all Results submitted by Students to this Question.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitActivity.html">ClipitActivity</a></td>
+					<td>
+											Contains all elements required to carry out the JuxtaLearn learning method in which Student work in Groups around a  selected Tricky Topic.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitTrickyTopic.html">ClipitTrickyTopic</a></td>
+					<td>
+											A main topic to explain through videos, which can be decomposed into tags (Stumbling Blocks).
 										</td>
 				</tr>
 								<tr>
@@ -169,9 +157,27 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitPerformanceItem.html">ClipitPerformanceItem</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitQuizResult.html">ClipitQuizResult</a></td>
 					<td>
-											&lt;Class Description&gt;
+											A Student Result for a Quiz Question, with a link to it, and a boolean value to show whether it is Correct or not.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitLabel.html">ClipitLabel</a></td>
+					<td>
+											A key term (Label) which can be linked from any Resource as metadata for richer linkage, searching and context.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitRemoteTrickyTopic.html">ClipitRemoteTrickyTopic</a></td>
+					<td>
+											An class which holds properties for Remote Tricky Topics.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitLA.html">ClipitLA</a></td>
+					<td>
+											Learning Analytics instance and interface class, for working with the external Learning Analytics Toolkit.
 										</td>
 				</tr>
 								<tr>
@@ -181,9 +187,9 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitQuizResult.html">ClipitQuizResult</a></td>
+					<td style="padding-right: 2em"><a href="../../ClipIt/clipit_api/ClipitResource.html">ClipitResource</a></td>
 					<td>
-											A Student Result for a Quiz Question, with a link to it, and a boolean value to show whether it is Correct or not.
+											An extensible class which holds common functionality and properties for Resource objects such as Videos or  Storyboards.
 										</td>
 				</tr>
 							</table>
@@ -315,7 +321,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$cloned_from" id="$cloned_from"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -337,7 +343,7 @@
 
 </div>
 <a name="var$clone_array" id="$clone_array"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -359,7 +365,7 @@
 
 </div>
 <a name="var$description" id="$description"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -381,13 +387,13 @@
 
 </div>
 <a name="var$id" id="$id"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">int</span>
 			<span class="var-name">$id</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">34</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">34</span>)
 		</span>
 	</div>
 
@@ -403,7 +409,7 @@
 
 </div>
 <a name="var$name" id="$name"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -425,7 +431,7 @@
 
 </div>
 <a name="var$owner_id" id="$owner_id"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -447,7 +453,7 @@
 
 </div>
 <a name="var$time_created" id="$time_created"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -469,7 +475,7 @@
 
 </div>
 <a name="var$url" id="$url"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -510,7 +516,7 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">Constructor __construct</span> (line <span class="line-number">72</span>)
@@ -573,7 +579,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constREL_PARENT_CLONE" id="REL_PARENT_CLONE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -588,7 +594,7 @@
 	
 </div>
 <a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -603,7 +609,7 @@
 	
 </div>
 <a name="constTYPE" id="TYPE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -622,7 +628,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:56 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:23 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

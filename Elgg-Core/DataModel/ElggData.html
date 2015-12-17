@@ -59,15 +59,15 @@
 					<th class="class-table-header">Description</th>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></td>
-					<td>
-											The parent class for all Elgg Entities.
-										</td>
-				</tr>
-								<tr>
 					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html">ElggExtender</a></td>
 					<td>
 											The base class for ElggEntity extenders.
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></td>
+					<td>
+											The parent class for all Elgg Entities.
 										</td>
 				</tr>
 								<tr>
@@ -367,12 +367,16 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddelete">ElggEntity::delete()</a>
-								: Delete this entity.
+				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methoddelete">ElggMetadata::delete()</a>
+								: Delete the metadata
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methoddelete">ElggSite::delete()</a>
-								: Delete the site.
+				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methoddelete">ElggAnnotation::delete()</a>
+								: Delete the annotation.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methoddelete">ElggEntity::delete()</a>
+								: Delete this entity.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-File/ElggFile.html#methoddelete">ElggFile::delete()</a>
@@ -383,12 +387,8 @@
 								: User specific override of the entity delete method.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methoddelete">ElggAnnotation::delete()</a>
-								: Delete the annotation.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methoddelete">ElggMetadata::delete()</a>
-								: Delete the metadata
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methoddelete">ElggSite::delete()</a>
+								: Delete the site.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Core/ElggRelationship.html#methoddelete">ElggRelationship::delete()</a>
@@ -430,24 +430,24 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
+				<a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html#methodget">ElggExtender::get()</a>
+								: Returns an attribute
+							</li>
+					<li>
 				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodget">ElggEntity::get()</a>
 								: Return the value of a property.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodget">ElggGroup::get()</a>
-								: Returns an attribute or metadata.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodget">ElggPlugin::get()</a>
-								: Get a value from private settings.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodget">ElggWidget::get()</a>
 								: Override entity get and sets in order to save data to private data store.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html#methodget">ElggExtender::get()</a>
-								: Returns an attribute
+				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodget">ElggPlugin::get()</a>
+								: Get a value from private settings.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodget">ElggGroup::get()</a>
+								: Returns an attribute or metadata.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Core/ElggRelationship.html#methodget">ElggRelationship::get()</a>
@@ -569,16 +569,16 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetURL">ElggEntity::getURL()</a>
-								: Returns the URL for this entity
+				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodgetURL">ElggMetadata::getURL()</a>
+								: Get a url for this item of metadata.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methodgetURL">ElggAnnotation::getURL()</a>
 								: Get a url for this annotation.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodgetURL">ElggMetadata::getURL()</a>
-								: Get a url for this item of metadata.
+				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodgetURL">ElggEntity::getURL()</a>
+								: Returns the URL for this entity
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Core/ElggRelationship.html#methodgetURL">ElggRelationship::getURL()</a>
@@ -645,20 +645,28 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
+				<a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html#methodinitializeAttributes">ElggExtender::initializeAttributes()</a>
+								: (non-PHPdoc)
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodinitializeAttributes">ElggMetadata::initializeAttributes()</a>
+								: (non-PHPdoc)
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methodinitializeAttributes">ElggAnnotation::initializeAttributes()</a>
+								: (non-PHPdoc)
+							</li>
+					<li>
 				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodinitializeAttributes">ElggEntity::initializeAttributes()</a>
 								: Initialize the attributes array.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodinitializeAttributes">ElggGroup::initializeAttributes()</a>
-								: Sets the type to group.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodinitializeAttributes">ElggSite::initializeAttributes()</a>
-								: Initialise the attributes array.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodinitializeAttributes">ElggObject::initializeAttributes()</a>
 								: Initialise the attributes array to include the type,  title, and description.
+							</li>
+					<li>
+				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodinitializeAttributes">ElggWidget::initializeAttributes()</a>
+								: Set subtype to widget.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-File/ElggFile.html#methodinitializeAttributes">ElggFile::initializeAttributes()</a>
@@ -669,24 +677,16 @@
 								: Set subtype to 'plugin'
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodinitializeAttributes">ElggWidget::initializeAttributes()</a>
-								: Set subtype to widget.
-							</li>
-					<li>
 				<a href="../../Elgg-Core/DataModel-User/ElggUser.html#methodinitializeAttributes">ElggUser::initializeAttributes()</a>
 								: Initialise the attributes array.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html#methodinitializeAttributes">ElggExtender::initializeAttributes()</a>
-								: (non-PHPdoc)
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodinitializeAttributes">ElggSite::initializeAttributes()</a>
+								: Initialise the attributes array.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methodinitializeAttributes">ElggAnnotation::initializeAttributes()</a>
-								: (non-PHPdoc)
-							</li>
-					<li>
-				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodinitializeAttributes">ElggMetadata::initializeAttributes()</a>
-								: (non-PHPdoc)
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodinitializeAttributes">ElggGroup::initializeAttributes()</a>
+								: Sets the type to group.
 							</li>
 				</ul>
 	</div>
@@ -951,16 +951,16 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
+				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodsave">ElggMetadata::save()</a>
+								: Save metadata object
+							</li>
+					<li>
+				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methodsave">ElggAnnotation::save()</a>
+								: Save this instance
+							</li>
+					<li>
 				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodsave">ElggEntity::save()</a>
 								: Save an entity.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodsave">ElggGroup::save()</a>
-								: Override the save function.
-							</li>
-					<li>
-				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodsave">ElggSite::save()</a>
-								: Saves site-specific attributes.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/DataModel-Object/ElggObject.html#methodsave">ElggObject::save()</a>
@@ -979,12 +979,12 @@
 								: Saves this user to the database.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Annotations/ElggAnnotation.html#methodsave">ElggAnnotation::save()</a>
-								: Save this instance
+				<a href="../../Elgg-Core/DataMode-Site/ElggSite.html#methodsave">ElggSite::save()</a>
+								: Saves site-specific attributes.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Metadata/ElggMetadata.html#methodsave">ElggMetadata::save()</a>
-								: Save metadata object
+				<a href="../../Elgg-Core/Groups/ElggGroup.html#methodsave">ElggGroup::save()</a>
+								: Override the save function.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Core/ElggRelationship.html#methodsave">ElggRelationship::save()</a>
@@ -1029,20 +1029,20 @@
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
 					<li>
-				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodset">ElggEntity::set()</a>
-								: Sets the value of a property.
+				<a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html#methodset">ElggExtender::set()</a>
+								: Set an attribute
 							</li>
 					<li>
-				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodset">ElggPlugin::set()</a>
-								: Save a value as private setting or attribute.
+				<a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html#methodset">ElggEntity::set()</a>
+								: Sets the value of a property.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Widgets/ElggWidget.html#methodset">ElggWidget::set()</a>
 								: Override entity get and sets in order to save data to private data store.
 							</li>
 					<li>
-				<a href="../../Elgg-Core/DataModel-Extender/ElggExtender.html#methodset">ElggExtender::set()</a>
-								: Set an attribute
+				<a href="../../Elgg-Core/Plugins-Settings/ElggPlugin.html#methodset">ElggPlugin::set()</a>
+								: Save a value as private setting or attribute.
 							</li>
 					<li>
 				<a href="../../Elgg-Core/Core/ElggRelationship.html#methodset">ElggRelationship::set()</a>
@@ -1189,7 +1189,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:32 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:07 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>

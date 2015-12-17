@@ -168,6 +168,21 @@
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$tag_array</span>)
 									</div>
 																																<div class="method-definition">
+					static 						<span class="method-result">void</span>
+										<a href="#evaluate_results" title="details" class="method-name">evaluate_results</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">static[]</span>
+										<a href="#get_from_quiz" title="details" class="method-name">get_from_quiz</a>
+											(<span class="var-type">int</span>&nbsp;<span class="var-name">$quiz_id</span>)
+									</div>
+																<div class="method-definition">
+					static 						<span class="method-result">static[]</span>
+										<a href="#get_from_video" title="details" class="method-name">get_from_video</a>
+											(<span class="var-type">$video_url</span>&nbsp;<span class="var-name">$video_url</span>)
+									</div>
+																<div class="method-definition">
 					static 						<span class="method-result">int|null</span>
 										<a href="#get_image" title="details" class="method-name">get_image</a>
 											(<span class="var-type">int</span>&nbsp;<span class="var-name">$id</span>)
@@ -238,7 +253,7 @@
 										<a href="#copy_to_elgg" title="details" class="method-name">copy_to_elgg</a>
 											(<span class="var-type"><a href="../../Elgg-Core/DataModel-Entities/ElggEntity.html">ElggEntity</a></span>&nbsp;<span class="var-name">$elgg_entity</span>)
 									</div>
-																																																								<div class="method-definition">
+																																																																																<div class="method-definition">
 											<span class="method-result">bool|int</span>
 										<a href="#save" title="details" class="method-name">save</a>
 											([<span class="var-type">bool</span>&nbsp;<span class="var-name">$double_save</span> = <span class="var-default">false</span>])
@@ -510,7 +525,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_quiz_results</span> (line <span class="line-number">148</span>)
+		<span class="method-title">static method add_quiz_results</span> (line <span class="line-number">197</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -539,7 +554,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method add_tags</span> (line <span class="line-number">191</span>)
+		<span class="method-title">static method add_tags</span> (line <span class="line-number">240</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -568,11 +583,97 @@
 		
 			
 	</div>
-<a name="methodget_image" id="get_image"><!-- --></a>
+<a name="methodevaluate_results" id="evaluate_results"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_image</span> (line <span class="line-number">123</span>)
+		<span class="method-title">static method evaluate_results</span> (line <span class="line-number">183</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">void</span>
+		<span class="method-name">
+			evaluate_results
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$id</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_from_quiz" id="get_from_quiz"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_from_quiz</span> (line <span class="line-number">124</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get all Questions from a Quiz ID</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Quiz question array</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">static[]</span>
+		<span class="method-name">
+			get_from_quiz
+		</span>
+					(<span class="var-type">int</span>&nbsp;<span class="var-name">$quiz_id</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">int</span>
+				<span class="var-name">$quiz_id</span><span class="var-description">: Quiz ID</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_from_video" id="get_from_video"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_from_video</span> (line <span class="line-number">160</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get Quiz Questions linked to a Video URL</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> Array of Quiz Questions</li>
+			</ul>
+	
+	<div class="method-signature">
+	    static
+		<span class="method-result">static[]</span>
+		<span class="method-name">
+			get_from_video
+		</span>
+					(<span class="var-type">$video_url</span>&nbsp;<span class="var-name">$video_url</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$video_url</span>
+				<span class="var-name">$video_url</span><span class="var-description">: URL of video (optionally in Base64)</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodget_image" id="get_image"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">static method get_image</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -599,10 +700,10 @@
 			
 	</div>
 <a name="methodget_quiz_results" id="get_quiz_results"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_quiz_results</span> (line <span class="line-number">179</span>)
+		<span class="method-title">static method get_quiz_results</span> (line <span class="line-number">228</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -629,10 +730,10 @@
 			
 	</div>
 <a name="methodget_tags" id="get_tags"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method get_tags</span> (line <span class="line-number">226</span>)
+		<span class="method-title">static method get_tags</span> (line <span class="line-number">275</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -659,10 +760,10 @@
 			
 	</div>
 <a name="methodremove_quiz_results" id="remove_quiz_results"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_quiz_results</span> (line <span class="line-number">168</span>)
+		<span class="method-title">static method remove_quiz_results</span> (line <span class="line-number">217</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -688,10 +789,10 @@
 			
 	</div>
 <a name="methodremove_tags" id="remove_tags"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method remove_tags</span> (line <span class="line-number">215</span>)
+		<span class="method-title">static method remove_tags</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -721,10 +822,10 @@
 			
 	</div>
 <a name="methodset_image" id="set_image"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_image</span> (line <span class="line-number">138</span>)
+		<span class="method-title">static method set_image</span> (line <span class="line-number">150</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -754,10 +855,10 @@
 			
 	</div>
 <a name="methodset_quiz_results" id="set_quiz_results"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_quiz_results</span> (line <span class="line-number">158</span>)
+		<span class="method-title">static method set_quiz_results</span> (line <span class="line-number">207</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -783,10 +884,10 @@
 			
 	</div>
 <a name="methodset_tags" id="set_tags"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_tags</span> (line <span class="line-number">203</span>)
+		<span class="method-title">static method set_tags</span> (line <span class="line-number">252</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -816,10 +917,10 @@
 			
 	</div>
 <a name="methodset_type_number" id="set_type_number"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_type_number</span> (line <span class="line-number">248</span>)
+		<span class="method-title">static method set_type_number</span> (line <span class="line-number">297</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -842,10 +943,10 @@
 			
 	</div>
 <a name="methodset_type_select_multi" id="set_type_select_multi"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_type_select_multi</span> (line <span class="line-number">242</span>)
+		<span class="method-title">static method set_type_select_multi</span> (line <span class="line-number">291</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -868,10 +969,10 @@
 			
 	</div>
 <a name="methodset_type_select_one" id="set_type_select_one"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_type_select_one</span> (line <span class="line-number">236</span>)
+		<span class="method-title">static method set_type_select_one</span> (line <span class="line-number">285</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -894,10 +995,10 @@
 			
 	</div>
 <a name="methodset_type_true_false" id="set_type_true_false"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method set_type_true_false</span> (line <span class="line-number">230</span>)
+		<span class="method-title">static method set_type_true_false</span> (line <span class="line-number">279</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -921,7 +1022,7 @@
 	</div>
 
 <a name="methodcopy_from_elgg" id="copy_from_elgg"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">copy_from_elgg</span> (line <span class="line-number">75</span>)
@@ -950,7 +1051,7 @@
 			
 	</div>
 <a name="methodcopy_to_elgg" id="copy_to_elgg"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">copy_to_elgg</span> (line <span class="line-number">93</span>)
@@ -979,10 +1080,10 @@
 			
 	</div>
 <a name="methodsave" id="save"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">save</span> (line <span class="line-number">109</span>)
+		<span class="method-title">save</span> (line <span class="line-number">110</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1034,7 +1135,7 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constREL_QUIZQUESTION_IMAGE" id="REL_QUIZQUESTION_IMAGE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1049,7 +1150,7 @@
 	
 </div>
 <a name="constREL_QUIZQUESTION_QUIZRESULT" id="REL_QUIZQUESTION_QUIZRESULT"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1064,7 +1165,7 @@
 	
 </div>
 <a name="constREL_QUIZQUESTION_TAG" id="REL_QUIZQUESTION_TAG"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1079,7 +1180,7 @@
 	
 </div>
 <a name="constSUBTYPE" id="SUBTYPE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1094,7 +1195,7 @@
 	
 </div>
 <a name="constTYPE_NUMBER" id="TYPE_NUMBER"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1109,7 +1210,7 @@
 	
 </div>
 <a name="constTYPE_SELECT_MULTI" id="TYPE_SELECT_MULTI"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1124,7 +1225,7 @@
 	
 </div>
 <a name="constTYPE_SELECT_ONE" id="TYPE_SELECT_ONE"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1139,7 +1240,7 @@
 	
 </div>
 <a name="constTYPE_TRUE_FALSE" id="TYPE_TRUE_FALSE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<span class="const-title">
@@ -1172,7 +1273,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 14 Apr 2015 14:16:28 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
+		Documentation generated on Thu, 17 Dec 2015 15:26:04 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.4</a>
 	</p>
 	</div></body>
 </html>
