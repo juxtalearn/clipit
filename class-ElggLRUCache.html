@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="generator" content="ApiGen 2.8.0">
+
+	<title>Class ElggLRUCache</title>
+
+	<script type="text/javascript" src="resources/combined.js?117538352"></script>
+	<script type="text/javascript" src="elementlist.js?224625972"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-ClipIt.html">ClipIt<span></span></a>
+						<ul>
+				<li><a href="package-ClipIt.clipit.html">clipit<span></span></a>
+						<ul>
+				<li><a href="package-ClipIt.clipit.api.html">api</a>
+						</li>
+							</ul></li>
+				<li><a href="package-ClipIt.urjc.html">urjc<span></span></a>
+						<ul>
+				<li><a href="package-ClipIt.urjc.backend.html">backend</a>
+						</li>
+							</ul></li></ul></li>
+				<li class="active"><a href="package-Elgg.html">Elgg<span></span></a>
+						<ul>
+				<li class="active"><a href="package-Elgg.Core.html">Core<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.Access.html">Access</a>
+						</li>
+				<li><a href="package-Elgg.Core.Authentication.html">Authentication</a>
+						</li>
+				<li class="active"><a href="package-Elgg.Core.Cache.html">Cache</a>
+						</li>
+				<li><a href="package-Elgg.Core.Caches.html">Caches</a>
+						</li>
+				<li><a href="package-Elgg.Core.Core.html">Core</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataMode.html">DataMode<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.DataMode.Site.html">Site</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Core.DataModel.html">DataModel<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.DataModel.Annotations.html">Annotations</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.Entities.html">Entities</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.Extender.html">Extender</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.File.html">File</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.Importable.html">Importable</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.Loggable.html">Loggable</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.Notable.html">Notable</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.Object.html">Object</a>
+						</li>
+				<li><a href="package-Elgg.Core.DataModel.User.html">User</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Core.DataStorage.html">DataStorage</a>
+						</li>
+				<li><a href="package-Elgg.Core.Exception.html">Exception</a>
+						</li>
+				<li><a href="package-Elgg.Core.Exceptions.html">Exceptions<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.Exceptions.Stub.html">Stub</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Core.FileStore.html">FileStore<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.FileStore.Disk.html">Disk</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Core.Groups.html">Groups</a>
+						</li>
+				<li><a href="package-Elgg.Core.Helpers.html">Helpers</a>
+						</li>
+				<li><a href="package-Elgg.Core.HMAC.html">HMAC</a>
+						</li>
+				<li><a href="package-Elgg.Core.Memcache.html">Memcache</a>
+						</li>
+				<li><a href="package-Elgg.Core.Metadata.html">Metadata</a>
+						</li>
+				<li><a href="package-Elgg.Core.Navigation.html">Navigation</a>
+						</li>
+				<li><a href="package-Elgg.Core.ODD.html">ODD</a>
+						</li>
+				<li><a href="package-Elgg.Core.Output.html">Output</a>
+						</li>
+				<li><a href="package-Elgg.Core.Plugins.html">Plugins<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.Plugins.Settings.html">Settings</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Core.Sessions.html">Sessions</a>
+						</li>
+				<li><a href="package-Elgg.Core.SocialModel.html">SocialModel<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Core.SocialModel.Friendable.html">Friendable</a>
+						</li>
+				<li><a href="package-Elgg.Core.SocialModel.Locatable.html">Locatable</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Core.WebServicesAPI.html">WebServicesAPI</a>
+						</li>
+				<li><a href="package-Elgg.Core.Widgets.html">Widgets</a>
+						</li>
+				<li><a href="package-Elgg.Core.XML.html">XML</a>
+						</li>
+				<li><a href="package-Elgg.Core.XMLRPC.html">XMLRPC</a>
+						</li>
+							</ul></li>
+				<li><a href="package-Elgg.Exceptions.html">Exceptions<span></span></a>
+						<ul>
+				<li><a href="package-Elgg.Exceptions.Stub.html">Stub</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="package-None.html">None</a>
+						</li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-ElggCache.html">ElggCache</a></li>
+				<li class="active"><a href="class-ElggLRUCache.html">ElggLRUCache</a></li>
+				<li><a href="class-ElggSharedMemoryCache.html">ElggSharedMemoryCache</a></li>
+				<li><a href="class-ElggStaticVariableCache.html">ElggStaticVariableCache</a></li>
+				<li><a href="class-ElggVolatileMetadataCache.html">ElggVolatileMetadataCache</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text">
+		<input type="submit" value="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-Elgg.Core.Cache.html" title="Summary of Elgg\Core\Cache"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class ElggLRUCache</h1>
+
+
+	<div class="description">
+	
+<p>Least Recently Used Cache</p>
+
+<p>A fixed sized cache that removes the element used last when it reaches its
+size limit.</p>
+
+<p>Based on <a
+href="https://github.com/cash/LRUCache">https://github.com/cash/LRUCache</a></p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>ElggLRUCache</span></b>			
+			 implements 
+				<a href="class-ArrayAccess.html"><span>ArrayAccess</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		
+		<b>Package:</b> <a href="package-Elgg.html">Elgg</a>\<a href="package-Elgg.Core.html">Core</a>\<a href="package-Elgg.Core.Cache.html">Cache</a><br>
+
+		<b>Located at</b> <a href="source-class-ElggLRUCache.html#3-181" title="Go to source code">ElggLRUCache.php</a><br>
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-ElggLRUCache.html#27-38" title="Go to source code">__construct</a>( <span>integer <var>$size</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Create a LRU Cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a LRU Cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$size</var></dt>
+					<dd><code>integer</code><br>$size The size of the cache</dd>
+				</dl></div>
+
+
+				<h4>Throws</h4>
+				<div class="list">
+					<code><code><a href="class-InvalidArgumentException.html">InvalidArgumentException</a></code></code><br>
+				</div>
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="get" id="_get">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_get">#</a>
+		<code><a href="source-class-ElggLRUCache.html#40-54" title="Go to source code">get</a>( <span>integer|string <var>$key</var></span>, <span>mixed <var>$default</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the value cached with this key</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the value cached with this key</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key. Strings that are ints are cast to ints.</dd>
+					<dt><var>$default</var></dt>
+					<dd><code>mixed</code><br>$default The value to be returned if key not found. (Optional)</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="set" id="_set">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_set">#</a>
+		<code><a href="source-class-ElggLRUCache.html#56-75" title="Go to source code">set</a>( <span>integer|string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add something to the cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add something to the cache</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key. Strings that are ints are cast to ints.</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value to cache</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="size" id="_size">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_size">#</a>
+		<code><a href="source-class-ElggLRUCache.html#77-84" title="Go to source code">size</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the number of elements in the cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the number of elements in the cache</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="containsKey" id="_containsKey">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_containsKey">#</a>
+		<code><a href="source-class-ElggLRUCache.html#86-94" title="Go to source code">containsKey</a>( <span>integer|string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Does the cache contain an element with this key</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Does the cache contain an element with this key</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="remove" id="_remove">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_remove">#</a>
+		<code><a href="source-class-ElggLRUCache.html#96-110" title="Go to source code">remove</a>( <span>integer|string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove the element with this key.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove the element with this key.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>Value or null if not set<br>
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="clear" id="_clear">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_clear">#</a>
+		<code><a href="source-class-ElggLRUCache.html#112-119" title="Go to source code">clear</a>( )</code>
+
+		<div class="description short">
+			
+<p>Clear the cache</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Clear the cache</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="recordAccess" id="_recordAccess">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_recordAccess">#</a>
+		<code><a href="source-class-ElggLRUCache.html#121-131" title="Go to source code">recordAccess</a>( <span>integer|string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Moves the element from current position to end of array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Moves the element from current position to end of array</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetSet" id="_offsetSet">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetSet">#</a>
+		<code><a href="source-class-ElggLRUCache.html#133-144" title="Go to source code">offsetSet</a>( <span>integer|string <var>$key</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Assigns a value for the specified key</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Assigns a value for the specified key</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key to assign the value to.</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>$value The value to set.</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-ArrayAccess.html#_offsetSet">ArrayAccess::offsetSet()</a></code></code><br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetSet">ArrayAccess::offsetSet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetGet" id="_offsetGet">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetGet">#</a>
+		<code><a href="source-class-ElggLRUCache.html#146-156" title="Go to source code">offsetGet</a>( <span>integer|string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get the value for specified key</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the value for specified key</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key to retrieve.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-ArrayAccess.html#_offsetGet">ArrayAccess::offsetGet()</a></code></code><br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetGet">ArrayAccess::offsetGet()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetUnset" id="_offsetUnset">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetUnset">#</a>
+		<code><a href="source-class-ElggLRUCache.html#158-168" title="Go to source code">offsetUnset</a>( <span>integer|string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Unsets a key.</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Unsets a key.</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key The key to unset.</dd>
+				</dl></div>
+
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-ArrayAccess.html#_offsetUnset">ArrayAccess::offsetUnset()</a></code></code><br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetUnset">ArrayAccess::offsetUnset()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="offsetExists" id="_offsetExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_offsetExists">#</a>
+		<code><a href="source-class-ElggLRUCache.html#170-180" title="Go to source code">offsetExists</a>( <span>integer|string <var>$key</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Does key exist?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Does key exist?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$key</var></dt>
+					<dd><code>integer|string</code><br>$key A key to check for.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>
+				</div>
+
+
+				<h4>See</h4>
+				<div class="list">
+						<code><code><a href="class-ArrayAccess.html#_offsetExists">ArrayAccess::offsetExists()</a></code></code><br>
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-ArrayAccess.html#_offsetExists">ArrayAccess::offsetExists()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="maximumSize" id="$maximumSize">
+		<td class="attributes"><code>
+			protected  
+			integer
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-ElggLRUCache.html#17-18" title="Go to source code"><var>$maximumSize</var></a>
+		</td>
+		<td class="value"><code></code></td>
+		<td class="description"><div>
+			<a href="#$maximumSize" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="data" id="$data">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-ElggLRUCache.html#20-25" title="Go to source code"><var>$data</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$data" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>The front of the array contains the LRU element</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>The front of the array contains the LRU element</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
