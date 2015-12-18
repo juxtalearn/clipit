@@ -2,7 +2,7 @@
 
 /**
  * Created by PhpStorm.
- * User: Pablo Llinás
+ * User: Pablo Llinï¿½s
  * Date: 16/06/2015
  * Time: 11:37
  */
@@ -19,7 +19,7 @@ class ClipitUpdate
         chdir(elgg_get_root_path());
         exec("git stash save");
         exec("git clean -f");
-        exec("git fetch --tags");
+        exec("git fetch origin refs/tags/*:refs/tags/*");
         $clipit_tag_branch = get_config("clipit_tag_branch");
         $latest_tag = exec("git for-each-ref --sort=committerdate --format='%(refname:short)' refs/tags | grep $clipit_tag_branch | tail -1");
         exec("git checkout $latest_tag");

@@ -125,6 +125,9 @@ class UBFile extends UBItem {
         // if the mimetype is already set, use the whole $this->name as name
         if(!empty($this->mime_full)){
             $elgg_file->set("name", (string)$this->name);
+            $elgg_file->set("mime_ext", (string)$this->mime_ext);
+            $elgg_file->set("mime_full", (string)$this->mime_full);
+            $elgg_file->set("mime_short", (string)$this->mime_short);
         }
         // else separate name part and extension part from $this->name and find out mime_type
         else{
@@ -186,6 +189,7 @@ class UBFile extends UBItem {
     static function create_clone($id, $linked = true, $keep_owner = false) {
         $parent_file = new ClipitFile($id);
         $prop_value_array = static::get_properties($id);
+        // use parent file location as temp_path for cloned file
         $prop_value_array["temp_path"] = $parent_file->file_path;
         if($keep_owner === false){
             $prop_value_array["owner_id"] = elgg_get_logged_in_user_guid();
