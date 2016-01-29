@@ -26,11 +26,11 @@ $tabs = array(
         'href' => "{$href}?filter=videos",
         'priority' => 300,
     ),
-    'texts' => array(
+    /*'texts' => array(
         'text' => elgg_view('output/filter_responsive', array('text' => elgg_echo('multimedia:texts'), 'badge' => $texts_count, 'icon' => 'fa-file-text-o')),
         'href' => "{$href}?filter=texts",
         'priority' => 400,
-    ),
+    ),*/
 );
 foreach ($tabs as $name => $tab) {
     $tab['name'] = $name;
