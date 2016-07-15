@@ -581,6 +581,7 @@ function get_group_progress($group_id){
             }
         }
     }
+    $completed = $completed > 100 ? 100: $completed;
     return round($completed);
 }
 
