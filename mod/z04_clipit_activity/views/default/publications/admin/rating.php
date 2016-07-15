@@ -13,6 +13,22 @@
 $rating = elgg_extract('rating', $vars);
 $entity = elgg_extract('entity', $vars);
 $href = elgg_extract('href', $vars);
+
+// Get invidual ratings
+$rubric_ratings = ClipitRubricRating::get_by_id($rating->rubric_rating_array);
+$average_rating = 0;
+$rubric_items = [];
+foreach($rubric_ratings as $rubric_rating) {
+    $rubric_item = array_pop(ClipitRubricItem::get_by_id(array($rubric_rating->rubric_item)));
+    $rubric_items[$rubric_rating->rubric_item] = array(
+      'name' => $rubric_item->name,
+      'score' => round($rubric_rating->score*10, 1)
+    );
+    $average_rating += $rubric_rating->score;
+}
+if ($average_rating > 0) {
+    $average_rating /= count($rubric_ratings);
+}
 ?>
 <style>
 .user-rating-view .image-background{
@@ -72,7 +88,7 @@ $href = elgg_extract('href', $vars);
         <?php echo elgg_view('publications/admin/item_preview', array('entity' => $entity, 'href' => $href));?>
         <?php if($rating->rubric_rating_array):?>
         <div class="margin-top-10">
-            <strong class="pull-right blue" style="font-size: 18px;line-height: 20px;"><?php echo round($entity->rubric_rating_average*10,1);?></strong>
+            <strong class="pull-right blue" style="font-size: 18px;line-height: 20px;"><?php echo round($average_rating*10,1);?></strong>
             <small><?php echo elgg_echo('publications:rating');?></small>
         </div>
         <div class="clearfix"></div>
@@ -80,14 +96,10 @@ $href = elgg_extract('href', $vars);
             <hr class="margin-bottom-5 margin-top-5">
             <div>
                 <ul class="margin-top-10">
-                    <?php
-                    $rubric_ratings = ClipitRubricRating::get_by_id($rating->rubric_rating_array);
-                    foreach($rubric_ratings as $rubric_rating):
-                        $rubric_item = array_pop(ClipitRubricItem::get_by_id(array($rubric_rating->rubric_item)));
-                    ?>
+                    <?php foreach($rubric_items as $rubric_item): ?>
                         <li class="list-item-5 text-muted">
-                            <strong class="pull-right"><?php echo round($rubric_rating->score*10, 1);?></strong>
-                            <?php echo $rubric_item->name;?>
+                            <strong class="pull-right"><?php echo $rubric_item['score'];?></strong>
+                            <?php echo $rubric_item['name'];?>
                         </li>
                     <?php endforeach;?>
                 </ul>
